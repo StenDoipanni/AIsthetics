@@ -1,0 +1,112 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sibley: <http://example.org/philtext/sibley/> .
+@base <http://example.org/philtext/sibley/> .
+
+# Ontology Declaration
+<http://example.org/philtext/sibley> rdf:type owl:Ontology ;
+    owl:imports <http://example.org/philtext> ;
+    dc:title "Sibley Chapter 3 Domain Module"@en ;
+    dc:description "Domain ontology module capturing concepts from Sibley's Chapter 3 on Aesthetic and Non-aesthetic"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+sibley:hasAestheticDependency rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasRelationWith ;
+    rdfs:domain sibley:AestheticProperty ;
+    rdfs:range sibley:NonAestheticProperty ;
+    rdfs:label "has aesthetic dependency"@en ;
+    rdfs:comment "Represents the dependency relationship between aesthetic and non-aesthetic properties"@en .
+
+sibley:requiresPerception rdf:type owl:ObjectProperty ;
+    rdfs:domain sibley:AestheticJudgment ;
+    rdfs:range sibley:AestheticPerception ;
+    rdfs:label "requires perception"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+sibley:AestheticProperty rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Aesthetic Property"@en ;
+    rdfs:comment "A property that requires aesthetic sensitivity to perceive"@en .
+
+sibley:NonAestheticProperty rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Non-aesthetic Property"@en ;
+    rdfs:comment "A property that does not require aesthetic sensitivity to perceive"@en .
+
+sibley:AestheticJudgment rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Aesthetic Judgment"@en ;
+    rdfs:comment "A judgment that requires aesthetic perception and sensitivity"@en .
+
+sibley:NonAestheticJudgment rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Non-aesthetic Judgment"@en ;
+    rdfs:comment "A judgment that does not require aesthetic sensitivity"@en .
+
+sibley:AestheticPerception rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Aesthetic Perception"@en ;
+    rdfs:comment "The faculty of perceiving aesthetic qualities"@en .
+
+sibley:Verdict rdf:type owl:Class ;
+    rdfs:subClassOf sibley:AestheticJudgment ;
+    rdfs:label "Verdict"@en ;
+    rdfs:comment "Purely evaluative aesthetic judgments about good/bad, excellent/mediocre"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Aesthetic Properties
+sibley:Graceful rdf:type owl:NamedIndividual, sibley:AestheticProperty ;
+    rdfs:label "Graceful"@en .
+
+sibley:Balanced rdf:type owl:NamedIndividual, sibley:AestheticProperty ;
+    rdfs:label "Balanced"@en .
+
+sibley:Unified rdf:type owl:NamedIndividual, sibley:AestheticProperty ;
+    rdfs:label "Unified"@en .
+
+sibley:Sad rdf:type owl:NamedIndividual, sibley:AestheticProperty ;
+    rdfs:label "Sad"@en .
+
+# Non-aesthetic Properties
+sibley:Slow rdf:type owl:NamedIndividual, sibley:NonAestheticProperty ;
+    rdfs:label "Slow"@en .
+
+sibley:Circular rdf:type owl:NamedIndividual, sibley:NonAestheticProperty ;
+    rdfs:label "Circular"@en .
+
+sibley:Green rdf:type owl:NamedIndividual, sibley:NonAestheticProperty ;
+    rdfs:label "Green"@en .
+
+# Key TextualFactoids
+sibley:AestheticDependencyFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :hasText "Aesthetic qualities are dependent upon non-aesthetic ones for their existence. They could no more occur in isolation than there could be facial resemblances without features, or grins without faces"@en ;
+    :refersTo sibley:AestheticProperty, sibley:NonAestheticProperty .
+
+sibley:PerceptionRequirementFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :hasText "People have to see the grace or unity of a work, hear the plaintiveness or frenzy in the music, notice the gaudiness of colour scheme, feel the power of a novel, its mood, or its uncertainty of tone"@en ;
+    :refersTo sibley:AestheticPerception .
+
+sibley:NonSufficientConditionsFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :hasText "Although a thing's aesthetic character is dependent on and results from its non-aesthetic features, in general there are no sets of non-aesthetic features that are logically sufficient for it to have a certain aesthetic quality"@en ;
+    :refersTo sibley:AestheticProperty, sibley:NonAestheticProperty .
+
+# Author
+:Sibley rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "Frank Sibley"@en .

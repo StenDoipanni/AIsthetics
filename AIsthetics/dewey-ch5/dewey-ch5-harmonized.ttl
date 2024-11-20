@@ -1,0 +1,429 @@
+@prefix : <http://example.org/philtext/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+# Ontology Declaration
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:title "Dewey Chapter 5 Analysis Ontology"@en ;
+    dc:description "Ontology capturing the analysis of Dewey's work on aesthetics"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Pages
+#################################################################
+
+:Page82 rdf:type :Page ;
+    rdfs:label "Page 82" .
+
+:Page83 rdf:type :Page ;
+    rdfs:label "Page 83" .
+
+:Page84 rdf:type :Page ;
+    rdfs:label "Page 84" .
+
+:Page85 rdf:type :Page ;
+    rdfs:label "Page 85" .
+
+:Page86 rdf:type :Page ;
+    rdfs:label "Page 86" .
+
+:Page87 rdf:type :Page ;
+    rdfs:label "Page 87" .
+
+:Page91 rdf:type :Page ;
+    rdfs:label "Page 91" .
+
+:Page94 rdf:type :Page ;
+    rdfs:label "Page 94" .
+
+:Page100 rdf:type :Page ;
+    rdfs:label "Page 100" .
+
+:Page103 rdf:type :Page ;
+    rdfs:label "Page 103" .
+
+#################################################################
+#    Concepts
+#################################################################
+
+:ExpressiveObject rdf:type :Concept ;
+    rdfs:label "Expressive Object"@en ;
+    :hasReferencePage :Page82 ;
+    :hasRelationWith :Expression, :Art, :Meaning .
+
+:SubjectObjectInterdependence rdf:type :Concept ;
+    rdfs:label "Subject-Object Interdependence"@en ;
+    :hasReferencePage :Page82 ;
+    :hasRelationWith :ExpressiveObject, :Expression .
+
+:ActOfExpression rdf:type :Concept ;
+    rdfs:label "Act of Expression"@en ;
+    :hasReferencePage :Page82 ;
+    :hasRelationWith :Expression, :AestheticProcess .
+
+:AestheticProcess rdf:type :Concept ;
+    rdfs:label "Aesthetic Process"@en ;
+    :hasReferencePage :Page83 ;
+    :hasRelationWith :ActOfExpression, :Experience .
+
+:Representation rdf:type :Concept ;
+    rdfs:label "Representation"@en ;
+    :hasReferencePage :Page83 ;
+    :hasRelationWith :Reproduction, :Experience .
+
+:Reproduction rdf:type :Concept ;
+    rdfs:label "Reproduction"@en ;
+    :hasReferencePage :Page83 ;
+    :hasRelationWith :Representation .
+
+:Meaning rdf:type :Concept ;
+    rdfs:label "Meaning"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :ExpressiveObject, :ExternalReference .
+
+:ExternalReference rdf:type :Concept ;
+    rdfs:label "External Reference"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :Meaning .
+
+:IntrinsicExperiencedObject rdf:type :Concept ;
+    rdfs:label "Intrinsic Experienced Object"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :ExpressiveObject, :Experience .
+
+:WorkingConnections rdf:type :Concept ;
+    rdfs:label "Working Connections"@en ;
+    :hasReferencePage :Page84 ;
+    :hasRelationWith :AestheticProcess .
+
+:Statement rdf:type :Concept ;
+    rdfs:label "Statement"@en ;
+    :hasReferencePage :Page84 ;
+    :hasRelationWith :Expression .
+
+:Expression rdf:type :Concept ;
+    rdfs:label "Expression"@en ;
+    :hasReferencePage :Page84 ;
+    :hasRelationWith :Statement, :ActOfExpression .
+
+:IndividualPrivate rdf:type :Concept ;
+    rdfs:label "Individual Private"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :Intersubjective .
+
+:Intersubjective rdf:type :Concept ;
+    rdfs:label "Intersubjective"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :IndividualPrivate .
+
+:SubjectMatter rdf:type :Concept ;
+    rdfs:label "Subject Matter"@en ;
+    :hasReferencePage :Page87 ;
+    :hasRelationWith :Expression, :Material .
+
+:Perception rdf:type :Concept ;
+    rdfs:label "Perception"@en ;
+    :hasReferencePage :Page87 ;
+    :hasRelationWith :Construction .
+
+:Construction rdf:type :Concept ;
+    rdfs:label "Construction"@en ;
+    :hasReferencePage :Page87 ;
+    :hasRelationWith :Perception .
+
+:Emotion rdf:type :Concept ;
+    rdfs:label "Emotion"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :Enactivism .
+
+:Enactivism rdf:type :Concept ;
+    rdfs:label "Enactivism"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :Emotion .
+
+:Environment rdf:type :Concept ;
+    rdfs:label "Environment"@en ;
+    :hasReferencePage :Page91 ;
+    :hasRelationWith :Experience, :Perception .
+
+:Expressiveness rdf:type :Concept ;
+    rdfs:label "Expressiveness"@en ;
+    :hasReferencePage :Page103 ;
+    :hasRelationWith :CompleteInterpretation .
+
+:CompleteInterpretation rdf:type :Concept ;
+    rdfs:label "Complete Interpretation"@en ;
+    :hasReferencePage :Page103 ;
+    :hasRelationWith :Expressiveness, :AttentivePerception .
+
+:AttentivePerception rdf:type :Concept ;
+    rdfs:label "Attentive Perception"@en ;
+    :hasReferencePage :Page103 ;
+    :hasRelationWith :CompleteInterpretation .
+
+#################################################################
+#    TextualFactoids
+#################################################################
+
+:TextualFactoid_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page82 ;
+    :hasText "the product, the object that is expressive, that says something to us" ;
+    :refersTo :ExpressiveObject ;
+    :hasDescription "Definition of the status of the art object as" ;
+    :hasGloss "even if the object is defined as a product, implying it's a product from an operational standpoint, this term shouldn't be taken as merely passive. An expressive object is an art object or artwork that successfully communicates an experience." ;
+    :hasSyntheticStylisticCategory :Verbal .
+
+:TextualFactoid_1_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_1 ;
+    :findableIn :Page82 ;
+    :hasNeighbourhood "individuality of vision" ;
+    :hasGloss "This object encapsulates the emotional and intellectual experiences of the artist, transforming those experiences into a form that can be perceived and appreciated by others." .
+
+:TextualFactoid_1_2 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_1 ;
+    :findableIn :Page82 ;
+    :refersTo :SubjectObjectInterdependence ;
+    :hasDescription "not just about the final product but about the entire process of creation" ;
+    :hasGloss "Dewey's operation is anti-oppositional and relational, employing a process reminiscent of Hegelian aufhebung in emphasizing, both conceptually and practically, the reciprocal relationship between the dualisms typical of Western philosophy." ;
+    :hasAnalyticStylisticCategory :Dialectic .
+
+:TextualFactoid_2 rdf:type :TextualFactoid ;
+    :findableIn :Page82 ;
+    :hasText "«the act proceeds from an individual live creature», «the individual contribution which makes the object something new», «the act of expressing from the espressiveness possessed by the object»" ;
+    :refersTo :ActOfExpression ;
+    :hasNeighbourhood "semantic area of productivity" .
+
+:TextualFactoid_2_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_2 ;
+    :findableIn :Page83 ;
+    :refersTo :AestheticProcess ;
+    :hasGloss "The author intends to describe the aesthetic process with factual examples and connections between the theoretical approach and the consequences in factual reality" ;
+    :hasAnalyticStylisticCategory :Descriptive, :ProgressiveLinear .
+
+:TextualFactoid_3 rdf:type :TextualFactoid ;
+    :findableIn :Page83 ;
+    :refersTo :Representation ;
+    :hasDescription "In analogy with" ;
+    :refersTo :Reproduction ;
+    :hasGloss "reproduction of the art object as a mere copy (e.g. to Plato's critique of art)" .
+
+:TextualFactoid_3_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_3 ;
+    :hasDescription "Bidirectional correlation" ;
+    :refersTo :Experience ;
+    :hasGloss "reproduction of a way of experiencing the world" .
+
+:TextualFactoid_4 rdf:type :TextualFactoid ;
+    :findableIn :Page86 ;
+    :hasText "Yet the meaning is there; it is there as something beyond the occasion of the painter's private experience, something that he takes to be there potentially for others" ;
+    :refersTo :Meaning ;
+    :hasDescription "inherent in objects or events themselves" ;
+    :refersTo :ExternalReference ;
+    :hasGloss "something that \"stands for\" (something else)" ;
+    :hasAnalyticStylisticCategory :Dialectic .
+
+:TextualFactoid_4_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_4 ;
+    :hasDescription "not \"inherent in\" object but created through a dynamic interaction" ;
+    :refersTo :IntrinsicExperiencedObject ;
+    :hasGloss "Objects within the environment possess qualities that precede the noematic component of feeling" .
+
+:TextualFactoid_5 rdf:type :TextualFactoid ;
+    :refersTo :WorkingConnections ;
+    :hasGloss "Dewey reiterates in the text the idea of operational connections that are exploratory. It is no coincidence that the object of art is a work of art: the connections it implies must be working, effective and operational" .
+
+:TextualFactoid_6 rdf:type :TextualFactoid ;
+    :findableIn :Page84 ;
+    :refersTo :Statement ;
+    :hasDescription "in opposition to" ;
+    :refersTo :Expression ;
+    :hasGloss "The \"statement\" outlines some conditions necessary to acquire that experience. It has a descriptive role, similar to that of a road sign, but it can also have operational value, as seen in science. On the other hand, \"expression\" captures the inner essence of things. This inner nature is the opposite of the \"external reference\"." .
+
+:TextualFactoid_6_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_6 ;
+    :hasNeighbourhood "fulfillement" ;
+    :hasGloss "in the case of the \"statement\" there is a reference to the conditions that, simply, must be fulfilled. The fulfillement is different in the case of expression: here there is no adaptation to external references, but a full intrinsic fulfillment to the experience itself, that is, to reach fulfilment in its intrinsic essence." .
+
+:TextualFactoid_6_2 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_6 ;
+    :hasNeighbourhood "poetic/prosaic, esthetic art/scientific, to lead/ to constitute an experience" ;
+    :hasGloss "different concepts that emerge from the opposition of statement and expression in reference to language, knowledge and experience" .
+
+:TextualFactoid_7 rdf:type :TextualFactoid ;
+    :findableIn :Page86 ;
+    :refersTo :IndividualPrivate ;
+    :hasDescription "Non-oppositional and bidirectional correlation" ;
+    :refersTo :Intersubjective ;
+    :hasNeighbourhood "cfr. 1.2" ;
+    :hasGloss "Despite being the product of the artist's personal experience, the meaning transcends this, potentially resonating with others. The artwork inherently possesses expressiveness, yet individual perception is part of a shared process, emphasizing the absence of a purely private language. Individuality does not equate to complete privacy, as it would lead to nonsensical outcomes (e.g. Wittgenstein's critique of private language)" .
+
+:TextualFactoid_7_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_7 ;
+    :hasNeighbourhood "consummatory fulfillement" ;
+    :hasGloss "\"Potentially\" refers to a form of \"dynamis\" that becomes \"energheia\" whem consumed. Art plays a privileged role in a process that involves the reconfiguration of material processes into a consummatory fulfillment, the result of a sensibility exercise in materiality, transformed into experiential processes through a metabolic mechanism which is never exclusively subjective." .
+
+:TextualFactoid_8 rdf:type :TextualFactoid ;
+    :refersTo :SubjectMatter ;
+    :hasGloss "The artist's process involves manipulating the material, selecting and organizing an external subject matter. Emphasis is placed on the importance of the material, the subject matter, which serves as the foundation upon which the artistic action is taken and takes shape. This underscores how the chaotic and accidental elements are harmonized into rhythm through the artist's intervention" .
+
+:TextualFactoid_9 rdf:type :TextualFactoid ;
+    :findableIn :Page87 ;
+    :refersTo :Perception ;
+    :hasDescription "Correlation of meaning and simultaneity" ;
+    :refersTo :Construction ;
+    :hasGloss "Perception and construction are intertwined. Sight is exercised on the material; one learns to see better and to make a selection that doesn't necessarily originate solely from the artist as the operating subject but is also stimulated and directed by the object itself, establishing a relationship of mutual perception and spatial formation." ;
+    :hasAnalyticStylisticCategory :Visual, :Dialectic .
+
+:TextualFactoid_9_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_9 ;
+    :findableIn :Page94 ;
+    :hasNeighbourhood "phenomenology of perception" ;
+    :hasGloss "The author describes the process of perception-construction using a phenomenological approach, highlighting the material processes involved in selecting lines, colors, and spatial relationships between subject and object. The reference to Cezanne exemplifies this, emphasizing the enjoyment of perception inherent in his work. This concept is further explored by Merleau-Ponty, who uses Cezanne as an example of rejecting geometric-analytical perspective in favor of reclaiming perceptual experience. Terms describing the functionality of the optical apparatus vividly illustrate the aesthetic operation of the mind and perception." ;
+    :hasAnalyticStylisticCategory :Visual .
+
+:TextualFactoid_9_2 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_9 ;
+    :findableIn :Page100 ;
+    :hasText "While the optical apparatus may be isolated in anatomical dissection, it never functions in isolations. It operates in connection with the hand in reaching for things and in exploring their surface, […] the sense-qualities coming to us by means of the optical apparatus are simultaneously bound up with those that come to us from object" ;
+    :hasNeighbourhood "aesthetic operativity of the mind" ;
+    :hasGloss "The terms chosen to describe the overall functionality of the optical apparatus make the aesthetic operativity of the mind and perception vividly clear" .
+
+:TextualFactoid_10 rdf:type :TextualFactoid ;
+    :findableIn :Page86 ;
+    :refersTo :Emotion ;
+    :hasDescription "Developments in contemporary research" ;
+    :refersTo :Enactivism ;
+    :hasGloss "emotional turmoil and external events merge in expressive objects. This is significant within Dewey's three-part definition of emotion: feeling, intentional behavior, and objects with emotional qualities. Objects can organically excite our ideo-motor apparatus, influencing the conscious experience of observers. This interaction is shaped by memories integrated into the self's structure. This perspective aligns with contemporary brain science theories like enactivism, which propose that cognitive structures develop through interactions between individuals and their environment, rather than being pre-existing and separate." .
+
+:TextualFactoid_11 rdf:type :TextualFactoid ;
+    :refersTo :Environment ;
+    :hasGloss "The author's reference to the environment indicates a preference for an approach to aesthetic experience not only descriptive but also adhering to material and pragmatic processes resulting from the described interaction. This interaction can lead to physical distortion due to the nature of the perceptual process itself. Dewey emphasizes that \"drawing is drawing out,\" implying an extraction from the subject matter of what a particular artist has to say in a specific experience." .
+
+:TextualFactoid_11_1 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_11 ;
+    :hasNeighbourhood "qualities of perceived object" ;
+    :hasGloss "Perceptual experiences are tied to contingent connections.Qualities of perceived objects are sensory rather than referring to an abstract scale. The prefix \"re-\" underscores how previous experiences shape the current approach to the world and contribute to a new understanding of aesthetic perception. Dewey's articulation emphasizes the selection of aspects and qualities that enable control and assert subjectivity as agency, without resorting to a substantialist dogmatization of the individual." .
+
+:TextualFactoid_11_2 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_11 ;
+    :hasNeighbourhood "agency" ;
+    :hasGloss "Dewey describes a dual agency, to which both the object and the subject contribute." .
+
+:TextualFactoid_11_3 rdf:type :TextualFactoid ;
+    :basedOn :TextualFactoid_11 ;
+    :findableIn :Page91 ;
+    :hasText "Through habits formed in intercourse with the world, we also in-habit the world." ;
+    :hasGloss "a wordplay that probably refers to the etymological derivation of \"habits\" and \"in-habits\" from the Latin \"Habere\":  Having yourself (habits, what is constitutive of the self) also involves having a place, a common background of mutual foundation not only between individuals but also between the individual and the world." .
+
+:TextualFactoid_12 rdf:type :TextualFactoid ;
+    :findableIn :Page103 ;
+    :hasText "the expressiveness of the object of art is due to the fact that presents a complete interpretation of the materials of undergoing and of action [...]. The expressions of the object is the report and celebration of the complete fusion of what we undergo and what our activity of attentive perception brings into what we receive by means of the senses" ;
+    :refersTo :Expressiveness ;
+    :refersTo :CompleteInterpretation ;
+    :hasAnalyticStylisticCategory :Thesis .
+
+
+
+
+
+
+#################################################################
+#    Additional Important Relationships
+#################################################################
+
+# Experience relationships
+:Experience :hasRelationWith :ExpressiveObject, :AestheticProcess, :Environment .
+:Experience :hasRelationWith :Perception, :Construction .
+
+# Art relationships
+:Art :hasRelationWith :ExpressiveObject, :Expression .
+:Art :hasRelationWith :SubjectMatter, :Material .
+
+# Expression chain
+:Expression :hasRelationWith :ActOfExpression, :Expressiveness .
+:Expression :hasRelationWith :Statement, :SubjectMatter .
+
+# Perception relationships
+:Perception :hasRelationWith :AttentivePerception, :Environment .
+:Perception :hasRelationWith :Construction, :Experience .
+
+# Subject-Object relationships
+:SubjectObjectInterdependence :hasRelationWith :Experience .
+:SubjectObjectInterdependence :hasRelationWith :IndividualPrivate .
+
+# Meaning relationships
+:Meaning :hasRelationWith :Expression, :ExpressiveObject .
+:Meaning :hasRelationWith :ExternalReference .
+
+
+# Additional Concept Declarations
+
+:Material rdf:type :Concept ;
+    rdfs:label "Material"@en ;
+    :hasReferencePage :Page87 ;
+    :hasRelationWith :SubjectMatter, :Art, :Expression .
+
+:Agency rdf:type :Concept ;
+    rdfs:label "Agency"@en ;
+    :hasReferencePage :Page91 ;
+    :hasRelationWith :Environment, :IndividualPrivate .
+
+:Habits rdf:type :Concept ;
+    rdfs:label "Habits"@en ;
+    :hasReferencePage :Page91 ;
+    :hasRelationWith :Environment, :Experience .
+
+:OpticalApparatus rdf:type :Concept ;
+    rdfs:label "Optical Apparatus"@en ;
+    :hasReferencePage :Page100 ;
+    :hasRelationWith :Perception, :Construction .
+
+# Additional relationships for existing concepts
+:Experience :hasRelationWith :Habits, :Material, :OpticalApparatus .
+:Environment :hasRelationWith :Habits, :Agency, :Material .
+:Perception :hasRelationWith :OpticalApparatus, :Material .
+:Expression :hasRelationWith :Material, :Environment .
+
+# Making explicit the relationships mentioned in TextualFactoid glosses
+:SubjectMatter :hasRelationWith :Material, :Artist .
+:Artist rdf:type :Concept ;
+    rdfs:label "Artist"@en ;
+    :hasReferencePage :Page86 ;
+    :hasRelationWith :SubjectMatter, :Expression, :IndividualPrivate .
+
+# Additional relationships from TextualFactoid content
+:IntrinsicExperiencedObject :hasRelationWith :Environment, :Perception .
+:WorkingConnections :hasRelationWith :Art, :Material .
+:Enactivism :hasRelationWith :Environment, :Experience .
+
+# Completing the perception-related concept network
+:AttentivePerception :hasRelationWith :Perception, :OpticalApparatus .
+:Construction :hasRelationWith :Material, :OpticalApparatus .
+
+# Making explicit the relationships around individual/intersubjective concepts
+:IndividualPrivate :hasRelationWith :Expression, :Artist, :Experience .
+:Intersubjective :hasRelationWith :Experience, :Art .
+
+# Additional relationships around meaning and expression
+:Meaning :hasRelationWith :IndividualPrivate, :Intersubjective .
+:Expressiveness :hasRelationWith :Expression, :Art .
+
+# Completing the emotional aspects network
+:Emotion :hasRelationWith :Expression, :Experience, :IndividualPrivate .
+:Art :hasRelationWith :Emotion, :Expression, :Material .
+
+# Harmonizing with concepts from previous chapters
+:Experience :hasRelationWith :Art, :Expression, :Emotion . # From Chapter 3
+:Emotion :hasRelationWith :Consciousness . # From Chapter 4
+:Expression :hasRelationWith :ActOfExpression . # From Chapter 4
+
+# Bidirectional relationships due to symmetric property
+:Material :hasRelationWith :Expression .
+:Environment :hasRelationWith :Experience .
+:OpticalApparatus :hasRelationWith :Construction .
+:Art :hasRelationWith :Expression .
+:Expression :hasRelationWith :IndividualPrivate .

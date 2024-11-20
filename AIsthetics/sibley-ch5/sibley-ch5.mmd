@@ -1,0 +1,52 @@
+flowchart TD
+    %% Set diagram size
+    %% https://mermaid.js.org/syntax/flowchart.html#styling-and-classes
+    classDef TextualFactoid fill:#f9f,stroke:#333,color:#000
+    classDef Concept fill:#cff,stroke:#333
+    classDef StyleCategory fill:#ffd,stroke:#333
+    
+    %% Set diagram size
+    %%classDef default width:200px,height:100px
+
+    %% TextualFactoids
+    TF1["TF1: Truth/Falsity"]:::TextualFactoid
+    TF1_1["TF1.1: Colour Attribution"]:::TextualFactoid
+    TF1_2["TF1.2: Normal Vision"]:::TextualFactoid
+    TF2["TF2: Colour Language"]:::TextualFactoid
+    TF2_1["TF2.1: Visual Properties"]:::TextualFactoid
+    TF2_2["TF2.2: Discrimination Agreement"]:::TextualFactoid
+    TF2_3["TF2.3: Naming Time"]:::TextualFactoid
+    TF2_4["TF2.4: Original Namers"]:::TextualFactoid
+
+    %% Concepts
+    C1[Property]:::Concept
+    C2[Colour Property]:::Concept
+    C3[Normality]:::Concept
+    C4[As If Scenarios]:::Concept
+    C5[Visual Properties]:::Concept
+    C6[Initial Discrimination]:::Concept
+    C7[Naming Time]:::Concept
+    C8[Original Namers]:::Concept
+
+    %% BasedOn relationships
+    TF1_1 -->|basedOn| TF1
+    TF1_2 -->|basedOn| TF1_1
+    TF2_1 -->|basedOn| TF2
+    TF2_2 -->|basedOn| TF2_1
+    TF2_3 -->|basedOn| TF2_2
+    TF2_4 -->|basedOn| TF2_3
+
+    %% RefersTo relationships
+    TF1 -->|refersTo| C1
+    TF1_1 -->|refersTo| C2
+    TF1_2 -->|refersTo| C3
+    TF2 -->|refersTo| C4
+    TF2_1 -->|refersTo| C5
+    TF2_2 -->|refersTo| C6
+    TF2_3 -->|refersTo| C7
+    TF2_4 -->|refersTo| C8
+
+    %% Concept relationships
+    C2 -->|hasRelationWith| C1
+    C6 -->|hasRelationWith| C7
+    C7 -->|hasRelationWith| C8

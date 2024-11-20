@@ -1,0 +1,131 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dew: <http://example.org/philtext/dewey/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Ontology Declaration
+dew: rdf:type owl:Ontology ;
+     dc:title "Dewey's Art as Experience Chapter 5 Ontology"@en ;
+     dc:description "Domain ontology capturing concepts from Dewey's discussion of expressive objects in art"@en ;
+     owl:imports <http://example.org/philtext> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+dew:contrastedWith rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasRelationWith ;
+    rdfs:label "contrasted with"@en .
+
+dew:transformsInto rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasRelationWith ;
+    rdfs:label "transforms into"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+dew:ExpressionConcept rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Expression Concept"@en .
+
+dew:ArtisticMedium rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Artistic Medium"@en .
+
+dew:ArtisticProcess rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Artistic Process"@en .
+
+#################################################################
+#    Individuals - Concepts
+#################################################################
+
+dew:Expression rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Expression"@en ;
+    :hasReferencePage :Page82 .
+
+dew:Statement rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Statement"@en ;
+    :hasReferencePage :Page84 ;
+    dew:contrastedWith dew:Expression .
+
+dew:ExpressiveObject rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Expressive Object"@en ;
+    :hasReferencePage :Page82 .
+
+dew:Representation rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Representation"@en ;
+    :hasReferencePage :Page83 .
+
+dew:Meaning rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Meaning"@en ;
+    :hasReferencePage :Page83 .
+
+dew:AbstractArt rdf:type owl:NamedIndividual, dew:ExpressionConcept ;
+    rdfs:label "Abstract Art"@en ;
+    :hasReferencePage :Page93 .
+
+dew:Selection rdf:type owl:NamedIndividual, dew:ArtisticProcess ;
+    rdfs:label "Selection"@en ;
+    :hasReferencePage :Page95 .
+
+dew:Transformation rdf:type owl:NamedIndividual, dew:ArtisticProcess ;
+    rdfs:label "Transformation"@en ;
+    :hasReferencePage :Page95 .
+
+#################################################################
+#    Individuals - TextualFactoids
+#################################################################
+
+dew:ExpressionStatementDistinction rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasText "Science states meanings; art expresses them"@en ;
+    :hasGloss "Fundamental distinction between scientific statement and artistic expression"@en ;
+    :findableIn :Page84 ;
+    :refersTo dew:Expression, dew:Statement ;
+    :hasAnalyticStylisticCategory :Thesis .
+
+dew:AbstractArtFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasText "Reference to the real world does not disappear from art as forms cease to be those of actually existing things"@en ;
+    :hasGloss "Abstract art maintains connection to reality through shared qualities"@en ;
+    :findableIn :Page93 ;
+    :refersTo dew:AbstractArt ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+dew:MeaningInArtFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasText "Denial of meaning to a work of art thus has two radically different significations. It may signify that a work of art has not the kind of meaning that belongs to signs and symbols in mathematics—a contention that is just. Or it may signify that the work of art is without meaning as nonsense is without it."@en ;
+    :hasGloss "Distinguishes between external symbolic meaning and inherent artistic meaning"@en ;
+    :findableIn :Page83 ;
+    :refersTo dew:Meaning ;
+    :hasAnalyticStylisticCategory :Dialectic .
+
+dew:TransformationFactoid rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasText "Something which was ugly under other conditions, the usual ones, is extracted from the conditions in which it was repulsive and is transfigured in quality as it becomes a part of an expressive whole."@en ;
+    :hasGloss "Art's power to transform ordinary or ugly elements through expressive integration"@en ;
+    :findableIn :Page96 ;
+    :refersTo dew:Transformation ;
+    :hasAnalyticStylisticCategory :Descriptive, :Metaphoric .
+
+#################################################################
+#    Concept Relations
+#################################################################
+
+dew:Expression :hasRelationWith dew:ExpressiveObject .
+dew:Expression dew:contrastedWith dew:Statement .
+dew:Meaning :hasRelationWith dew:Expression .
+dew:Selection :hasRelationWith dew:Transformation .
+dew:AbstractArt :hasRelationWith dew:Representation .
+
+#################################################################
+#    Pages
+#################################################################
+
+:Page82 rdf:type :Page .
+:Page83 rdf:type :Page .
+:Page84 rdf:type :Page .
+:Page93 rdf:type :Page .
+:Page95 rdf:type :Page .
+:Page96 rdf:type :Page .

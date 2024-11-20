@@ -1,0 +1,389 @@
+@prefix : <http://example.org/philtext/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+# Ontology Declaration
+<http://example.org/philtext> a owl:Ontology ;
+    dc:title "Philosophical Text Analysis Ontology"@en ;
+    dc:description "An ontology for representing philosophical text analysis, concepts, and their relationships"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:basedOn a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "based on"@en .
+
+:findableIn a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:label "findable in"@en .
+
+:hasAnalyticStylisticCategory a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:label "has analytic stylistic category"@en .
+
+:hasAuthor a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:label "has author"@en .
+
+:hasReferencePage a owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:label "reference page"@en .
+
+:hasRelationWith a owl:ObjectProperty, owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "has relation with"@en .
+
+:hasSyntheticStylisticCategory a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:label "has synthetic stylistic category"@en .
+
+:refersTo a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:label "refers to"@en .
+
+:see a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "see"@en .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:hasDescription a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has description"@en .
+
+:hasExternalReference a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has external reference"@en .
+
+:hasGloss a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gloss"@en .
+
+:hasNeighbourhood a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has neighbourhood"@en .
+
+:hasText a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has text"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:AnalyticStylisticCategory a owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:comment "Categories describing analytical aspects of writing style"@en ;
+    rdfs:label "Analytic Stylistic Category"@en .
+
+:Author a owl:Class ;
+    rdfs:comment "The author of a philosophical work or text"@en ;
+    rdfs:label "Author"@en .
+
+:Concept a owl:Class ;
+    rdfs:subClassOf [ 
+        a owl:Restriction ;
+        owl:onProperty :hasReferencePage ;
+        owl:someValuesFrom :Page
+    ] ;
+    rdfs:comment "A philosophical concept or idea discussed in the text"@en ;
+    rdfs:label "Concept"@en .
+
+:Page a owl:Class ;
+    rdfs:comment "A page reference in a work"@en ;
+    rdfs:label "Page"@en .
+
+:StylisticCategory a owl:Class ;
+    rdfs:comment "A category describing the writing style"@en ;
+    rdfs:label "Stylistic Category"@en .
+
+:SyntheticStylisticCategory a owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:comment "Categories describing synthetic aspects of writing style"@en ;
+    rdfs:label "Synthetic Stylistic Category"@en .
+
+:TextualFactoid a owl:Class ;
+    rdfs:subClassOf [ 
+        a owl:Restriction ;
+        owl:onProperty :hasAuthor ;
+        owl:someValuesFrom :Author
+    ] ,
+    [ 
+        a owl:Restriction ;
+        owl:onProperty :refersTo ;
+        owl:someValuesFrom owl:Thing
+    ] ;
+    rdfs:comment "A discrete unit of textual information from a philosophical work"@en ;
+    rdfs:label "Textual Factoid"@en .
+
+:Work a owl:Class ;
+    rdfs:comment "A philosophical work or text being analyzed"@en ;
+    rdfs:label "Work"@en .
+
+#################################################################
+#    Individuals - Stylistic Categories
+#################################################################
+
+# Analytic Stylistic Categories
+:Descriptive a :AnalyticStylisticCategory ;
+    rdfs:label "Descriptive"@en .
+
+:Honorific a :AnalyticStylisticCategory ;
+    rdfs:label "Honorific"@en .
+
+:Metaphoric a :AnalyticStylisticCategory ;
+    rdfs:label "Metaphoric"@en .
+
+:Evocative a :AnalyticStylisticCategory ;
+    rdfs:label "Evocative"@en .
+
+:Visual a :AnalyticStylisticCategory ;
+    rdfs:label "Visual"@en .
+
+:Dialectic a :AnalyticStylisticCategory ;
+    rdfs:label "Dialectic"@en .
+
+:Thesis a :AnalyticStylisticCategory ;
+    rdfs:label "As a thesis"@en .
+
+:ProgressiveLinear a :AnalyticStylisticCategory ;
+    rdfs:label "Progressive-linear"@en .
+
+:Paratactic a :AnalyticStylisticCategory ;
+    rdfs:label "Paratactic"@en .
+
+# Synthetic Stylistic Categories
+:Verbal a :SyntheticStylisticCategory ;
+    rdfs:label "Verbal"@en .
+
+:Adjectival a :SyntheticStylisticCategory ;
+    rdfs:label "Adjectival"@en .
+
+:Nominal a :SyntheticStylisticCategory ;
+    rdfs:label "Nominal"@en .
+
+#################################################################
+#    Individuals - Author
+#################################################################
+
+:Sibley a :Author ;
+    rdfs:label "Sibley" .
+
+#################################################################
+#    Individuals - Concepts
+#################################################################
+
+:AestheticConcept a :Concept ;
+    :hasReferencePage "p.2-23" ;
+    rdfs:label "aesthetic concept" .
+
+:Taste a :Concept ;
+    :hasReferencePage "p.2-11, p.13, p.14, p.20-23" ;
+    :hasRelationWith :AestheticConcept ;
+    rdfs:label "taste" .
+
+:NonAestheticConcepts a :Concept ;
+    rdfs:label "non-aesthetic terms or concepts" .
+
+#################################################################
+#    Individuals - TextualFactoids
+#################################################################
+
+:TF1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page1 ;
+    :hasText "I am interested in what they all have in common." ;
+    :refersTo :AestheticConcept ;
+    :hasNeighbourhood "the analysis is extended to the 'discourse in everyday life', not only works of art" ;
+    :hasGloss """Sibley wants to identify what kind of qualities all aesthetic concepts, that require the ability of taste to be employed, have in common, because "aesthetic terms have been so largely neglected. They have received glancing treatment in the course of other aesthetic discussions; but as a broad category they have not received the direct attention they merit." (see p. 3)""" ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+:TF1_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page1 ;
+    :hasText "Accordingly, when a word or expression is such that taste or perceptiveness is required in order to apply it, I shall call it an aesthetic term or expression..." ;
+    :refersTo :Taste ;
+    :hasNeighbourhood "the condition of possibilty of employing aesthetic concepts" ;
+    :hasGloss "When talking about what differentiates aesthetic concepts from other types of descriptions (even of works of art), Sibley says that a certain ability or capacity is implied, which is \"taste, perceptiveness, or sensitivity, of aesthetic discrimination or appreciation\"." ;
+    :basedOn :TF1 ;
+    :hasAnalyticStylisticCategory :Descriptive ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TF1_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page1 ;
+    :hasText "In short, aesthetic terms always ultimately apply because of, and aesthetic qualities always ultimately depend upon, the presence of features which, like curving or angular lines, colour contrasts, placing of masses, or speed of movement, are visible, audible, or otherwise discernible without any exercise of taste or sensibility." ;
+    :refersTo :NonAestheticConcepts ;
+    :hasNeighbourhood "the relationship between the use of aesthetic and non-aesthetic concepts" ;
+    :hasGloss "Sibley analyses the dependence that accures between aesthetic and non-aesthetic terms, namely that non-aesthetics terms are always used to describe aesthetic ones." ;
+    :basedOn :TF1_1 .
+
+
+# Continuing from the previous TextualFactoids...
+
+:TF1_3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page1 ;
+    :hasText """Nothing like this is possible with aesthetic terms. Examples undoubtedly play a crucial role in giving us a grasp of these concepts; but we do not and cannot derive from these examples conditions and principles, however complex, which will enable us, if we are consistent, to apply die terms even to some new cases.""" ;
+    :refersTo :Rules ;
+    :hasDescription "concept 2 isn't used to state concept 1" ;
+    :hasNeighbourhood "rules cannot be derived from examples to apply aesthetic terms" ;
+    :basedOn :TF1_2 ;
+    :hasAnalyticStylisticCategory :Dialectic .
+
+:TF1_4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page20 ;
+    :hasText "Aesthetic concepts are as natural, as little esoteric, as any others." ;
+    :refersTo :AestheticConcept ;
+    :hasDescription "concept 1 doesn't involve concept 2" ;
+    :hasNeighbourhood "the natural character of aesthetic concepts" ;
+    :hasGloss """Sibley argues against a commun misconception, according to which aesthetic concepts and qualities pertain to a very specific, esoteric domain. Sibley thinks that this isn't true, aesthetic concepts just have different rules, contexts and aren't as straight-forward as the non-aesthetic ones.""" ;
+    :basedOn :TF1_3 .
+
+:TF1_5 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page2 ;
+    :hasText "Having entered the language of art description and criticism as metaphors they are now standard vocabulary in that language." ;
+    :refersTo :AestheticConcept ;
+    :hasReferencePage "p.20" ;
+    :hasDescription "concept 2 is sometimes involved with the making with concept 1 but once concept 1 is formed concept 2 doesn't serve it's usual purpose" ;
+    :hasNeighbourhood "the process that makes it possible to use an aesthetic concept or description" ;
+    :hasGloss """Sibley argues that for us to use an aesthetic word or concept there should be a sort of trasfert of meaning, from a literal to a quasi or metaphorical sense, that leads us to ufficially use an aesthetic concept in it's proper, specific and natural sense.""" ;
+    :basedOn :TF1_4 .
+
+:TF2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page4 ;
+    :hasText "Aesthetic or taste concepts are not in this respect condition-governed at all." ;
+    :refersTo :ConditionGoverned ;
+    :hasGloss """Sibley here finds that one of the things that makes an aesthetic description, is the fact that it's not logically governed by necessary and sufficient conditions of any type.""" ;
+    :hasAnalyticStylisticCategory :Descriptive ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear .
+
+:TF2_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page6 ;
+    :hasText "I do not wish to deny therefore that taste concepts may be governed negatively by conditions." ;
+    :refersTo :ConditionGoverned ;
+    :hasReferencePage "p.8, p.13" ;
+    :hasDescription "concept 2 is the exception of concept 1" ;
+    :basedOn :TF2 .
+
+:TF3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page9 ;
+    :hasText """It is at least noteworthy that in applying words like 'lazy' or 'intelligent' to new and unique instances we say that we are required to exercise judgement; it would be indeed odd to say that we are exercising taste...""" ;
+    :refersTo :Taste ;
+    :hasDescription "concept 2 is in contrast to concept 1" ;
+    :hasNeighbourhood "different types of human abilities emplyed for different types of purposes" ;
+    :hasGloss """Sibley uses some exemples, like the concepts of "lazy" and "intelligent" to prove the difference between the exercise of judgement, employed in non-aesthetic contexts, and the exercise of taste, employed in aesthetic concepts. The first types of descriptions are founded upon conditions while it doesn't work the same way for the others.""" .
+
+:TF3_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page14 ;
+    :hasText """This kind of comparison between the exercise of taste and the use of the five senses is indeed familiar; our use of the word 'taste' itself shows that the comparison is age-old and very natural. Yet whatever the similarities, there are great dissimilarities too.""" ;
+    :refersTo :Taste ;
+    :hasDescription "concept 2 and concept 1 have great similarities but great dissimilarities too" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :basedOn :TF3 .
+
+:TF4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page3 ;
+    :hasText """When we cannot ourselves quite say what non-aesthetic features make something delicate or unbalanced or powerful or moving, the good critic often puts his finger on something which strikes us as the right explanation.""" ;
+    :refersTo :Critic ;
+    :hasReferencePage "p.16, p.18, p.19" ;
+    :hasDescription "analysing and pointing out concept 2 is the prerogative of concept 1" ;
+    :hasGloss "it is the role of the critic of pointing out aesthetic concepts and qualities" .
+
+:TF4_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page18 ;
+    :hasText "I shall attempt a brief description of the methods we use as critics." ;
+    :refersTo :Critic ;
+    :hasReferencePage "p.19" ;
+    :hasDescription "concept 1 uses concept 2 to operate" ;
+    :hasGloss """Sibley describes the method used by critics, that already have a clear grasp of what aesthetic qualities are, to point them out to the general public. He sums the method up in 7 main points or steps (see p. 18 and p.19).""" ;
+    :basedOn :TF4 .
+
+:TF4_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page23 ;
+    :hasText """But in particular I have wanted to urge that it should not strike us as puzzling that the critic supports his judgements and brings us to see aesthetic qualities by pointing out key features and talking about them in the way he does. It is by the vary same methods that people helped us develop our aesthetic sense and master its vocabulary from the beginning.""" ;
+    :hasGloss """the normal learning of aesthetic concepts' use""" ;
+    :basedOn :TF4_1 .
+
+
+
+#################################################################
+#    Individuals - Pages
+#################################################################
+
+
+# Additional Concepts referenced above
+:Rules a :Concept ;
+    rdfs:label "rules, conditions and principles" .
+
+:ConditionGoverned a :Concept ;
+    rdfs:label "condition-governed" .
+
+:Critic a :Concept ;
+    rdfs:label "the critic" .
+
+# Additional Pages referenced above
+
+:Page1 a :Page ;
+    rdfs:label "1" .
+
+:Page2 a :Page ;
+    rdfs:label "2" .
+
+:Page3 a :Page ;
+    rdfs:label "3" .
+
+:Page4 a :Page ;
+    rdfs:label "4" .
+
+:Page6 a :Page ;
+    rdfs:label "6" .
+
+:Page9 a :Page ;
+    rdfs:label "9" .
+
+:Page14 a :Page ;
+    rdfs:label "14" .
+
+:Page18 a :Page ;
+    rdfs:label "18" .
+
+:Page20 a :Page ;
+    rdfs:label "20" .
+
+:Page23 a :Page ;
+    rdfs:label "23" .
+
+
+

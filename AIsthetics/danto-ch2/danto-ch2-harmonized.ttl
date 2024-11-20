@@ -1,0 +1,1344 @@
+@prefix : <http://example.org/philtext/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:basedOn rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "based on"@en .
+
+:findableIn rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:label "findable in"@en .
+
+:hasAnalyticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:label "has analytic stylistic category"@en .
+
+:hasAuthor rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:label "has author"@en .
+
+:hasReferencePage rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:label "reference page"@en .
+
+:hasRelationWith rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "has relation with"@en .
+
+:hasSyntheticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:label "has synthetic stylistic category"@en .
+
+:refersTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:label "refers to"@en .
+
+:see rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "see"@en .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has description"@en .
+
+:hasExternalReference rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has external reference"@en .
+
+:hasGloss rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gloss"@en .
+
+:hasNeighbourhood rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has neighbourhood"@en .
+
+:hasText rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has text"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:AnalyticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory .
+
+:Author rdf:type owl:Class .
+
+:Concept rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasReferencePage ;
+                      owl:someValuesFrom :Page ] .
+
+:Page rdf:type owl:Class .
+
+:StylisticCategory rdf:type owl:Class .
+
+:SyntheticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory .
+
+:TextualFactoid rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasAuthor ;
+                      owl:someValuesFrom :Author ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty :refersTo ;
+                      owl:someValuesFrom owl:Thing ] .
+
+#################################################################
+#    Individuals - Style Categories
+#################################################################
+
+:Descriptive rdf:type :AnalyticStylisticCategory .
+:Honorific rdf:type :AnalyticStylisticCategory .
+:Metaphoric rdf:type :AnalyticStylisticCategory .
+:Evocative rdf:type :AnalyticStylisticCategory .
+:Visual rdf:type :AnalyticStylisticCategory .
+:Dialectic rdf:type :AnalyticStylisticCategory .
+:Thesis rdf:type :AnalyticStylisticCategory .
+:ProgressiveLinear rdf:type :AnalyticStylisticCategory .
+:Paratactic rdf:type :AnalyticStylisticCategory .
+
+:Verbal rdf:type :SyntheticStylisticCategory .
+:Adjectival rdf:type :SyntheticStylisticCategory .
+:Nominal rdf:type :SyntheticStylisticCategory .
+
+#################################################################
+#    Individuals - Authors
+#################################################################
+
+:danto rdf:type :Author ;
+    rdfs:label "Danto" .
+
+#################################################################
+#    Individuals - Main Concepts
+#################################################################
+
+:essence rdf:type :Concept ;
+    rdfs:label "Essence" .
+
+:entityClassification rdf:type :Concept ;
+    rdfs:label "Entity Classification" .
+
+:ontology rdf:type :Concept .
+
+:historicalContext rdf:type :Concept ;
+    rdfs:label "Historical Context" .
+
+:author rdf:type :Concept ;
+    rdfs:label "Author" .
+
+:workContent rdf:type :Concept ;
+    rdfs:label "Work Content" .
+
+:causation rdf:type :Concept ;
+    rdfs:label "Causation" .
+
+:workStructure rdf:type :Concept ;
+    rdfs:label "Work Structure" .
+
+:perceptualProperties rdf:type :Concept ;
+    rdfs:label "Perceptual Properties" .
+
+:aestheticPurism rdf:type :Concept ;
+    rdfs:label "Aesthetic Purism" .
+
+:perceptualIndiscernibility rdf:type :Concept ;
+    rdfs:label "Perceptual Indiscernibility" .
+
+#################################################################
+#    TextualFactoids - Section 1
+#################################################################
+
+:TextualFactoid_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Now there is a problem of a familiar metaphysical sort concerning the identity of an artwork" ;
+    :refersTo :essence ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "l'identità di un'opera è ciò che la rende tale: la sua essenza" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string .
+
+:TextualFactoid_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the poem" ;
+    :refersTo :essence ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Si riferisce all'essenza dell'opera d'arte" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_1_1 .
+
+:TextualFactoid_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the Poem Itself" ;
+    :refersTo :essence ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Vd: gloss; 1.2" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_1_2 .
+
+:TextualFactoid_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Often enough poets and philosophers have thought of artworks as thus only tenously connected with their embodiments" ;
+    :refersTo :essence ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Danto ritiene che un'analisi della dimensione sensibile non sia utile al fine di definire che cosa è opera d'arte" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_1_3 .
+
+#################################################################
+#    TextualFactoids - Section 2
+#################################################################
+
+:TextualFactoid_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the class of its copies" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Classi di enti sono l'esito di un esercizio di classificazione ontologica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string .
+
+:TextualFactoid_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "artworks as a class" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Vd: gloss; 2.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_2_1 .
+
+#################################################################
+#    TextualFactoids - Section 3
+#################################################################
+
+:TextualFactoid_3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "ours being a prior question of the ontological difference between artworks and their nonartistic counterparts" ;
+    :refersTo :ontology ;
+    :hasNeighbourhood "Critica al purismo estetico: presentazione della posizione di Goodman" ;
+    :hasGloss "Qui abbiamo una dichiarazione di intenti" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string .
+
+:TextualFactoid_3_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So it is almost a problem in psychophysics rather than one in ontology" ;
+    :refersTo :ontology ;
+    :hasNeighbourhood "Critica al purismo estetico: presentazione della posizione di Goodman" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_3_1 .
+
+:TextualFactoid_3_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the serious ontological question, namely that of deciding which is which between artworks and nonartworks" ;
+    :refersTo :ontology ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 3.2" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_3_2 .
+
+#################################################################
+#    TextualFactoids - Section 4
+#################################################################
+
+:TextualFactoid_4_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText """Cervantes "opposes to the fiction of chivalry the tawdry provincial reality of his country." Menard on the other hand (on the other hand!) selects for its reality "the land of Carmen during the century of Lepanto and Lope de Vega." These are of course descriptions of the same place and time, but the mode of referring to them belongs to different times: it would not have been feasible for Cervantes to refer to Spain as "the land of Carmen", Carmen being a nineteenth-century literary personality familiar, of course, to Menard""" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "35"^^xsd:string .
+
+:TextualFactoid_4_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText """It would have been ridiculous for Menard to have opposed the fiction of chivalry since that literature had already long since been demolished by Cervantes; and though Menard was perhaps making an oblique characterization of Salambô as a piece of historical fiction, no such intention would have been possible for Cervantes, who was after all a contemporary of Shakespeare""" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "35"^^xsd:string ;
+    :basedOn :TextualFactoid_4_1_1 .
+
+:TextualFactoid_4_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Moreover, Menard is conscious of his predecessor as a predecessor" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una copia" ;
+    :hasGloss "Il fatto che Menard conosca l'opera di Cervantes (e, dunque, che l'opera di Cervantes sia già stata scritta) rende possibile al primo produrre l'opera che Borges immagina produca" ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_4_1_2 .
+
+:TextualFactoid_4_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText """It is not clear that Cezanne could even have framed the intention to make an artwork this way, since the concept through which the intention could have been formed was not such as to allow its formation at that point. But Picasso was famous for transfigurations of the commonplace. He had made the head of a chimpazee out of a child's toy; a goat's thorax out of an old wicker baslet; a bull's head out of bicycle parts; a Venus out of a gasjet - and so why not the ultimate transfiguration, an artwork out of a thing, "Cravat" out of a necktie? There was a room in the space of the artworld by then and in the internal structure of Picasso's corpus, which did so much to define the space of the artworld, for such an object by Picasso there and then. Cezanne, however staggeringly original whitin the boundaries of painting, had only the option of exploring the territory the boundaries circumscribed whitout transforming the boundaries themselves, and had only the option of making apples and mountains out of paint""" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_4_1_3 .
+
+#################################################################
+#    TextualFactoids - Section 4 (continued)
+#################################################################
+
+:TextualFactoid_4_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "it was a repudiation of painterliness (le peinture), of that apotheosis of paint-and-brushstroke (or drip) which defined New York painting of the 1950s as a movement." ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "L'affermazione di Picasso è resa possibile dal contesto in cui Picasso opera" ;
+    :findableIn "40"^^xsd:string .
+
+:TextualFactoid_4_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "What, one may ask, is the subject of \"Cravat\"? Or has it a subject? In a way, one wants to say: this too is an historical question and in part at least depends upon what subject Picasso supposed it had" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_4_2_1 .
+
+:TextualFactoid_4_3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Close attention to the relationship between his work and that of Cervantes brings to light a number of deeply interesting relationships between the identity of a work and the time and place and provenance of the work, so much su that identification of its subject and style cannot be effected in complete historical abstraction" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: necessità di indagare la storia causale di un ente" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "39"^^xsd:string .
+
+:TextualFactoid_4_3_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "In part, the answer to the question has to be historical. Not everything is possible at every time, as Heinrich Wölflin has written, meaning that certain artworks simply could not be inserted as artworks into certain periods of art history, though it is possible that objects identical to artworks could have been made at that period" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_4_3_1 .
+
+:TextualFactoid_4_3_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Duchamp's snowshovel was pretty banal in the early twentieth century, simply because chosen from the set of indiscernible industrial products from a shovel factory, with its peer to be found in garages throughout the bourgeois world. But the identical object - a curved sheet of metal attached to a wooden stick at the other terminus of which was a shape like today's snowshovel handle - would have been, I should think, a deeply mysterious object in the thirteenth century; but it is doubtful that i could have been absorbed into the artworld of that period and place" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_4_3_2 .
+
+:TextualFactoid_4_3_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "And it is not difficult to conceive of objects which, though thay would not have been works of art at the time they were made, can have in a later period objects precisely like them which are works of art" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_4_3_3 .
+
+:TextualFactoid_4_3_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "A sculptor who produced an archaic torso of Apollo in the period of Praxiteles would have gone hungry, since the artworld by then had evolved so as to exclude this as a possible artwork unless it has been made when appropriate, and lingered on as an antique. The artworld of the period would have excluded from the expressive vocabolary of its contemporaries the deliberate exploitation of archaic forms, in contrast with the situation today when, if an artist should choose to employ archaic forms, this would be tolerated; but of course if someone uses limestone stele today, they could hardly have the same meaning as they would have had when Stonehenge was new. And if today an artist exhibits a painting in the syle of Watteau, we should hesitate before declaring him out of date: this may be a self-conscious archaism, in which case he stands in a very different relationship to the Rococco style than Watteau would have done" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasGloss "Il contesto storico influenza ogni componente della struttura dell'opera (significato e rappresentazione)" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "45"^^xsd:string ;
+    :basedOn :TextualFactoid_4_3_4 .
+
+:TextualFactoid_4_3_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "In any case, it is for reasons of historical possibility such as these that the identical object could have been an artwork from the hands of Picasso - but not from Cezanne" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "46"^^xsd:string ;
+    :basedOn :TextualFactoid_4_3_5 .
+
+#################################################################
+#    TextualFactoids - Section 5
+#################################################################
+
+:TextualFactoid_5_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText """Cervantes "opposes to the fiction of chivalry the tawdry provincial reality of his country." Menard on the other hand (on the other hand!) selects for its reality "the land of Carmen during the century of Lepanto and Lope de Vega.""" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "I diversi modi di intendere il medesimo luogo e la medesima epoca utilizzati da Cervantes e Menard danno luogo a due contenuti differenti" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "35"^^xsd:string .
+
+:TextualFactoid_5_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "But in any case, if Menard were quoting that work, what his would be about would just be the book of Cervantes rather than \"the land of Carmen in the century of Lepanto and Lope de Vega\"" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una citazione" ;
+    :hasGloss "Da Menard dipende il contenuto del suo prodotto: se volesse citare il libro di Cervantes, si avrebbe una citazione del libro di Cervantes. Menard vuole dire qualcosa circa la terra di Carmen nel secolo di Lepanto e Lope de Vega e questo diviene il contenuto del suo prodotto" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "37"^^xsd:string ;
+    :basedOn :TextualFactoid_5_1_1 .
+
+:TextualFactoid_5_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "In any case, let us suppose that just before his death, at the crowning work of his already amazing corpus, Picasso himself had made a tie, which I shall describe this way: Picasso, who of course had not worn one for years, found one of his old ties and painted it a bright blue all over. The paint was applied smoothly and carefully, and every trace of brushstroke was purged: it was a repudiation of painterliness (le peinture), of that apotheosis of paint-and-brushstroke (or drip) which defined New York painting of the 1950s as a movement." ;
+    :refersTo :author ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Picasso pensa che il modo di dipingere diffuso a New York negli anni '50 fosse da ripudiare e crea un'opera per \"affermare\" la sua teoria" ;
+    :findableIn "40"^^xsd:string ;
+    :basedOn :TextualFactoid_5_1_2 .
+
+:TextualFactoid_5_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "What, one may ask, is the subject of \"Cravat\"? Or has it a subject? In a way, one wants to say: this too is an historical question and in part at least depends upon what subject Picasso supposed it had" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_5_1_3 .
+
+:TextualFactoid_5_1_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So Picasso's tie and Cezanne's tie have no subject, but the force of saying this is different in the two cases. In the one case, the work lacks a subject because Picasso willed that it not have one. In the other case, it lacks one because it is logically of the wrong sort to have one, being only a thing (if also an artifact)" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "La negazione di un contenuto da parte di un autore è sempre un contenuto" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_5_1_4 .
+
+:TextualFactoid_5_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Moreover, Menard is conscious of his predecessor as a predecessor: his is not the sort of case illustrated by Robin who discovered that one of his Ombres from the Porte d'Enfer was an exact replica, rotated through ninety degrees, of the figure of Adam on the Sistine ceiling, sketched and admired by Rodin forty years earlier on a pilgrimage to Italy. Menard did not discover that what he had written was word for word what Cervantes had set down. His aim was to recreate a work already well known to him. So what he produced was a work and his" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una copia" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "36"^^xsd:string .
+
+:TextualFactoid_5_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "In any case, let us suppose that just before his death, at the crowning work of his already amazing corpus, Picasso himself had made a tie, which I shall describe this way: Picasso, who of course had not worn one for years, found one of his old ties and painted it a bright blue all over. The paint was applied smoothly and carefully, and every trace of brushstroke was purged: it was a repudiation of painterliness (le peinture), of that apotheosis of paint-and-brushstroke (or drip) which defined New York painting of the 1950s as a movement" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Con questo caso immaginario Danto mostra in che modo l'autore è titolare del processo di causazione: ha un contenuto (repudiation of painterliness) che deve rappresentare (the paint was applied smoothly and carefully)" ;
+    :findableIn "40"^^xsd:string ;
+    :basedOn :TextualFactoid_5_2_1 .
+
+:TextualFactoid_5_3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "There was a room in the space of the artworld by then and in the internal structure of Picasso's corpus, which did so much to define the space of the artworld, for such an object by Picasso there and then." ;
+    :refersTo :author ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :findableIn "47"^^xsd:string .
+
+:TextualFactoid_5_4_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the absence, in this instance the deliberate absence, of Giottesque perspective in the Strozzi altarpiece" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Alcune considerazioni sul rapporto tra contesto storico, intenzione dell'autore e contenuto dell'opera" ;
+    :hasGloss "L'autore, titolare del processo di causazione, sceglie la modalità di rappresentazione del contenuto che deposita nell'opera" ;
+    :findableIn "50"^^xsd:string .
+
+:TextualFactoid_5_5_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So let us imagine that a child gets hold of one of his father's ties and covers it with blue paint, which he makes as smooth as possible with blue paint from the same company (Sapolin) which manufactured the paint Picasso used, \"to make it nice\" as he explains. I would hesitate to predict a glorious artistic future for this child merely on the grounds that he had produced an entity indiscernible from one turned out by the greatest master of modern times. It is not as if the child had covered the walls of the living room with something not to be told apart from the Legend of the True Cross. I am prepared to go further and insist that even though there is the sort of indiscernibility our examples require, what the child has effected is not an artwork" ;
+    :refersTo :author ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Il bambino non afferma nulla circa alcunché e, dunque, non produce un qualcosa di artistico" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "40"^^xsd:string .
+
+#################################################################
+#    TextualFactoids - Section 6 - Content of the Work
+#################################################################
+
+:TextualFactoid_6_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The paint was applied smoothly and carefully, and every trace of brushstroke was purged: it was a repudiation of painterliness" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :findableIn "40"^^xsd:string .
+
+:TextualFactoid_6_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Let us, this established, suppose that the Picasso tie indeed has a subject, and let us further suppose, in view of the way in which I descrived the smoothing out of all that blue paint, that part of what the work is about is painting. In the painting of the 1950s, the brushstroke was fo such preeminent importance, because is immediately conveyed the action of depositing itself on the canvas, that it would have been unthinkable to conceal it, say in the manner of the glassy surfaces of academic painting of a certain era. And since painting was virtually defined as action - action was the cause and substance of these works - the brushstroke was a deeply charged emblem" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Alcune considerazioni sul rapporto tra contesto storico, intenzione dell'autore e contenuto dell'opera" ;
+    :findableIn "50"^^xsd:string ;
+    :basedOn :TextualFactoid_6_1_1 .
+
+:TextualFactoid_6_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the significance of smooth paint in Cravat" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Alcune considerazioni sul rapporto tra contesto storico, intenzione dell'autore e contenuto dell'opera" ;
+    :hasGloss "La vernice ha un significato, ma non di per sè: è il significato che il contenuto dell'opera \"afferma\" e viene rappresentato con le proprietà percettive" ;
+    :findableIn "50"^^xsd:string ;
+    :basedOn :TextualFactoid_6_1_2 .
+
+:TextualFactoid_6_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "What, one may ask, is the subject of \"Cravat\"? Or has it a subject? In a way, one wants to say: this too is an historical question and in part at least depends upon what subject Picasso supposed it had. Suppose, however, that he denied, in the boorish manner of J at the beginning of our exploration, that it had any subject. I want to accept that answer, and apply to it considerations briefly alluded to at the beginning. Perhaps it does not have a subject, but the question of what its subject is, is not ruled out and rejected out of hand. The request for its subject would, in the case of what the child wrought, be rejected out of hand. To be sure, it may have significance as a gesture, revealing deep oedipal hostility toward the father (think of the sexual symbolism of the necktie!) and so be an expression of that; but though it is a sympton of something, it not a thing with a subject" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "Il contenuto dell'opera deve esservi depositato intenzionalmente (e non inconsciamente) e deve essere di tipo concettuale-predicativo: l'opera sembra a una sorta di asserzione o negazione circa qualcosa" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string .
+
+:TextualFactoid_6_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Or, if the case is too marginal, at least the paintrag of Cezanne does not have a subject, being merely a paint-covered thing. So Picasso's tie and Cezanne's tie have no subject, but the force of saying this is different in the two cases. In the one case, the work lacks a subject because Picasso willed that it not have one. In the other case, it lacks one because it is logically of the wrong sort to have one, being only a thing (if also an artifact)" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "L'elemento del contenuto concettuale-predicativo è cruciale per la definizione dell'opera: è un elemento non sensibili che la distingue dalle mere cose" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_6_2_1 .
+
+:TextualFactoid_6_2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "There is an analogy to this elsewhere: asked his reason for raising his arm, an agent may answer that there was no reason, that he merely did it, apropos de rien, with no ulterior motive. He may be wrong - there may be, may always be, a hidden reason - but if he is right, he is giving a negative answer to a question, not, as it were, negating the question. The question is allowed application, but within its range no positive answer is available. By contrast, if a man's arm moves in such a way that it cannot be reckoned an action, but is a spasm of some order, or merely happens to occur for causes of an unknown order, then, because it appears to us to have been an action, we might again ask why; and when he says there was no reason, he would exluding it from the domain within which the question applies, negating, as just said, the question as such. The relationship then between an artwork and a thing just like it is in this respect analogous to the difference between a basic action and a bodily movement just like it, to all outward appearances" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "Vd: gloss; 6.2.1" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_6_2_2 .
+
+:TextualFactoid_6_2_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Let us now return, before considering the other two ties, to the case of the fortuitous splat that looks like the Polish Rider. Once more we may ask what it is about, what its subject is, and the answer is (I should think) that it has no subject, though there might seem an argument to the effect that, given parity of form with the Polish Rider, it should be about whatever the Polish Rider is about, and ambiguous if the latter is ambiguous. But of course it is not even clear that the splat has any structure, even if it is congruent with an object - the Polish Rider itself - which has one; and even if if did, it would be far from plain that it inherits meaning from its structural counterpart" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "L'elemento del contenuto concettuale-predicativo è cruciale per la definizione dell'opera: è uno degli elementi non sensibili che la distingue dalle mere cose" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_6_2_3 .
+
+#################################################################
+#    TextualFactoids - Section 7 - Causation
+#################################################################
+
+:TextualFactoid_7_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "It is not just that the books are written at different times by different authors of different nationalities and literary intentions: these facts are not external ones; they serve to characterize the work(s)" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "35"^^xsd:string .
+
+:TextualFactoid_7_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "That is to say, the works are in part constituted by their location in the history of literature as well as by their relationship to their authors, and as these are often dismissed by critics who urge us to pay attention to the work itself, Borges' contribution to the ontology of art is stupendous: you cannot isolate these factors from the work since they penetrate, so to speak, the essence of the work" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_1 .
+
+:TextualFactoid_7_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Menard did not discover that what he had written was word for word what Cervantes had set down. His aim was to recreate a work already well known to him. So what he produced was a work and his: it was not a copy therefore, since any fool could copy Cervantes' work and the result would be just that, a copy that would have only the literary value of the original. It would require only those skills required by facsimilitation; the copyst would be merely a mechanism of duplication, like a xerox machine" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una copia" ;
+    :hasGloss "Il processo di causazione deve essere adeguato: deve dare luce a tutti gli elementi che fanno parte della struttura dell'opera" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_2 .
+
+:TextualFactoid_7_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Nor, again, was he copying himself. We judge a copy by how accurate it is, and if someone were to criticize one of these paintings of paintings on the grounds that it was inaccurate, Burliuk might have laughed; the question of accuracy cannot arise when the painting in question is not to begin with an attempted copy" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una ripetizione" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "38"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_3 .
+
+:TextualFactoid_7_1_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So let us imagine that a child gets hold of one of his father's ties and covers it with blue paint, which he makes as smooth as possible with blue paint from the same company (Sapolin) which manufactured the paint Picasso used, \"to make it nice\" as he explains. I would hesitate to predict a glorious artistic future for this child merely on the grounds that he had produced an entity indiscernible from one turned out by the greatest master of modern times. It is not as if the child had covered the walls of the living room with something not to be told apart from the Legend of the True Cross. I am prepared to go further and insist that even though there is the sort of indiscernibility our examples require, what the child has effected is not an artwork" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Vd: gloss; 7.1.3" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "40"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_4 .
+
+:TextualFactoid_7_1_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Its being a forgery, one would think, has something to do with its history, with the way in which it arrived in the world. And to call something an artwork is at least to deny that sort of history to it" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "L'essere un determinato ente si deve all'avere una certa storia causale" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_5 .
+
+:TextualFactoid_7_1_7 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "It is of more than incidental interest that none of the artists just mentioned could as a matter of artistic fact have created the work we are pretending was created by Picasso. The fact bears mention because it is not, as with J, simply that he happens to have been an artist that Picasso's necktie, but not that of the child, is a work of art, for the thing has to stand in the right relationship to the person who cause it to come into existence, even if he or she happens to be an artist" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasGloss "Vd: gloss; 7.1.3" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_6 .
+
+:TextualFactoid_7_1_8 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "In any case, it is for reasons of historical possibility such as these that the identical object could have been an artwork from the hands of Picasso - but not from Cezanne, who just happened, let us suppose, with his characteristic meticulousness, to have used this particular piece of cloth as a paintrag (we know that he wiped his brush after each stroke) and, because of his equally celebrated parsimony, did not throw it away until he had completely used it up, the result being a tie-shaped cloth covered from edge to edge with the same blue Picasso may be supposed to have used to execute his work" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasGloss "Vd: gloss; 7.1.3" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "46"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_7 .
+
+:TextualFactoid_7_1_9 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Let the snapshot be a photograph of the World Trade Cetner. We know pretty much what conditions must hold for the description to be true: it must resemble the World Trade Center itself, from whatever angle is relevant. But more than this, it must be caused by the World Trade Center itself, radiations from which interact photochemically with the treated paper to produce just that pattern of darks and lights. Now imagine next to this a piece of photographic paper bearing the identical pattern of darks and lights, but let this one not be caused by the World Trade Center. Perhaps it materialized mysteriously on the paper. Perhaps it was the result of accidentally tripping the shutter while the camera was pointed toward the water off Cape Canaveral, and by that sort of coincidence upon which we are bit by bit erecting a philosophy of art, the result looks exactly like the photograph of the World Trace Center. But it is not that, because the causal condition for being that fails. The differently caused photograph is of something different from our first photograph, and it is possible to imagine causal histories inconsistent with claiming that the photograph is of anything at all, hence with claiming it in the first place to be a snapshot" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: la storia causale determina la struttura dell'opera" ;
+    :hasGloss "Vd: gloss; 7.1.3" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "49"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_8 .
+
+:TextualFactoid_7_1_10 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "certain things which exactly resemble one another may not be of the same thing, or one of them may be of something only if the right causal history is presupposed while its counterpart may not be of anything at all" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: la storia causale determina la struttura dell'opera" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "49"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_9 .
+
+:TextualFactoid_7_1_11 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "This would then be one reason why Cezanne, even had his necktie been a work of art, could not have it mean what Picasso's means, since the relevant events were in his future and could not form a possible subject for art. And it would equally be a reason why the child's necktie could not mean, supposing it has a meaning, what Picasso's tie does; the child could not be expected to have internalized the recent history of the artworld, or to appreciate the mad polemics of the brushmark. It is not just that the shape of art history must change before such statements are possible, but that one must have internalized that history if one is to make that sort of statement" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Alcune considerazioni sul rapporto tra contesto storico, intenzione dell'autore e contenuto dell'opera" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "51"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_10 .
+
+:TextualFactoid_7_1_12 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The status of the forgery, in this perspective, perhaps is only this, that it too stands in the wrong relation to its maker to be supposed a statement of his: it only pretends to be a statement of someone else's, namely Picasso. Forgers have varieties of motives. Van Meegeren wanted to prove that he could paint as well as Vermeer, but we would hardly suppose that this is a statement he makes by means of his emulation of Vermeer, only a statement he could justify on the basis of his trumperies. And whatever statement Vermeer might have made had he made it through the paintings in fact confected by Van Meegeren, these cannot be the statements made by means of these paintings since they were not painted by Vermeer. Van Meegeren is after all in a different position altogether from an artist who happened, in 1935 or whenever, to paint in the manner of Veermer and to make whatever statement such deliberate stylistic anachronisms would enable a painter to make: perhaps a statement about the decadence of the Dutch art of the time" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Alcune considerazioni sul rapporto tra contesto storico, intenzione dell'autore e contenuto dell'opera" ;
+    :hasGloss "Vd: gloss; 7.1.3" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "51"^^xsd:string ;
+    :basedOn :TextualFactoid_7_1_11 .
+
+:TextualFactoid_7_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Or, if the case is too marginal, at least the paintrag of Cezanne does not have a subject, being merely a paint-covered thing. So Picasso's tie and Cezanne's tie have no subject, but the force of saying this is different in the two cases. In the one case, the work lacks a subject because Picasso willed that it not have one. In the other case, it lacks one because it is logically of the wrong sort to have one, being only a thing (if also an artifact)" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string .
+
+:TextualFactoid_7_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "There is an analogy to this elsewhere: asked his reason for raising his arm, an agent may answer that there was no reason, that he merely did it, apropos de rien, with no ulterior motive. He may be wrong - there may be, may always be, a hidden reason - but if he is right, he is giving a negative answer to a question, not, as it were, negating the question. The question is allowed application, but within its range no positive answer is available. By contrast, if a man's arm moves in such a way that it cannot be reckoned an action, but is a spasm of some order, or merely happens to occur for causes of an unknown order, then, because it appears to us to have been an action, we might again ask why; and when he says there was no reason, he would exluding it from the domain within which the question applies, negating, as just said, the question as such. The relationship then between an artwork and a thing just like it is in this respect analogous to the difference between a basic action and a bodily movement just like it, to all outward appearances" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasDescription "Tesi dell'autore" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_7_2_1 .
+
+:TextualFactoid_7_2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Let us now return, before considering the other two ties, to the case of the fortuitous splat that looks like the Polish Rider. Once more we may ask what it is about, what its subject is, and the answer is (I should think) that it has no subject, though there might seem an argument to the effect that, given parity of form with the Polish Rider, it should be about whatever the Polish Rider is about, and ambiguous if the latter is ambiguous. But of course it is not even clear that the splat has any structure, even if it is congruent with an object - the Polish Rider itself - which has one; and even if if did, it would be far from plain that it inherits meaning from its structural counterpart" ;
+    :refersTo :causation ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_7_2_2 .
+
+#################################################################
+#    TextualFactoids - Section 8 - Structure of the Work
+#################################################################
+
+:TextualFactoid_8_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So much the worse for the properties that meet the eye, then, in individuating works of art" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :findableIn "35"^^xsd:string .
+
+:TextualFactoid_8_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "it was not a copy therefore" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una copia" ;
+    :hasGloss "Apparentemente l'opera di Menard potrebbe sembrare una copia di quella di Cervantes, ma in realtà non lo è: il ricorso alle proprietà sensibili è fallimentare quando si tratta di classificare ontologicamente gli enti del mondo" ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_1 .
+
+:TextualFactoid_8_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Nor is Menard's a quotation of the original" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una citazione" ;
+    :hasGloss "Apparentemente l'opera di Menard potrebbe sembrare una citazione di quella di Cervantes, ma in realtà non lo è: il ricorso alle proprietà sensibili è fallimentare quando si tratta di classificare ontologicamente gli enti del mondo" ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_2 .
+
+:TextualFactoid_8_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Again, his cannot be easily assimilated to the concept of imitation" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è un'imitazione" ;
+    :hasGloss "Apparentemente l'opera di Menard potrebbe sembrare una imitazione di quella di Cervantes, ma in realtà non lo è: il ricorso alle proprietà sensibili è fallimentare quando si tratta di classificare ontologicamente gli enti del mondo" ;
+    :findableIn "37"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_3 .
+
+:TextualFactoid_8_1_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Finally, I think, Menard's work cannot be considered a repetition of Cervantes'. Simply because two works resemble one another does not mean that the artist of the one is repeating the artist of the other" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una ripetizione" ;
+    :hasGloss "Apparentemente l'opera di Menard potrebbe sembrare una ripetizione di quella di Cervantes, ma in realtà non lo è: il ricorso alle proprietà sensibili è fallimentare quando si tratta di classificare ontologicamente gli enti del mondo" ;
+    :findableIn "38"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_4 .
+
+:TextualFactoid_8_1_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The logical point, while it guarantees that if a is not identical with b, then there must be a property F such that a is F and b is not F, does not require that F be a perceptual property, and we have had enough practice with indiscernibilia to be able to offer actual instances where the differences are not such as may be registered by the senses" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Gli elementi che definiscono l'identità di un ente sono non percettivi (intenzione dell'autore storicamente determinata, possibile contenuto, storia causale)" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_5 .
+
+:TextualFactoid_8_1_7 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The three neckties, for example, may be noticeably different without this entailing that the noticeable differences will identify which of them is an artwork and which is not, and this primarily through the fact that it is not clear that concepts like \"work of art\" and \"forgery\" are translatanle into sets of simple percetual predicates" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_6 .
+
+:TextualFactoid_8_1_8 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "objects do not wear their histories on their surfaces" ;
+    :refersTo :workStructure ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_8_1_7 .
+
+#################################################################
+#    TextualFactoids - Section 9 - Perceptual Properties
+#################################################################
+
+:TextualFactoid_9_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "That there should exist indiscernible artworks - indiscernible at least with respect to anything the eye or ear can determine" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Indiscernibilia" ;
+    :hasGloss "il tono è restrittivo: l'indiscernibilità è solo delle proprietà percettive e in un'analisi ontologica va superata" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string .
+
+:TextualFactoid_9_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "There he describes two fragments of works, one of which is part of Don Quixote by Cervantes, and the other, like it in every graphic respect - like it, indeed, as much as two copies of the fragment by Cervantes could be - which happens to be by Pierre Menard and not by Cervantes" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Indiscernibilia" ;
+    :hasGloss "Vd: gloss; 9.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_1 .
+
+:TextualFactoid_9_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though nothing would be easier than to mistake a copy of Cervantes for a copy of Menard" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "il tono è concessivo: l'indiscernibilità è solo delle proprietà percettive e in un'analisi ontologica va superata" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_2 .
+
+:TextualFactoid_9_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though they look as much like one another as do paired copies of the same work" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_3 .
+
+:TextualFactoid_9_1_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "They have only in common those properties that the eye as such might identify" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 9.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "35"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_4 .
+
+:TextualFactoid_9_1_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "even though every word contained in the Menard version can be found in Cervantes' and in the corresponding position" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "35"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_5 .
+
+:TextualFactoid_9_1_7 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "for all their graphic indiscernibility" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "35"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_6 .
+
+:TextualFactoid_9_1_8 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "graphic congruities notwithstanding" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: la sua storia causale determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_7 .
+
+:TextualFactoid_9_1_9 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though it may resemble it precisely" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: la sua storia causale determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "39"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_8 .
+
+:TextualFactoid_9_1_10 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though there is a sort of indiscernibility our examples require" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "40"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_9 .
+
+:TextualFactoid_9_1_11 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "similarity of surface notwithstanding" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_10 .
+
+:TextualFactoid_9_1_12 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "allowing therefore the logical possibility that two things may be perceptually indiscernible" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 9.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_11 .
+
+:TextualFactoid_9_1_13 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though it is possible that objects identical to artworks" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_12 .
+
+:TextualFactoid_9_1_14 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "even if it is congruent with an object - the Polish Rider" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "Vd: gloss; 9.1.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_13 .
+
+:TextualFactoid_9_1_15 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the result looks exactly like the photograph of the World Trade Center" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: la storia causale determina la struttura dell'opera" ;
+    :hasGloss "to look exactly like è diverso da to be exactly like" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_9_1_14 .
+
+#################################################################
+#    TextualFactoids - Section 9.2 - Perceptual Properties and Aesthetic Purism
+#################################################################
+
+:TextualFactoid_9_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "critics who urge us to pay attention to the work itself" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Caso Cervantes-Menard: la sua storia causale determina ontologicamente un ente" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string .
+
+:TextualFactoid_9_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "But the attitude expressed here has perhaps the force that such things ought not to figure, that we should give ourselves up to \"the work itself\"" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "41"^^xsd:string ;
+    :basedOn :TextualFactoid_9_2_1 .
+
+:TextualFactoid_9_2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Goodman then goes on to argue that no proof can be given that a perceptual difference may not be found, so thing that look alike today may look so different tomorrow that it will seem retrospectively amazing that confusion ever could have arisen" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_9_2_2 .
+
+:TextualFactoid_9_2_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So it is almost a problem in psychophysics rather than one in ontology" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasGloss "Le premesse teoriche di Goodman e di Danto sono inconciliabili: secondo Danto, scegliendo di concentrarsi sulla dimensione sensibile degli enti, Goodman non può che occuparsi di questioni psicofisiche e non ontologiche" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_9_2_3 .
+
+:TextualFactoid_9_2_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "And it is striking as a matter of concealed bias on Goodman's part that he should spontaneously have assumed that all aesthetic differences are perceptual differences" ;
+    :refersTo :perceptualProperties ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_9_2_4 .
+
+#################################################################
+#    TextualFactoids - Section 10 - Aesthetic Purism
+#################################################################
+
+:TextualFactoid_10_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "though I have heard this attitude expressed in connection with artworks of a measurably greater degree of sublimity than these, and with the intent of dismissing as irrelevant to experiencing them the sorts of allegedly grubby facts having to do with where and when and by whom the thing was done" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "41"^^xsd:string .
+
+:TextualFactoid_10_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Our recent encounter with Pierre Menard should imply a cautionary attitude regarding such purist aesthetic imperatives, such ahistorical views of artworks" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_10_1_1 .
+
+:TextualFactoid_10_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "But then the entire structure of the examples with which we have been working cries out for an answer to the inverse of Goodman's question, whether an unnoticed, and let us even suppose unnoticeabile, difference can make an aesthetic difference" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_10_1_2 .
+
+:TextualFactoid_10_2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "To be sure, we are not yet in a position to ponder aesthetic differences, our being a prior question of the ontological difference between artworks and their nonartistic counterparts, and there is a question whether this difference, which again is unnoticeable so far as examination of the objects is concerned, can make anything like an aesthetic difference" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_10_2 .
+
+:TextualFactoid_10_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the purists who ask us to surrender ourselves to the work itself have supposed, after all, that it is a work to which we are to surrender ourselves, and it is not clear what they would urge regarding objects that are in no sense works, like our fortuitously splattered pare-Polish Rider (or, if it si in some sense a work, its identity must be so different from that of the Polish Rider that, similarity of surface notwithstanding, it would be astonishing were there to be no difference in \"aesthetic response,\" whatever that may be)" ;
+    :refersTo :aestheticPurism ;
+    :hasGloss "Il purismo estetico non effettua un'indagine ontologica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_10_2_1 .
+
+:TextualFactoid_10_2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Furthermore, I think, whatever may be the case with aesthetic differences, even supposing Goodman is right, and that sustained and protracted peering and comparison will ultimately make a difference, so that we can learn to tell Lippo Lippi from Filippino Lippi and Vermeer from Peter de Hooch, as we learn to tell vogne romanée from beaujolais, still this will not help us with the serious ontological question, namely that of deciding which is which between artworks and nonartworks" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Danto concede che i puristi potrebbero aver ragione quando dicono che la percezione cambierà nel tempo, ma pensa che questo non aiuti in nessun modo a risolvere il problema ontologico: la definizione degli enti non si basa sulle proprietà percettive, ma sulla loro storia causale" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_10_2_2 .
+
+:TextualFactoid_10_3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Goodman in a curious way rejects one of the conditions of the question, namely the condition of indiscernibility. And it appers to be his view that indiscernibility is only momentary, that sooner or later differences will emerge" ;
+    :refersTo :aestheticPurism ;
+    :hasNeighbourhood "Critica al purismo estetico: la posizione di Goodman" ;
+    :hasGloss "Curious è quasi sarcastico: Danto mostra le conseguenze delle assunzioni metodologiche del purismo estetico e la negazione della condizione dell'indiscernibilità" ;
+    :hasDescription "Prospettiva che l'autore critica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string .
+
+#################################################################
+#    TextualFactoids - Section 11 - Perceptual Indiscernibility
+#################################################################
+
+:TextualFactoid_11_1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "it is a fact that the two works identified by Borges, that of Cervantes and that of Menard, would generate classes of indiscernible copies, the one class copies of the work of Cervantes, the other copies of that of Menard: but these would be copies of different, even importantly different, works, though nothing would be easier than to mistake a copy of Cervantes for a copy of Menard" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Il contrasto tra indiscernibilità percettiva e differenza ontologica muove l'analisi" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string .
+
+:TextualFactoid_11_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "but a copy of Cervantes and a copy of Menards are copies of different works, though they look as much like one another as do paired copies of the same work" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_1 .
+
+:TextualFactoid_11_1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Borges tells us that the Quixote of Menard is infinitely more subtle than that of Cervantes, while that of Cervantes is immeasurably more coarse than its counterpart even though every word contained in the Menard version can be found in Cervantes' and in the corresponding position" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "35"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_2 .
+
+:TextualFactoid_11_1_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "I would hesitate to predict a glorious artistic future for this child merely on the grounds that he had produced an entity indiscernible from one turned out by the greatest master of modern times. It is not as if the child had covered the walls of the living room with something not to be told apart from the Legend of the True Cross. I am prepared to go further and insist that even though there is the sort of indiscernibility our examples require, what the child has effected is not an artwork" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "40"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_3 .
+
+:TextualFactoid_11_1_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The logical point, while it guarantees that if a is not identical with b, then must be a property F such that a is F and b is not F, does not require that F be a perceptual property, and we have had enough practice with indiscernibilia to be able to offer actual instances where the differences are not such as may be registered by the senses. So it is possible that future investigation may reveal differences between two objects which are not perceptual differences, allowing therefore the logical possibility that two things may be perceptually indiscernible" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_4 .
+
+:TextualFactoid_11_1_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "There was a certain sense of unfairness felt at the time when Warhol piled the Stable Gallery full of his Brillo boxes; for the commonplace Brillo container was actually designed by an artist, an Abstract Expressionist drive by need into commercial art; and the question was why Warhol's boxes should have been worth $200 when that man's products were not worth a dime. Whatever explains this explains, as well, why the primed canvas of Giorgione, in our first example, fails to be an artwork though resembling in every respect the red expanses which are such" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: come il contesto storico e l'intenzione dell'autore determinano la struttura dell'opera" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "44"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_5 .
+
+:TextualFactoid_11_1_7 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Let us now return, before considering the other two ties, to the case of the fortuitous splat that looks like the Polish Rider. Once more we may ask what it is about, what its subject is, and the answer is (I should think) that it has no subject, though there might seem an argument to the effect that, given parity of form with the Polish Rider, it should be about whatever the Polish Rider is about,and ambiguous if the latter is ambiguous. But of course it is not even clear that the splat has any structure, even if it is congruent with an object - the Polish Rider itself - which has one; and even if it did, it would be far from plain that it inherits meaning from its structural counterpart" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_6 .
+
+:TextualFactoid_11_1_8 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the result looks exactly like the photograph of the World Trade Center. But it is not that" ;
+    :refersTo :perceptualIndiscernibility ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 11.1.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "48"^^xsd:string ;
+    :basedOn :TextualFactoid_11_1_7 .
+
+:TextualFactoid_2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "artworks as a class" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Essenza dell'opera d'arte: type e token" ;
+    :hasGloss "Vd: gloss; 2.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "33"^^xsd:string ;
+    :basedOn :TextualFactoid_2_1 .
+
+:TextualFactoid_2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "classes of indiscernible copies, the one class copies of the work of Cervantes, the other copies of that of Menard" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 2.1" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_2_2 .
+
+:TextualFactoid_2_4 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "but these would be copies of different, even importantly different, works, though nothing would be easier than to mistake a copy of Cervantes for a copy of Menard" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Differenza e identicità sono il parametro fondamentale di ogni tentativo di classicazione di enti" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_2_3 .
+
+:TextualFactoid_2_5 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "The question then is what makes them copies of different works?" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Caso Cervantes-Menard: due opere percettivamente indiscernibili sono la stessa opera?" ;
+    :hasGloss "Vd: gloss; 2.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "34"^^xsd:string ;
+    :basedOn :TextualFactoid_2_4 .
+
+:TextualFactoid_2_6 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "these are deeply different works" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Caso Cervantes-Menard: la sua storia causale determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 2.4" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_2_5 .
+
+:TextualFactoid_2_7 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "So what he produced was a work and his: it was not a copy therefore" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una copia" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_2_6 .
+
+:TextualFactoid_2_8 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Nor is Menard's a quotation of the original" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una citazione" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "36"^^xsd:string ;
+    :basedOn :TextualFactoid_2_7 .
+
+:TextualFactoid_2_9 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Again, his cannot be easily assimilated to the concept of imitation" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è un'imitazione" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "37"^^xsd:string ;
+    :basedOn :TextualFactoid_2_8 .
+
+:TextualFactoid_2_10 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Finally, I think, Menard's work cannot be considered a repetition of Cervantes'" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: non è una ripetizione" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "38"^^xsd:string ;
+    :basedOn :TextualFactoid_2_9 .
+
+:TextualFactoid_2_11 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the bounday of ultimate concern to us - namely what separates any work from a mere object" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Tentativo in negativo di definizione del prodotto di Menard: la sua storia causale determina ontologicamente un ente" ;
+    :hasGloss "La preoccupazione è tracciare i confini tra i vari enti e dunque compiere una classificazione ontologica" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "39"^^xsd:string ;
+    :basedOn :TextualFactoid_2_10 .
+
+:TextualFactoid_2_12 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "ours being a prior question of the ontological difference between artworks and their nonartistic counterparts" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Critica al purismo estetico: presentazione della posizione di Goodman" ;
+    :hasGloss "Vd: gloss; 2.4; 2.11" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "42"^^xsd:string ;
+    :basedOn :TextualFactoid_2_11 .
+
+:TextualFactoid_2_13 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "the serious ontological question, namely that of deciding which is which between artworks and nonartworks" ;
+    :refersTo :entityClassification ;
+    :hasNeighbourhood "Critica al purismo estetico: la sua storia causale (e non le sue proprietà percettive) determina ontologicamente un ente" ;
+    :hasGloss "Vd: gloss; 2.11" ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "43"^^xsd:string ;
+    :basedOn :TextualFactoid_2_12 .
+
+:TextualFactoid_6_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "Or, if the case is too marginal, at least the paintrag of Cezanne does not have a subject, being merely a paint-covered thing. So Picasso's tie and Cezanne's tie have no subject, but the force of saying this is different in the two cases. In the one case, the work lacks a subject because Picasso willed that it not have one. In the other case, it lacks one because it is logically of the wrong sort to have one, being only a thing (if also an artifact)" ;
+    :refersTo :workContent ;
+    :hasNeighbourhood "Struttura essenziale dell'opera: l'opera ha un contenuto" ;
+    :hasGloss "L'elemento del contenuto concettuale-predicativo è cruciale per la definizione dell'opera: è un elemento non sensibili che la distingue dalle mere cose" ;
+    :hasAnalyticStylisticCategory :Dialectic ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :findableIn "47"^^xsd:string .
+
+:TextualFactoid_4_2 rdf:type :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText "it was a repudiation of painterliness (le peinture), of that apotheosis of paint-and-brushstroke (or drip) which defined New York painting of the 1950s as a movement. What, one may ask, is the subject of \"Cravat\"? Or has it a subject? In a way, one wants to say: this too is an historical question and in part at least depends upon what subject Picasso supposed it had" ;
+    :refersTo :historicalContext ;
+    :hasNeighbourhood "Caso cravatte: perché enti percettivamente indiscernibili sono ontologicamente diversi?" ;
+    :hasDescription "Tesi dell'autore" ;
+    :findableIn "47"^^xsd:string ;
+    :basedOn :TextualFactoid_4_2_1 ,
+             :TextualFactoid_4_2_2 .
+
+
+
+#################################################################
+#    Concept Relations
+#################################################################
+
+:historicalContext :hasRelationWith :author .
+:author :hasRelationWith :workContent .
+:workContent :hasRelationWith :perceptualProperties .
+:causation :hasRelationWith :workStructure .
+:workStructure :hasRelationWith :workContent .
+:perceptualIndiscernibility :hasRelationWith :perceptualProperties .
+:aestheticPurism :hasRelationWith :perceptualProperties .
+
+# Additional concepts referenced in TextualFactoids that need to be declared
+:copies rdf:type :Concept ;
+    rdfs:label "Copies" .
+
+:mimeticArt rdf:type :Concept ;
+    rdfs:label "Mimetic Art" .
+
+:institutionalFramework rdf:type :Concept ;
+    rdfs:label "Institutional Framework" .
+
+:essence rdf:type :Concept ;
+    rdfs:label "Essence" .
+
+:representations rdf:type :Concept ;
+    rdfs:label "Representations" .
+
+:imitation rdf:type :Concept ;
+    rdfs:label "Imitation" .
+
+:conventions rdf:type :Concept ;
+    rdfs:label "Conventions" .
+
+:pleasure rdf:type :Concept ;
+    rdfs:label "Pleasure" .
+
+:mirror_of_reality rdf:type :Concept ;
+    rdfs:label "Mirror of Reality" .
+
+:cognitive_dimensions rdf:type :Concept ;
+    rdfs:label "Cognitive Dimensions" .
+
+:aboutness rdf:type :Concept ;
+    rdfs:label "Aboutness" .
+
+:aesthetic_socratism rdf:type :Concept ;
+    rdfs:label "Aesthetic Socratism" .
+
+:information rdf:type :Concept ;
+    rdfs:label "Information" .
+
+:boundary rdf:type :Concept ;
+    rdfs:label "Boundary" .
+
+:concept rdf:type :Concept ;
+    rdfs:label "Concept" .
+
+:knowledge rdf:type :Concept ;
+    rdfs:label "Knowledge" .

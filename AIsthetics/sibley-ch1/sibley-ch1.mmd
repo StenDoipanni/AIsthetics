@@ -1,0 +1,58 @@
+graph TD
+    %% Core Classes
+    subgraph CoreClasses
+        TF[TextualFactoid]
+        C[Concept]
+        A[Author]
+        P[Page]
+    end
+
+    %% Stylistic Categories
+    subgraph AnalyticCategories["Analytic Stylistic Categories"]
+        DESC[Descriptive]
+        HON[Honorific]
+        META[Metaphoric]
+        EVOC[Evocative]
+        VIS[Visual]
+        DIAL[Dialectic]
+        THES[As a thesis]
+        PROG[Progressive-linear]
+        PARA[Paratactic]
+    end
+
+    subgraph SyntheticCategories["Synthetic Stylistic Categories"]
+        VERB[Verbal]
+        ADJ[Adjectival]
+        NOM[Nominal]
+    end
+
+    %% Main TextualFactoid Chain
+    TF1[TF1: Aesthetic concept]
+    TF1_1[TF1.1: Taste requirement]
+    TF1_2[TF1.2: Non-aesthetic concepts]
+    TF1_3[TF1.3: Rules rejection]
+    TF1_4[TF1.4: Natural usage]
+    TF1_5[TF1.5: Metaphorical origin]
+
+    %% Core Properties
+    TF1 -->|hasAuthor| A
+    TF1 -->|findableIn| P
+    TF1 -->|refersTo| C
+    C -->|hasReferencePage| P
+    C -->|hasRelationWith| C
+
+    %% TextualFactoid Chain Relationships
+    TF1 -->|basedOn| TF1_1
+    TF1_1 -->|basedOn| TF1_2
+    TF1_2 -->|basedOn| TF1_3
+    TF1_3 -->|basedOn| TF1_4
+    TF1_4 -->|basedOn| TF1_5
+
+    %% Stylistic Categories Relationships
+    TF1 -->|hasAnalyticStylisticCategory| DESC
+    TF1_1 -->|hasSyntheticStylisticCategory| ADJ
+
+    classDef concept fill:#f9f,stroke:#333,stroke-width:2px
+    classDef factoid fill:#bbf,stroke:#333,stroke-width:2px
+    class C,A,P concept
+    class TF1,TF1_1,TF1_2,TF1_3,TF1_4,TF1_5 factoid

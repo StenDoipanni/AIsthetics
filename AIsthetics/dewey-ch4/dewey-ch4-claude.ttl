@@ -1,0 +1,137 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dewey: <http://example.org/philtext/dewey/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dewey: rdf:type owl:Ontology ;
+    dc:title "Dewey Chapter 4 - The Act of Expression Domain Ontology"@en ;
+    dc:description "Domain-specific ontology capturing concepts from Dewey's Art as Experience, Chapter 4"@en ;
+    owl:imports <http://example.org/philtext> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+dewey:transformsInto rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "transforms into"@en .
+
+dewey:requiresFor rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "requires for"@en .
+
+dewey:distinguishedFrom rdf:type owl:ObjectProperty ,
+                               owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "distinguished from"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+dewey:DeweyChapter4 rdf:type owl:Class ;
+    rdfs:subClassOf :Work ;
+    rdfs:label "Art as Experience Chapter 4"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Key Concepts
+dewey:Expression rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Expression"@en ;
+    :hasReferencePage dewey:Page58 .
+
+dewey:Impulsion rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Impulsion"@en ;
+    :hasReferencePage dewey:Page58 ;
+    :hasRelationWith dewey:Expression ;
+    dewey:transformsInto dewey:Expression .
+
+dewey:Emotion rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Emotion"@en ;
+    :hasReferencePage dewey:Page67 ;
+    :hasRelationWith dewey:Expression .
+
+dewey:AestheticEmotion rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Aesthetic Emotion"@en ;
+    :hasReferencePage dewey:Page76 ;
+    dewey:distinguishedFrom dewey:NaturalEmotion .
+
+dewey:Medium rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Medium"@en ;
+    :hasReferencePage dewey:Page63 ;
+    dewey:requiresFor dewey:Expression .
+
+dewey:Act rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Act"@en ;
+    :hasReferencePage dewey:Page61 .
+
+# TextualFactoids
+
+dewey:TF1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :refersTo dewey:Impulsion ;
+    :hasText """Impulsion designates a movement outward and forward of the whole organism to which special impulses are auxiliary.""" ;
+    :findableIn dewey:Page58 ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+dewey:TF2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :refersTo dewey:Expression ;
+    :hasText """Expression is the clarification of turbid emotion; our appetites know themselves when they are reflected in the mirror of art, and as they know themselves they are transfigured.""" ;
+    :findableIn dewey:Page77 ;
+    :hasAnalyticStylisticCategory :Metaphoric .
+
+dewey:TF3 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :refersTo dewey:AestheticEmotion ;
+    :hasText """Emotion is esthetic when it adheres to an object formed by an expressive act, in the sense in which the act of expression has been defined.""" ;
+    :findableIn dewey:Page76 ;
+    :hasAnalyticStylisticCategory :Thesis .
+
+dewey:TF4 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :refersTo dewey:Medium ;
+    :hasText """An act of expression always employs natural material, though it may be natural in the sense of habitual as well as in that of primitive or native. It becomes a medium when it is employed in view of its place and rôle, in its relations, an inclusive situation.""" ;
+    :findableIn dewey:Page64 ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+# Author
+dewey:JohnDewey rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "John Dewey" .
+
+# Pages
+dewey:Page58 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 58" .
+
+dewey:Page61 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 61" .
+
+dewey:Page63 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 63" .
+
+dewey:Page64 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 64" .
+
+dewey:Page67 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 67" .
+
+dewey:Page76 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 76" .
+
+dewey:Page77 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 77" .
+
+# Additional Concept Relationships
+dewey:Expression dewey:requiresFor dewey:Medium ;
+    :hasRelationWith dewey:Act .
+
+dewey:Emotion dewey:transformsInto dewey:AestheticEmotion ;
+    :hasRelationWith dewey:Medium .

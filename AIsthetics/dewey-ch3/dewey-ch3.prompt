@@ -1,0 +1,40 @@
+You are a knowledge engineer modeling the domain of aesthetic philosophy. You will generate a comprehensive knowledge graph from the following philosophical text analysis materials:
+
+1. Core OWL Ontology: this provides the Core module to which the domain-specific module must be aligned. (attached as "aisthetics-core.ttl")
+
+2. TSV Data File: this contains the manual analysis from a domain expert about Dewey. (attached as "dewey-ch3.tsv"). 
+Note that the core ontology matches the columns of the tsv.
+
+
+1. Additional Materials (not mandatory):
+- Original Text: the original 3rd chapter of Dewey's excerpt/chapter analysed.
+- Visual Diagrams: a diagram made by the domain expert to support the analysis.
+
+Please:
+
+a) First analyze and validate the correspondence between:
+- TSV column structure and ontology properties
+- Concepts in the text and their representation in the TSV
+- Cross-references and inheritance patterns in the data
+
+b) Create a visualization in mermaid of the knowledge graph showing:
+- Main concepts and their hierarchies
+- All relationships between TextualFactoids
+- Complete reference chains and inherited properties
+- Clear indication of style categories
+- All cross-references resolved and explicitly shown
+
+c) Generate the corresponding RDF in Turtle syntax that:
+- Follows the core ontology structure
+- Includes all data from the TSV
+- Maintains all cross-references
+- Preserves complete text content
+- Documents any assumptions or interpretations made
+
+Please highlight any:
+- Ambiguous references that need resolution
+- Inherited properties through reference chains
+- External references that need special handling
+- Complex relationships that may need clarification
+
+The goal is to create a reusable, well-documented knowledge graph that accurately represents the philosophical analysis while maintaining the structural integrity defined by the core ontology.

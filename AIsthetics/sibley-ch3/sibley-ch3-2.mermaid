@@ -1,0 +1,53 @@
+graph TD
+    %% TextualFactoids
+    TF1[TextualFactoid_1]
+    TF1_2[TextualFactoid_1.2]
+    TF2[TextualFactoid_2]
+    TF3[TextualFactoid_3]
+    TF3_1[TextualFactoid_3.1]
+    TF4[TextualFactoid_4]
+    TF5[TextualFactoid_5]
+
+    %% Concepts
+    C_NAJ[Non-aesthetic judgements]
+    C_AJ[Aesthetic judgements]
+    C_AP[Aesthetic perception]
+    C_AAQ[Attribution of Aesthetic Quality]
+    C_DAE[Dependence of Aesthetic on Non-aesthetic]
+    C_EMG[Emergency]
+
+    %% Pages
+    P33[Page 33]
+    P34[Page 34]
+    P35[Page 35]
+    P37_45[Pages 37,45]
+
+    %% Relationships
+    TF1 -->|refersTo| C_NAJ
+    TF1_2 -->|refersTo| C_AJ
+    TF3 -->|refersTo| C_AP
+    TF3_1 -->|basedOn| TF3
+    TF4 -->|refersTo| C_AAQ
+    TF5 -->|refersTo| C_DAE
+    TF5 -->|hasRelationWith| C_EMG
+
+    %% Page References
+    TF1 -->|findableIn| P33
+    TF1_2 -->|findableIn| P33
+    TF3 -->|findableIn| P34
+    TF3_1 -->|findableIn| P34
+    TF4 -->|findableIn| P35
+    TF5 -->|findableIn| P35
+    TF5 -->|hasReferencePage| P37_45
+
+    %% Concept Relationships
+    C_DAE -->|includes| C_EMG
+    C_AP -->|requiresFor| C_AJ
+
+    classDef factoid fill:#f9f,stroke:#333,stroke-width:2px
+    classDef concept fill:#bbf,stroke:#333,stroke-width:2px
+    classDef page fill:#bfb,stroke:#333,stroke-width:2px
+
+    class TF1,TF1_2,TF2,TF3,TF3_1,TF4,TF5 factoid
+    class C_NAJ,C_AJ,C_AP,C_AAQ,C_DAE,C_EMG concept
+    class P33,P34,P35,P37_45 page

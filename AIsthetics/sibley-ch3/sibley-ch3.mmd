@@ -1,0 +1,79 @@
+classDiagram
+    %% Core Classes
+    class TextualFactoid {
+        +hasText: string
+        +hasDescription: string
+        +hasGloss: string
+        +hasNeighbourhood: string
+        +hasExternalReference: string
+    }
+    
+    class Concept {
+        +label: string
+    }
+    
+    class Author {
+        +label: string
+    }
+    
+    class Page {
+        +label: string
+    }
+    
+    class Work {
+        +label: string
+    }
+
+    %% Style Categories
+    class StylisticCategory {
+        +label: string
+    }
+    
+    class AnalyticStylisticCategory {
+        +Descriptive
+        +Honorific
+        +Metaphoric
+        +Evocative
+        +Visual
+        +Dialectic
+        +Thesis
+        +ProgressiveLinear
+        +Paratactic
+    }
+    
+    class SyntheticStylisticCategory {
+        +Verbal
+        +Adjectival
+        +Nominal
+    }
+
+    %% Relationships
+    TextualFactoid --|> hasAuthor : Author
+    TextualFactoid --|> findableIn : Page
+    TextualFactoid --|> refersTo : Concept
+    TextualFactoid --|> basedOn : TextualFactoid
+    TextualFactoid --|> see : TextualFactoid
+    TextualFactoid --|> hasAnalyticStylisticCategory : AnalyticStylisticCategory
+    TextualFactoid --|> hasSyntheticStylisticCategory : SyntheticStylisticCategory
+    
+    Concept --|> hasReferencePage : Page
+    Concept --|> hasRelationWith : Concept
+    
+    Page --* Work
+    
+    StylisticCategory <|-- AnalyticStylisticCategory
+    StylisticCategory <|-- SyntheticStylisticCategory
+
+    %% Property Characteristics Notes
+    note for TextualFactoid "Object Properties:\n- basedOn (Transitive)\n- see\n- hasAuthor\n- findableIn\n- refersTo"
+    note for Concept "Object Properties:\n- hasRelationWith (Symmetric)\n- hasReferencePage"
+    note for StylisticCategory "Hierarchical classification\nof writing styles"
+
+    %% Class Annotations
+    TextualFactoid : "Main analysis unit"
+    Concept : "Philosophical concepts"
+    Author : "Text authors"
+    Page : "Page references"
+    Work : "Source works"
+    StylisticCategory : "Style classifications"
+    

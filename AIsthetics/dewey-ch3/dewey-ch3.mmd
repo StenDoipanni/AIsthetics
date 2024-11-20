@@ -1,0 +1,103 @@
+graph TD
+    %% Class Hierarchy
+    classDef conceptClass fill:#e1f5fe
+    classDef factoidClass fill:#fff3e0
+    classDef styleClass fill:#f3e5f5
+    classDef authorClass fill:#e8f5e9
+    classDef pageClass fill:#fce4ec
+
+    subgraph Classes
+        TextualFactoid[TextualFactoid]:::factoidClass
+        Author[Author]:::authorClass
+        Page[Page]:::pageClass
+        Concept[Concept]:::conceptClass
+        StylisticCategory[StylisticCategory]:::styleClass
+    end
+
+    subgraph StylisticCategories
+        AnalyticStyle[AnalyticStylisticCategory]:::styleClass
+        SyntheticStyle[SyntheticStylisticCategory]:::styleClass
+        
+        %% Analytic Categories
+        Desc[Descriptive]:::styleClass
+        Hon[Honorific]:::styleClass
+        Meta[Metaphoric]:::styleClass
+        Evo[Evocative]:::styleClass
+        Vis[Visual]:::styleClass
+        Dial[Dialectic]:::styleClass
+        Thesis[As a thesis]:::styleClass
+        Prog[Progressive-linear]:::styleClass
+        Para[Paratactic]:::styleClass
+        
+        %% Synthetic Categories
+        Verb[Verbal]:::styleClass
+        Adj[Adjectival]:::styleClass
+        Nom[Nominal]:::styleClass
+    end
+
+    %% Core Concepts
+    Experience[Experience]:::conceptClass
+    Art[Art]:::conceptClass
+    Esthetic[Esthetic]:::conceptClass
+    Artistic[Artistic]:::conceptClass
+    WorkOfArt[Work of Art]:::conceptClass
+    Thinking[Thinking]:::conceptClass
+    Action[Action]:::conceptClass
+    Morality[Morality]:::conceptClass
+    Emotions[Emotions]:::conceptClass
+    LiveCreature[Live Creature]:::conceptClass
+    World[World]:::conceptClass
+    PhysicalMaterial[Physical Material]:::conceptClass
+    EstheticPerception[Esthetic Perception]:::conceptClass
+    Resistance[Resistance]:::conceptClass
+
+    %% TextualFactoids (showing key examples)
+    TF1[TF1: Experience occurs continuously...]:::factoidClass
+    TF2[TF2: Work of art unity]:::factoidClass
+    TF3[TF3: Esthetic appears]:::factoidClass
+    TF4[TF4: Experience is emotional]:::factoidClass
+    TF5[TF5: Art does something]:::factoidClass
+    TF6[TF6: Esthetic experience distinction]:::factoidClass
+
+    %% Class Relationships
+    StylisticCategory --> AnalyticStyle
+    StylisticCategory --> SyntheticStyle
+    AnalyticStyle --> Desc & Hon & Meta & Evo & Vis & Dial & Thesis & Prog & Para
+    SyntheticStyle --> Verb & Adj & Nom
+
+    %% Core Property Relationships
+    TextualFactoid -- hasAuthor --> Author
+    TextualFactoid -- findableIn --> Page
+    TextualFactoid -- refersTo --> Concept
+    TextualFactoid -- hasAnalyticStylisticCategory --> AnalyticStyle
+    TextualFactoid -- hasSyntheticStylisticCategory --> SyntheticStyle
+    Concept -- hasRelationWith --> Concept
+    Concept -- hasReferencePage --> Page
+
+    %% Key Concept Relationships
+    Experience -- hasRelationWith --> Art
+    Art -- hasRelationWith --> WorkOfArt
+    Esthetic -- hasRelationWith --> Artistic
+    Experience -- hasRelationWith --> Thinking
+    Experience -- hasRelationWith --> Emotions
+    Art -- hasRelationWith --> PhysicalMaterial
+    Esthetic -- hasRelationWith --> EstheticPerception
+    LiveCreature -- hasRelationWith --> World
+
+    %% Example TextualFactoid Relationships
+    TF1 -- refersTo --> Experience
+    TF2 -- refersTo --> WorkOfArt
+    TF3 -- refersTo --> Esthetic
+    TF4 -- refersTo --> Emotions
+    TF5 -- refersTo --> Art
+    TF6 -- refersTo --> EstheticPerception
+
+    %% Data Properties (shown as notes)
+    style dataProps fill:#f8f9fa,stroke:#dee2e6
+    dataProps[
+        Data Properties:
+        - hasText
+        - hasDescription
+        - hasNeighbourhood
+        - hasGloss
+    ]

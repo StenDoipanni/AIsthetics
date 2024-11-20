@@ -1,0 +1,281 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:title "Philosophical Text Analysis Ontology - Chapter 3"@en ;
+    dc:description "Harmonized ontology for representing philosophical text analysis from Sibley's Chapter 3"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Individuals - Concepts
+#################################################################
+
+:NonAestheticJudgement a :Concept ;
+    :hasReferencePage "p.33" ;
+    rdfs:label "Non-aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticJudgement a :Concept ;
+    :hasReferencePage "p.33, p.37, p.38, p.40" ;
+    rdfs:label "Aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticPerception a :Concept ;
+    :hasReferencePage "p.38, p.40" ;
+    rdfs:label "Aesthetic perception" .
+
+:InvolvementAestheticPerception a :Concept ;
+    rdfs:label "Involvement of aesthetic perception" .
+
+:ReasonsEmpirical a :Concept ;
+    rdfs:label "Reasons on an empirical level (reasons something has an aesthetic quality)" .
+
+:ReasonsLogical a :Concept ;
+    rdfs:label "Reasons on a logical level (reasons to infer something has an aesthetic quality)" .
+
+:PerceptualProof a :Concept ;
+    rdfs:label "Perceptual proof" .
+
+:RationalSupport a :Concept ;
+    rdfs:label "Rational support" .
+
+:BringingPeopleToSeeAestheticQualities a :Concept ;
+    rdfs:label "Bringing people to see aesthetic qualities" .
+
+:Supporting_justifying_or_proving_aesthetic_judgements a :Concept ;
+    rdfs:label "Supporting, justifying or proving aesthetic judgements" .
+
+:Explanation a :Concept ;
+    rdfs:label "Explanation" .
+
+:RelationshipsExistInThingsThemselves a :Concept ;
+    rdfs:label "The relationships of dependence exist in things themselves, not simply in the viewer's experience" .
+
+:Reasons a :Concept ;
+    rdfs:label "Reasons" .
+
+#################################################################
+#    Concept Relationships
+#################################################################
+
+:NonAestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :NonAestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is not involved with concept 2" .
+
+:AestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is involved with concept 2" .
+
+:AestheticPerception_AestheticJudgement rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticPerception ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticJudgement ;
+    :relationType "Concept 1 is necessary for concept 2" .
+
+:ReasonsEmpirical_ReasonsLogical rdf:type owl:Axiom ;
+    owl:annotatedSource :ReasonsEmpirical ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ReasonsLogical ;
+    :relationType "Concept 1 is distinguished from concept 2" .
+
+#################################################################
+#    Individuals - TextualFactoids
+#################################################################
+
+:TextualFactoid_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page33 ;
+    :hasText """Many judgements about the shape, colour, sound, wording, subject-matter, or composition of things, including works of art, are such that it would be ludicrous to suggest that aesthetic sensitivity, perceptiveness, or taste had been exhibited in making them.""" ;
+    :refersTo :NonAestheticJudgement ;
+    :hasGloss "Non-aesthetic judgements, qualities, descriptions and concepts do not involve taste, perceptiveness or aesthetic sensitivity." ;
+    :hasAnalyticStylisticCategory :Paratactic .
+
+:TextualFactoid_1_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page33 ;
+    :hasText """By contrast, there are other judgements the making of which could clearly be said to exhibit an exercise of aesthetic sensitivity or perceptiveness.""" ;
+    :refersTo :AestheticJudgement ;
+    :hasGloss "Aesthetic judgements, qualities, descriptions and concepts necessarily involve aesthetic sensitivity, perceptiveness or taste." ;
+    :hasAnalyticStylisticCategory :Paratactic ;
+    :basedOn :TextualFactoid_1 .
+
+:TextualFactoid_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """We need therefore to investigate how we make such judgements and how we justify and explain them; we need also to examine further the aesthetic qualities and concepts (...). To do this, various relationship must be disentangled;""" ;
+    :refersTo :Intentions ;
+    :hasGloss "Intention to investigate the relationship between aesthetic and non-aesthetic in order to understand aesthetic qualities and concepts and the way we make and explain aesthetic judgements" ;
+    :hasAnalyticStylisticCategory :Paratactic .
+
+:TextualFactoid_3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """Aesthetics deals with a kind of perception. People have to see the grace or unity of a work, hear the plaintiveness or frenzy in the music, (...). They may be struck by these qualities at once, or they may come to perceive them only after repeated viewings, hearings, or readings, and with the help of critics. But unless they do perceive them for themselves, aesthetic enjoyment, appreciation, and judgement are beyond them. (...); the crucial thing is to see, hear, or feel.""" ;
+    :refersTo :AestheticPerception ;
+    :hasGloss "Perception is required for aesthetic enjoyment, appreciation and judgement. People cannot make aesthetic judgments unless they perceive for themselves the aesthetic qualities." ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+:TextualFactoid_3_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """To suppose indeed that one can make aesthetic judgements without aesthetic perception, say, by following rules of some kind, is to misunderstand aesthetic judgement.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasDescription "Concept 1 is implied in concept 2" ;
+    :hasGloss "The role of aesthetic perception as the divide between aesthetic and non-aesthetic is reiterated, now specifically referring to aesthetic judgements, and it is raised the point that aesthetic judgements cannot be made by following rules" ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear ;
+    :basedOn :TextualFactoid_3 .
+
+:TextualFactoid_4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page35 ;
+    :hasText """This therefore is how I shall use 'aesthetic judgement' throughout. Where there is no question of aesthetic perception, I shall use some other expression like 'attribution of aesthetic quality' or 'aesthetic statement'.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasRelationWith :AttributionOfAestheticQuality ;
+    :hasGloss "The fundamental terms of the analysis are laid out, the rigorous demarcation of the basic concepts lays the ground for the following arguments. Aesthetic judgements involve aesthetic sensitivity." ;
+    :hasAnalyticStylisticCategory :Expository ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_5 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page37 ;
+    :hasText """(i) The relationships that I have just described hold between qualities independently of a person's realizing in particular cases that they do. Whether or not one sees that a picture lacks balance, and lacks it notably because of the placing of a certain figure, in no way bears on the fact that the placing of the figure is what unbalances the picture.""" ;
+    :refersTo :RelationshipsExistInThingsThemselves ;
+    :hasGloss "The relationship of dependence stands between the qualities themselves, this is an important point that will resurface later while talking about reasons as reasons for things to be the way they are and reasons to infer things are the way they are. This statement about the relationship of dependence standing between things themselves already hints at the fact that reasons in the first sense are the ones that hold according to this analysis." .
+
+:TextualFactoid_6 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page38, :Page39 ;
+    :hasText """ a major occupation of critics is the task of bringing people to see things for what, aesthetically, they are, as well as why they are. How a critic manages by what he says and does to bring people to see aesthetic qualities they have missed has frequently puzzled writers. But there is no real reason for mystification. One might puzzle equally over how on my own I come to perceive, after ten minutes in front of a picture or several replayings of a sonata, what I had not previously perceived. A second question about this activity is whether it is a way of supporting orjustifying aesthetic judgements. Some aestheticians have held that this—showing the work, getting people to see—is the only way of supporting an aesthetic judgement, even perhaps the only point of critical activity. [...] I see no reason why it should not be called a way of supporting or justifying, even of proving, an aesthetic judgement""" ;
+    :refersTo :BringingPeopleToSeeAestheticQualities ;
+    :hasRelationWith :Supporting_justifying_or_proving_aesthetic_judgements ;
+    :hasSyntheticStylisticCategory :Verbal .
+
+:TextualFactoid_7 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page39 ;
+    :hasText """ If I say the apples are sour and someone doubts my claim, I may ask him to taste them. With more complex or subtle things I may have to help him in appropriate ways. If I say that a figure can be seen as either a staircase or a cornice, that a cloud looks like a giraffe, that two people look somewhat alike, or that the brandy is soft and velvety, and he questions what I say, it may not be enough merely to invite him to look or taste. I may need to draw attention to this and that, suggest he look at the figure thus, or taste the brandy in a certain way.[...] If he then finds himself agreeing with me, I have vindicated my claim in the best possible way, by getting him to see for himself. There is no reason not to say, if one wishes, that I have supported, justified, or even proved my original judgement. One might refer to this activity therefore, as perceptual proof.""" ;
+    :refersTo :PerceptualProof ;
+    :hasRelationWith :RationalSupport ;
+    :hasGloss "If we admit the possibility of justification or support for aesthetic judgements, we must clarify that it is not a rational support, one cannot reason in support of an aesthetic judgement." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_8 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page40 ;
+    :hasText """Nevertheless, if we do choose to call this support of an aesthetic judgement, we must be clear what kind it is and what kind it is not. The critic cannot be said to have reasoned in support of it. Where someone tries to bring another to agree with him by reasoning, or by offering rational support for a judgement, he offers statements which, if true, render it certain, likely, or reasonable to suppose, that his judgement was correct. The person to whom the reasons are offered may, after reviewing them, conclude or infer or decide that the judgement is indeed correct or justified. He has been offered reasons for thinking something, and so may end accepting the judgement originally offered. But it was neither the aim nor the outcome of the critic's activity I described to provide reasons from which his audience might reasonably conclude that his judgement was true.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasReferencePage "p.50" ;
+    :hasRelationWith :InvolvementAestheticPerception ;
+    :hasGloss "Aesthetic judgements cannot be the outcome of reasons because of the involvement of aesthetic sensitivity in making them: making an aesthetic judgement is not a matter of thinking but one of perceiving aesthetically. Through rational justification one could, at most, make an attribution of aesthetic quality or an aesthetic statement." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_9 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page42 ;
+    :hasText """If a work is graceful there will be reasons why it is, and this will be so whether anyone ever knows, or thinks, or has any reasons for thinking it so or not. [...] But 'reason' is also used to mean roughly, a true statement or a fact such that, on the basis of knowing it, it would be reasonable, right, or plausible to infer, suppose, or believe that something is so.""" ;
+    :refersTo :ReasonsEmpirical ;
+    :hasReferencePage "p.50" ;
+    :hasRelationWith :ReasonsLogical ;
+    rdfs:comment "Concept 1 is distinguished from concept 2. Concept 1 is valid, concept 2 is not." .
+
+#################################################################
+#    Individuals - Pages
+#################################################################
+
+:Page33 a :Page ;
+    rdfs:label "33" .
+
+:Page34 a :Page ;
+    rdfs:label "34" .
+
+:Page35 a :Page ;
+    rdfs:label "35" .
+
+:Page37 a :Page ;
+    rdfs:label "37" .
+
+:Page38 a :Page ;
+    rdfs:label "38" .
+
+:Page39 a :Page ;
+    rdfs:label "39" .
+
+:Page40 a :Page ;
+    rdfs:label "40" .
+
+:Page42 a :Page ;
+    rdfs:label "42" .
+
+:Page50 a :Page ;
+    rdfs:label "50" .
+
+#################################################################
+#    Individuals - Author
+#################################################################
+
+:Sibley a :Author ;
+    rdfs:label "Sibley" .
+
+#################################################################
+#    Concept Relationships
+#################################################################
+
+:AestheticJudgement_AestheticPerception rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticPerception ;
+    :relationType "Concept 1 necessarily requires concept 2" .
+
+:NonAestheticJudgement_AestheticPerception rdf:type owl:Axiom ;
+    owl:annotatedSource :NonAestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticPerception ;
+    :relationType "Concept 1 does not require concept 2" .
+
+:PerceptualProof_RationalSupport rdf:type owl:Axiom ;
+    owl:annotatedSource :PerceptualProof ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :RationalSupport ;
+    :relationType "Concept 1 is different from concept 2" .
+
+:BringingPeopleToSeeAestheticQualities_Supporting_justifying_or_proving_aesthetic_judgements rdf:type owl:Axiom ;
+    owl:annotatedSource :BringingPeopleToSeeAestheticQualities ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :Supporting_justifying_or_proving_aesthetic_judgements ;
+    :relationType "Concept 1 is a method for concept 2" .
+
+:AestheticJudgement_Reasons rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :Reasons ;
+    :relationType "Concept 1 cannot be justified by concept 2" .
+
+:ReasonsEmpirical_ReasonsLogical rdf:type owl:Axiom ;
+    owl:annotatedSource :ReasonsEmpirical ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ReasonsLogical ;
+    :relationType "Concept 1 is distinguished from concept 2" .
+
+:RelationshipsExistInThingsThemselves_AestheticPerception rdf:type owl:Axiom ;
+    owl:annotatedSource :RelationshipsExistInThingsThemselves ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticPerception ;
+    :relationType "Concept 1 exists independently of concept 2" .
+
+:Explanation_AestheticJudgement rdf:type owl:Axiom ;
+    owl:annotatedSource :Explanation ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticJudgement ;
+    :relationType "Concept 1 supports but does not prove concept 2" .
+
+:InvolvementAestheticPerception_AestheticJudgement rdf:type owl:Axiom ;
+    owl:annotatedSource :InvolvementAestheticPerception ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticJudgement ;
+    :relationType "Concept 1 is necessary for concept 2" .

@@ -1,0 +1,421 @@
+@prefix : <http://example.org/philtext/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+# Ontology Declaration
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:title "Philosophical Text Analysis Ontology"@en ;
+    dc:description "An ontology for representing philosophical text analysis, concepts, and their relationships"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:basedOn rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "based on"@en .
+
+:findableIn rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:label "findable in"@en .
+
+:hasAuthor rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:label "has author"@en .
+
+:hasAnalyticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:label "has analytic stylistic category"@en .
+
+:hasSyntheticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:label "has synthetic stylistic category"@en .
+
+:refersTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:label "refers to"@en .
+
+:hasRelationWith rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "has relation with"@en .
+
+:hasReferencePage rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:label "has reference page"@en .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:hasText rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has text"@en .
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has description"@en .
+
+:hasNeighbourhood rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has neighbourhood"@en .
+
+:hasGloss rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gloss"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:TextualFactoid rdf:type owl:Class ;
+    rdfs:label "Textual Factoid"@en ;
+    rdfs:comment "A discrete unit of textual information from a philosophical work"@en .
+
+:Author rdf:type owl:Class ;
+    rdfs:label "Author"@en ;
+    rdfs:comment "The author of a philosophical work or text"@en .
+
+:Page rdf:type owl:Class ;
+    rdfs:label "Page"@en ;
+    rdfs:comment "A page reference in a work"@en .
+
+:Concept rdf:type owl:Class ;
+    rdfs:label "Concept"@en ;
+    rdfs:comment "A philosophical concept or idea discussed in the text"@en .
+
+:StylisticCategory rdf:type owl:Class ;
+    rdfs:label "Stylistic Category"@en ;
+    rdfs:comment "A category describing the writing style"@en .
+
+:AnalyticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:label "Analytic Stylistic Category"@en .
+
+:SyntheticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:label "Synthetic Stylistic Category"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Author Individual
+:Dewey rdf:type :Author ;
+    rdfs:label "John Dewey" .
+
+# Page Individuals
+:Page35 rdf:type :Page ;
+    rdfs:label "Page 35" .
+
+:Page36 rdf:type :Page ;
+    rdfs:label "Page 36" .
+
+:Page38 rdf:type :Page ;
+    rdfs:label "Page 38" .
+
+# Stylistic Category Individuals
+:Descriptive rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Descriptive"@en .
+
+:Honorific rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Honorific"@en .
+
+:Metaphoric rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Metaphoric"@en .
+
+:Evocative rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Evocative"@en .
+
+:Visual rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Visual"@en .
+
+:Dialectic rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Dialectic"@en .
+
+:Thesis rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "As a thesis"@en .
+
+:ProgressiveLinear rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Progressive-linear"@en .
+
+:Paratactic rdf:type :AnalyticStylisticCategory ;
+    rdfs:label "Paratactic"@en .
+
+:Verbal rdf:type :SyntheticStylisticCategory ;
+    rdfs:label "Verbal"@en .
+
+:Adjectival rdf:type :SyntheticStylisticCategory ;
+    rdfs:label "Adjectival"@en .
+
+:Nominal rdf:type :SyntheticStylisticCategory ;
+    rdfs:label "Nominal"@en .
+
+# Concept Individuals
+:Experience rdf:type :Concept ;
+    rdfs:label "Experience"@en ;
+    :hasReferencePage :Page35 .
+
+:WorkOfArt rdf:type :Concept ;
+    rdfs:label "Work of Art"@en ;
+    :hasReferencePage :Page36 .
+
+:Thinking rdf:type :Concept ;
+    rdfs:label "Thinking"@en ;
+    :hasReferencePage :Page38 .
+
+# TextualFactoid Individuals from TSV
+:TF1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page35 ;
+    :hasText "experience occurs continuously, because the interaction of live creature and enviroining conditions is involved in the very process of living" ;
+    :refersTo :Experience ;
+    :hasGloss "here is explained what the author means when he talks about the esperience and he intends to explain what specifically means having an experience" .
+
+:TF2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page36 ;
+    :hasText "because of the continuous merging, there are no holes, mechanical junctions and dead centers when we have an experience" ;
+    :refersTo :WorkOfArt ;
+    :hasGloss "the expeirence is a whole even when it refers to a single experience, the author is looking for a definition of what is definetly an experience." .
+
+:TF2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page38 ;
+    :hasText "hence an experience of thinking has its own esthetic quality" ;
+    :refersTo :Thinking ;
+    :hasNeighbourhood "esthetic quality" ;
+    :hasGloss "introduction of the consept of the experience of thinking as something that has esthetic quality, also the inteelectual expereince is complete only when it has an esthetic aspect" .
+
+# TextualFactoid 2.2
+:TF2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page38 ;
+    :hasText "it is possible to be efficient in action and yet not have a conscious experience. the activity is too automatic to permit of a sense of what it is about and where it is going." ;
+    :refersTo :Action ;
+    :hasRelationWith :Experience ;
+    :hasDescription "efficient" ;
+    :hasNeighbourhood "automatic" .
+
+# TextualFactoid 2.3
+:TF2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page39 ;
+    :hasText "the experience may be one that is harmful to the world and its consummation undesiderable. but it has esthetic quality" ;
+    :refersTo :Morality ;
+    :hasGloss "even if an action is estheic it does not mean that it is moral (for example the concept of the kalon-agathon of the greek culture), but every practical activity has esthetic quality" .
+
+# TextualFactoid 3
+:TF3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page40 ;
+    :hasText "when the esthetic appears, it so sharply contrasts with the picture that has been formed of experience, that it is impossible to combine its special qualities with the features of the picture and the esthetic is given an outside place and status." ;
+    :refersTo :Experience ;
+    :hasGloss "the esthetic, in an experience, is generally given outside of the experience itself, estheticity can be find out of the framework of experience" .
+
+# TextualFactoid 3.1
+:TF3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page41 ;
+    :hasText "every integral experience moves toward a close, an ending, since it ceases only when the energies active in it have done their proper work" ;
+    :refersTo :IntegralExperience ;
+    :hasDescription "ending" ;
+    :hasRelationWith :Work ;
+    :hasGloss "here there is a resume of what the author has said up to this point: every experience has a closure of a circuit of energy." .
+
+# TextualFactoid 4
+:TF4 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page42 ;
+    :hasText "expereince is emotional but there are no separate things called emotions in it" ;
+    :refersTo :Emotional ;
+    :hasDescription "separate" ;
+    :hasRelationWith :Emotions ;
+    :hasGloss "there is not a separation between the emotions in an experience, there are, rather, emotional expereinces." .
+
+# TextualFactoid 4.1
+:TF4_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page43 ;
+    :hasText "its nature [the nature of the experience] and import can be expressed only by art, because there is a unity of expereince that can be expressed only as an expereince" ;
+    :refersTo :Art ;
+    :hasDescription "unity" ;
+    :hasRelationWith :Experience ;
+    :hasNeighbourhood "art" ;
+    :hasGloss "here is made explicit the relation between the experience and the work of art: the unity of the art can be compared with the unity of the experience" .
+
+# TextualFactoid 4.2
+:TF4_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page43 ;
+    :hasText "every experience is the result of an interaction between ther live creature and some aspect of the world in which he lives" ;
+    :refersTo :LiveCreature ;
+    :hasDescription "experience" ;
+    :hasRelationWith :World ;
+    :hasGloss "here is resumed and explained what is, in the end, an experience" .
+
+# TextualFactoid 4.3
+:TF4_3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page46 ;
+    :hasText "any idea that ignores the role of intelligence in production of works of art is based upon identification of thinking with use of one special kind of material, verbal sign and words" ;
+    :refersTo :Idea ;
+    :hasDescription "production" ;
+    :hasRelationWith :WorkOfArt ;
+    :hasNeighbourhood "work of art" .
+
+# TextualFactoid 5
+:TF5 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page47 ;
+    :hasText "Every art does something with some physical material, the body or something outside the body, with or without the use of intervening tools, and with a view to production of something visible, audible, or tangible. So marked is the active or \"doing\" phase of art, that the dictionaries usually define it in terms of skilled action, ability in execution" ;
+    :refersTo :Art ;
+    :hasDescription "does something" ;
+    :hasRelationWith :PhysicalMaterial ;
+    :hasGloss "art has always to do with something phisical and it produces something that can be seen, touched or listened, the act of creation is something that requires skills and abilities in its execution" .
+
+# TextualFactoid 5.1
+:TF5_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page48 ;
+    :hasText "to be truly artistic, a work must also be esthetic" ;
+    :refersTo :Artistic ;
+    :hasDescription "has to be" ;
+    :hasRelationWith :Esthetic .
+
+# TextualFactoid 5.2
+:TF5_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page49 ;
+    :hasText "there is an element of passion in all esthetic perception" ;
+    :refersTo :Passion ;
+    :hasRelationWith :EstheticPerception .
+
+# TextualFactoid 6
+:TF6 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :findableIn :Page56 ;
+    :hasText "That which distinguishes an experience as esthetic is conversion of resistance and tensions, of excitations that in themselves are temptations to diversion, into a movement toward an inclusive and fulfiling close." ;
+    :refersTo :Resistance ;
+    :hasDescription "closing movement" ;
+    :hasRelationWith :EstheticExperience ;
+    :hasGloss "what distinguish an esthetic expereince from another experience: the resistance and the tension" .
+
+# Additional Concept Individuals needed
+:PhysicalMaterial rdf:type :Concept ;
+    rdfs:label "Physical Material"@en ;
+    :hasReferencePage :Page47 .
+
+:Artistic rdf:type :Concept ;
+    rdfs:label "Artistic"@en ;
+    :hasReferencePage :Page48 .
+
+:Esthetic rdf:type :Concept ;
+    rdfs:label "Esthetic"@en ;
+    :hasReferencePage :Page48 .
+
+:Passion rdf:type :Concept ;
+    rdfs:label "Passion"@en ;
+    :hasReferencePage :Page49 .
+
+:EstheticPerception rdf:type :Concept ;
+    rdfs:label "Esthetic Perception"@en ;
+    :hasReferencePage :Page49 .
+
+:Resistance rdf:type :Concept ;
+    rdfs:label "Resistance"@en ;
+    :hasReferencePage :Page56 .
+
+:EstheticExperience rdf:type :Concept ;
+    rdfs:label "Esthetic Experience"@en ;
+    :hasReferencePage :Page56 .
+
+# Additional Pages needed
+:Page47 rdf:type :Page ;
+    rdfs:label "Page 47" .
+
+:Page48 rdf:type :Page ;
+    rdfs:label "Page 48" .
+
+:Page49 rdf:type :Page ;
+    rdfs:label "Page 49" .
+
+:Page56 rdf:type :Page ;
+    rdfs:label "Page 56" .
+
+# Additional relationships between concepts
+:Artistic :hasRelationWith :Esthetic .
+:Passion :hasRelationWith :EstheticPerception .
+:Resistance :hasRelationWith :EstheticExperience .
+
+
+# Additional Concept Individuals needed for the above factoids
+:Action rdf:type :Concept ;
+    rdfs:label "Action"@en ;
+    :hasReferencePage :Page38 .
+
+:Morality rdf:type :Concept ;
+    rdfs:label "Morality"@en ;
+    :hasReferencePage :Page39 .
+
+:IntegralExperience rdf:type :Concept ;
+    rdfs:label "Integral Experience"@en ;
+    :hasReferencePage :Page41 .
+
+:Work rdf:type :Concept ;
+    rdfs:label "Work"@en ;
+    :hasReferencePage :Page41 .
+
+:Emotional rdf:type :Concept ;
+    rdfs:label "Emotional"@en ;
+    :hasReferencePage :Page42 .
+
+:Emotions rdf:type :Concept ;
+    rdfs:label "Emotions"@en ;
+    :hasReferencePage :Page42 .
+
+:LiveCreature rdf:type :Concept ;
+    rdfs:label "Live Creature"@en ;
+    :hasReferencePage :Page43 .
+
+:World rdf:type :Concept ;
+    rdfs:label "World"@en ;
+    :hasReferencePage :Page43 .
+
+:Idea rdf:type :Concept ;
+    rdfs:label "Idea"@en ;
+    :hasReferencePage :Page46 .
+
+# Additional Pages needed
+:Page39 rdf:type :Page ;
+    rdfs:label "Page 39" .
+
+:Page40 rdf:type :Page ;
+    rdfs:label "Page 40" .
+
+:Page41 rdf:type :Page ;
+    rdfs:label "Page 41" .
+
+:Page42 rdf:type :Page ;
+    rdfs:label "Page 42" .
+
+:Page43 rdf:type :Page ;
+    rdfs:label "Page 43" .
+
+:Page46 rdf:type :Page ;
+    rdfs:label "Page 46" .

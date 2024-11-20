@@ -1,0 +1,445 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:title "Philosophical Text Analysis Ontology - Chapter 5"@en ;
+    dc:description "Harmonized ontology for representing philosophical text analysis from Sibley's Chapter 5"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Individuals - Concepts
+#################################################################
+
+:Property a :Concept ;
+    rdfs:label "Property" .
+
+:ColourProperty a :Concept ;
+    rdfs:label "Colour as property" .
+
+:Normality a :Concept ;
+    rdfs:label "Normality" .
+
+:AsIfScenarios a :Concept ;
+    rdfs:label "As if scenarios" .
+
+:SetOfVisualProperties a :Concept ;
+    rdfs:label "Set of visual properties" .
+
+:InitialDiscriminationAgreement a :Concept ;
+    rdfs:label "Initial discrimination agreement" .
+
+:NamingTime a :Concept ;
+    rdfs:label "Naming time" .
+
+:OriginalNamers a :Concept ;
+    rdfs:label "Original namers" .
+
+:Divergences a :Concept ;
+    rdfs:label "Divergences in colour naming" .
+
+:ReferenceGroup a :Concept ;
+    rdfs:label "Reference group" .
+
+:Errors a :Concept ;
+    rdfs:label "Errors" .
+
+:FamiliarObjects a :Concept ;
+    rdfs:label "Familiar objects" .
+
+:NameAgreement a :Concept ;
+    rdfs:label "Name agreement" .
+
+:NameDisagreement a :Concept ;
+    rdfs:label "Name disagreement" .
+
+:DoubleReversal a :Concept ;
+    rdfs:label "Double reversal" .
+
+:PhysiologicalChange a :Concept ;
+    rdfs:label "Physiological change" .
+
+:PastColourJudgementDisagreement a :Concept ;
+    rdfs:label "Past colour judgement disagreement" .
+
+:VisionChange a :Concept ;
+    rdfs:label "Vision change" .
+
+:ColourOfThingsChange a :Concept ;
+    rdfs:label "Colour of things change" .
+
+:PastColourJudgementAgreement a :Concept ;
+    rdfs:label "Past colour judgement agreement" .
+
+:Decision a :Concept ;
+    rdfs:label "Decision" .
+
+:NoDecision a :Concept ;
+    rdfs:label "No decision" .
+
+:ExistingPractice a :Concept ;
+    rdfs:label "Existing practice" .
+
+:RejectionOfScepticism a :Concept ;
+    rdfs:label "Rejection of scepticism" .
+
+:SimpleProperties a :Concept ;
+    rdfs:label "Simple properties" .
+
+:UltimateProof a :Concept ;
+    rdfs:label "Ultimate proof" .
+
+#################################################################
+#    Individuals - TextualFactoids
+#################################################################
+
+:TextualFactoid_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "Matters to which the notions of truth and falsity, correctness and error, have application are sometimes spoken of as 'objective'. The possibility of true and false attribution is certainly necessary to the notion of a property." ;
+    :refersTo :Property ;
+    :hasNeighbourhood "Colour attribution" .
+
+:TextualFactoid_1_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "This is so with attributions of colour, and is one reason why the colours of things are often called 'properties'." ;
+    :refersTo :ColourProperty ;
+    :basedOn :TextualFactoid_1 .
+
+:TextualFactoid_1_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "To say that a thing is green if it looks green to a normal person in normal conditions only postpones questions about what it is for something to look green, what normal vision consists in, and what establishes that someone has it." ;
+    :refersTo :Normality ;
+    :hasDescription "1.2 is an insufficient explanation for 1.1" ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page55 ;
+    :hasText "I depict the beginning of colour language thus. People hitherto used to distinguishing objects, but with black-grey-white or achromatic vision, gradually or suddenly develop colour vision. They find there is a new way in which they are making similar discriminations. They group things as alike and unlike, each person tending to group together the same objects as others do." ;
+    :refersTo :AsIfScenarios ;
+    :hasGloss "How colour vision might have developed." .
+
+:TextualFactoid_2_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page56 ;
+    :hasText "It might be asked whether, when it has tied the matter down, among properties we now know about, to colours, i.e. excluding properties we discern by touch, hearing, or taste, some people might be distinguishing another set of visual properties that share the features already mentioned with colours but are of a type unknown to those of us who see colours." ;
+    :refersTo :SetOfVisualProperties ;
+    :hasAnalyticStylisticCategory :Rhetoric .
+
+:TextualFactoid_2_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "We might imagine this period, from the first partial agreements to the eventual establishment of a complex language and behaviour like ours, telescoped into a short while. The outcome is that, in similar roughly specifiable conditions, everyone makes similar visual distinctions. I call this the initial discrimination-agreement," ;
+    :refersTo :InitialDiscriminationAgreement ;
+    :hasDescription "2.1 makes 1.1 possible" .
+
+:TextualFactoid_2_3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "For things they group as alike, grass, emeralds, etc., they introduce 'green', and so on. I call this whole occasion 'naming time', and the people, 'the original namers'." ;
+    :refersTo :NamingTime ;
+    :hasDescription "2.2 happens in 2.3" .
+
+:TextualFactoid_2_4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :refersTo :OriginalNamers ;
+    :hasDescription "2.4 makes 2.2 happen" .
+
+:TextualFactoid_2_5 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "Where people do not agree, divergences are attributable either to differences of angle, lighting, temporary physical condition (dazzles), etc., and should prove removable by appropriate changes, or to inadequate mastery of language, or, ultimately to some defect, e.g. colour-blindness." ;
+    :refersTo :Divergences ;
+    :hasNeighbourhood "Divergences in colour naming" .
+
+:TextualFactoid_2_6 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page58 ;
+    :hasText "The fully colour-sighted are those exhibiting the maximum or most detailed discrimination-agreement} That is, the 'is' of colour attribution, in our language, is linked to this group,3 and they are selected by performance in agreeing and disagreeing, not by other (e.g. physiological) tests." ;
+    :refersTo :ReferenceGroup .
+
+:TextualFactoid_3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page58 ;
+    :hasText "errors' in colour judgements were possible, and were constantly being corrected. But these were 'errors' the removal of which helped settle standard conditions for attribution and other conventions of the language." ;
+    :refersTo :Errors .
+
+:TextualFactoid_3_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page59 ;
+    :hasText "Since those making maximum distinctions with common and widely seen things have eliminated 'errors' in the course of selecting standard conditions, it is safe to say, limiting the claim to these familiar objects, that their colour attributions could not be mistaken." ;
+    :refersTo :FamiliarObjects ;
+    :hasDescription "3 does not occur for 3.1" .
+
+:TextualFactoid_4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "People agree which things are alike and unlike in colour, and also what colours they are: I call this 'name-agreement'" ;
+    :refersTo :NameAgreement ;
+    :hasNeighbourhood "Agreement" .
+
+:TextualFactoid_4_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "People agree which things are alike and unlike in colour, but not what their colours are (as if some had systematically mislearned colour words). I now reserve 'discrimination-agreement' for this." ;
+    :refersTo :NameDisagreement .
+
+:TextualFactoid_5 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "We must imagine the colours of all things systematically changed (to retain discrimination-agreement), and a systematic reciprocal change in something else (to retain name-agreement also): there must be a double reversal." ;
+    :refersTo :DoubleReversal .
+
+:TextualFactoid_5_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page61 ;
+    :hasText "First, we would surely seek an explanation, probably physiological." ;
+    :refersTo :PhysiologicalChange ;
+    :hasDescription "4 does not occur for 5.1 singular cases" .
+
+:TextualFactoid_5_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "But they find themselves, with astonishment, disagreeing systematically with their remembered and recorded past colour judgements" ;
+    :refersTo :PastColourJudgementDisagreement .
+
+:TextualFactoid_5_3 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "Moreover, considerations seem conceivable that might incline us to either of the extraordinary explanations (2a) that everyone's vision, or (2b) that the colours of things, had systematically changed." ;
+    :refersTo :VisionChange ;
+    :hasDescription "Possible explanation of 5.2" .
+
+:TextualFactoid_5_4 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :refersTo :ColourOfThingsChange ;
+    :hasDescription "Possible explanation of 5.2" .
+
+:TextualFactoid_5_5 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "Everyone wakes up apparently as usual, agreeing on the colours of things; and their present judgements of things accord fully with past judgements, their own and others." ;
+    :refersTo :PastColourJudgementAgreement .
+
+:TextualFactoid_6 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page63 ;
+    :hasText "It might be said that a decision would be required: either to adopt the rule that wavelengths and physiology, whatever happens, are irrelevant; or to say that they are relevant, and that overall agreement, past and present, does not guarantee the colours of things." ;
+    :refersTo :Decision .
+
+:TextualFactoid_6_1 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "no decision about language would be required, but only an explicit affirming of what is already implicit; and it is already an implicit rule of our colour language to disallow the relevance of scientific considerations." ;
+    :refersTo :NoDecision .
+
+:TextualFactoid_6_2 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "The language already incorporates reference of wavelengths; not to allow scientific considerations to prevail would be a decision away from the spirit of existing practice." ;
+    :refersTo :ExistingPractice .
+
+:TextualFactoid_7 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "But if we take his 'Perhaps rubies are green' as a factual suggestion about the present, he must suppose that a double scientific change has already occurred, undetected. This we can reject, at least about the recent (scientifically sophisticated) past, and have no reason to believe about earlier times." ;
+    :refersTo :RejectionOfScepticism .
+
+:TextualFactoid_8 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page66 ;
+    :hasText "Properties like 'square' are entailed by the presence of other ascertainable properties; but 'simple' properties make direct reference to people and their agreement in discrimination, and the language of attribution is tied directly to this. So with the simple qualities of other senses. I chose properties of this kind, I confess, because my eye is ultimately on other sorts of properties or alleged properties important in aesthetics" ;
+    :refersTo :SimpleProperties .
+
+:TextualFactoid_9 a :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page67 ;
+    :hasText "what I might call an 'ultimate proof (to distinguish it from asking a man already tested for colour vision) would consist in mustering facts so as to show, in a given case, that the conditions are met. To see if the conditions for X being green are met, one could assemble people, test them to see who is now making maximum distinctions, see if they group X with emeralds or grass, and whether they say that grass is green and that it looks as green things always have, etc." ;
+    :refersTo :UltimateProof .
+
+#################################################################
+#    Individuals - Pages
+#################################################################
+
+:Page54 a :Page ;
+    rdfs:label "54" .
+
+:Page55 a :Page ;
+    rdfs:label "55" .
+
+:Page56 a :Page ;
+    rdfs:label "56" .
+
+:Page57 a :Page ;
+    rdfs:label "57" .
+
+:Page58 a :Page ;
+    rdfs:label "58" .
+
+:Page59 a :Page ;
+    rdfs:label "59" .
+
+:Page60 a :Page ;
+    rdfs:label "60" .
+
+:Page61 a :Page ;
+    rdfs:label "61" .
+
+:Page62 a :Page ;
+    rdfs:label "62" .
+
+:Page63 a :Page ;
+    rdfs:label "63" .
+
+:Page64 a :Page ;
+    rdfs:label "64" .
+
+:Page66 a :Page ;
+    rdfs:label "66" .
+
+:Page67 a :Page ;
+    rdfs:label "67" .
+
+#################################################################
+#    Individuals - Author
+#################################################################
+
+:Sibley a :Author ;
+    rdfs:label "Sibley" .
+
+#################################################################
+#    Concept Relationships
+#################################################################
+
+:Property_ColourProperty rdf:type owl:Axiom ;
+    owl:annotatedSource :Property ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ColourProperty ;
+    :relationType "Concept 2 is an instance of concept 1" .
+
+:Normality_ColourProperty rdf:type owl:Axiom ;
+    owl:annotatedSource :Normality ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ColourProperty ;
+    :relationType "Concept 1 is insufficient to explain concept 2" .
+
+:InitialDiscriminationAgreement_NamingTime rdf:type owl:Axiom ;
+    owl:annotatedSource :InitialDiscriminationAgreement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :NamingTime ;
+    :relationType "Concept 1 precedes concept 2" .
+
+:OriginalNamers_InitialDiscriminationAgreement rdf:type owl:Axiom ;
+    owl:annotatedSource :OriginalNamers ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :InitialDiscriminationAgreement ;
+    :relationType "Concept 1 establishes concept 2" .
+
+:Divergences_ReferenceGroup rdf:type owl:Axiom ;
+    owl:annotatedSource :Divergences ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ReferenceGroup ;
+    :relationType "Concept 2 is defined by absence of concept 1" .
+
+:Errors_FamiliarObjects rdf:type owl:Axiom ;
+    owl:annotatedSource :Errors ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :FamiliarObjects ;
+    :relationType "Concept 1 does not occur with concept 2" .
+
+:NameAgreement_NameDisagreement rdf:type owl:Axiom ;
+    owl:annotatedSource :NameAgreement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :NameDisagreement ;
+    :relationType "Concept 1 is contrasted with concept 2" .
+
+:DoubleReversal_PhysiologicalChange rdf:type owl:Axiom ;
+    owl:annotatedSource :DoubleReversal ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :PhysiologicalChange ;
+    :relationType "Concept 2 can explain concept 1" .
+
+:PastColourJudgementDisagreement_VisionChange rdf:type owl:Axiom ;
+    owl:annotatedSource :PastColourJudgementDisagreement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :VisionChange ;
+    :relationType "Concept 2 can explain concept 1" .
+
+:PastColourJudgementDisagreement_ColourOfThingsChange rdf:type owl:Axiom ;
+    owl:annotatedSource :PastColourJudgementDisagreement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ColourOfThingsChange ;
+    :relationType "Concept 2 can explain concept 1" .
+
+:Decision_NoDecision rdf:type owl:Axiom ;
+    owl:annotatedSource :Decision ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :NoDecision ;
+    :relationType "Concept 2 replaces concept 1" .
+
+:ExistingPractice_Decision rdf:type owl:Axiom ;
+    owl:annotatedSource :ExistingPractice ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :Decision ;
+    :relationType "Concept 1 makes concept 2 unnecessary" .
+
+:SimpleProperties_Property rdf:type owl:Axiom ;
+    owl:annotatedSource :SimpleProperties ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :Property ;
+    :relationType "Concept 1 is a type of concept 2" .
+
+:UltimateProof_ColourProperty rdf:type owl:Axiom ;
+    owl:annotatedSource :UltimateProof ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ColourProperty ;
+    :relationType "Concept 1 verifies concept 2" .
+
+:AsIfScenarios_InitialDiscriminationAgreement rdf:type owl:Axiom ;
+    owl:annotatedSource :AsIfScenarios ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :InitialDiscriminationAgreement ;
+    :relationType "Concept 1 describes development of concept 2" .
+
+:SetOfVisualProperties_ColourProperty rdf:type owl:Axiom ;
+    owl:annotatedSource :SetOfVisualProperties ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :ColourProperty ;
+    :relationType "Concept 1 is analogous to concept 2" .
+
+#################################################################
+#    Reference Page Triples
+#################################################################
+
+:Property :hasReferencePage :Page54 .
+:ColourProperty :hasReferencePage :Page54 .
+:Normality :hasReferencePage :Page54 .
+:AsIfScenarios :hasReferencePage :Page55 .
+:SetOfVisualProperties :hasReferencePage :Page56 .
+:InitialDiscriminationAgreement :hasReferencePage :Page57 .
+:NamingTime :hasReferencePage :Page57 .
+:OriginalNamers :hasReferencePage :Page57 .
+:ReferenceGroup :hasReferencePage :Page58 .
+:Errors :hasReferencePage :Page58 .
+:FamiliarObjects :hasReferencePage :Page59 .
+:NameAgreement :hasReferencePage :Page60 .
+:NameDisagreement :hasReferencePage :Page60 .
+:DoubleReversal :hasReferencePage :Page60, :Page61 .
+:PhysiologicalChange :hasReferencePage :Page61 .
+:PastColourJudgementDisagreement :hasReferencePage :Page62 .
+:VisionChange :hasReferencePage :Page62 .
+:ColourOfThingsChange :hasReferencePage :Page62 .
+:Decision :hasReferencePage :Page63 .
+:NoDecision :hasReferencePage :Page64 .
+:ExistingPractice :hasReferencePage :Page64 .
+:RejectionOfScepticism :hasReferencePage :Page64 .
+:SimpleProperties :hasReferencePage :Page66 .
+:UltimateProof :hasReferencePage :Page67 .

@@ -1,0 +1,8 @@
+Attached you have three ontologies:
+* danto-ch1.ttl is the ontology taken from expert analysis on aesthetic philosophical vision expressed in 1st chapter of Danto's work
+* danto-ch2.ttl is the ontology taken from expert analysis on aesthetic philosophical vision expressed in 2nd chapter of Danto's work
+* aisthetics-core.ttl is a core model for both of them
+Your task is to:
+1. harmonize them syntactically: if the chapter modules use properties from the core module, use them and do not create duplications
+2. harmonize them conceptually: if they express the same concept in different ways, unify it and use the same URI (if it is used in chapter 1 and in chapter 2, use the one in chapter 1)
+Provide the two harmonized modules for chapter 1 and chapter 2 separately. Print the complete modules, DO NOT eliminate anything which has to be in the final output.

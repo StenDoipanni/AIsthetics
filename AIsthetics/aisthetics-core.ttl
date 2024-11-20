@@ -1,0 +1,277 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/philtext/> .
+
+<http://example.org/philtext> rdf:type owl:Ontology ;
+                               dc:description "An ontology for representing philosophical text analysis, concepts, and their relationships"@en ;
+                               dc:title "Philosophical Text Analysis Ontology"@en ;
+                               owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/philtext/basedOn
+:basedOn rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty ;
+         rdfs:domain :TextualFactoid ;
+         rdfs:range :TextualFactoid ;
+         rdfs:label "based on"@en .
+
+
+###  http://example.org/philtext/findableIn
+:findableIn rdf:type owl:ObjectProperty ;
+            rdfs:domain :TextualFactoid ;
+            rdfs:range :Page ;
+            rdfs:label "findable in"@en .
+
+
+###  http://example.org/philtext/hasAnalyticStylisticCategory
+:hasAnalyticStylisticCategory rdf:type owl:ObjectProperty ;
+                              rdfs:domain :TextualFactoid ;
+                              rdfs:range :AnalyticStylisticCategory ;
+                              rdfs:label "has analytic stylistic category"@en .
+
+
+###  http://example.org/philtext/hasAuthor
+:hasAuthor rdf:type owl:ObjectProperty ;
+           rdfs:domain :TextualFactoid ;
+           rdfs:range :Author ;
+           rdfs:label "has author"@en .
+
+
+###  http://example.org/philtext/hasReferencePage
+:hasReferencePage rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Concept ;
+                  rdfs:range :Page ;
+                  rdfs:label "reference page"@en .
+
+
+###  http://example.org/philtext/hasRelationWith
+:hasRelationWith rdf:type owl:ObjectProperty ,
+                          owl:SymmetricProperty ;
+                 rdfs:domain :Concept ;
+                 rdfs:range :Concept ;
+                 rdfs:label "has relation with"@en .
+
+
+###  http://example.org/philtext/hasSyntheticStylisticCategory
+:hasSyntheticStylisticCategory rdf:type owl:ObjectProperty ;
+                               rdfs:domain :TextualFactoid ;
+                               rdfs:range :SyntheticStylisticCategory ;
+                               rdfs:label "has synthetic stylistic category"@en .
+
+
+###  http://example.org/philtext/refersTo
+:refersTo rdf:type owl:ObjectProperty ;
+          rdfs:domain :TextualFactoid ;
+          rdfs:range :Concept ;
+          rdfs:label "refers to"@en .
+
+
+###  http://example.org/philtext/see
+:see rdf:type owl:ObjectProperty ;
+     rdfs:domain :TextualFactoid ;
+     rdfs:range :TextualFactoid ;
+     rdfs:label "see"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/philtext/hasDescription
+:hasDescription rdf:type owl:DatatypeProperty ;
+                rdfs:domain :TextualFactoid ;
+                rdfs:range xsd:string ;
+                rdfs:label "has description"@en .
+
+
+###  http://example.org/philtext/hasExternalReference
+:hasExternalReference rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :TextualFactoid ;
+                      rdfs:range xsd:string ;
+                      rdfs:label "has external reference"@en .
+
+
+###  http://example.org/philtext/hasGloss
+:hasGloss rdf:type owl:DatatypeProperty ;
+          rdfs:domain :TextualFactoid ;
+          rdfs:range xsd:string ;
+          rdfs:label "has gloss"@en .
+
+
+###  http://example.org/philtext/hasNeighbourhood
+:hasNeighbourhood rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :TextualFactoid ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "has neighbourhood"@en .
+
+
+###  http://example.org/philtext/hasText
+:hasText rdf:type owl:DatatypeProperty ;
+         rdfs:domain :TextualFactoid ;
+         rdfs:range xsd:string ;
+         rdfs:label "has text"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/philtext/AnalyticStylisticCategory
+:AnalyticStylisticCategory rdf:type owl:Class ;
+                           rdfs:subClassOf :StylisticCategory ;
+                           rdfs:comment "Categories describing analytical aspects of writing style"@en ;
+                           rdfs:label "Analytic Stylistic Category"@en .
+
+
+###  http://example.org/philtext/Author
+:Author rdf:type owl:Class ;
+        rdfs:comment "The author of a philosophical work or text"@en ;
+        rdfs:label "Author"@en .
+
+
+###  http://example.org/philtext/Concept
+:Concept rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasReferencePage ;
+                           owl:someValuesFrom :Page
+                         ] ;
+         rdfs:comment "A philosophical concept or idea discussed in the text"@en ;
+         rdfs:label "Concept"@en .
+
+
+###  http://example.org/philtext/Page
+:Page rdf:type owl:Class ;
+      rdfs:comment "A page reference in a work"@en ;
+      rdfs:label "Page"@en .
+
+
+###  http://example.org/philtext/StylisticCategory
+:StylisticCategory rdf:type owl:Class ;
+                   rdfs:comment "A category describing the writing style"@en ;
+                   rdfs:label "Stylistic Category"@en .
+
+
+###  http://example.org/philtext/SyntheticStylisticCategory
+:SyntheticStylisticCategory rdf:type owl:Class ;
+                            rdfs:subClassOf :StylisticCategory ;
+                            rdfs:comment "Categories describing synthetic aspects of writing style"@en ;
+                            rdfs:label "Synthetic Stylistic Category"@en .
+
+
+###  http://example.org/philtext/TextualFactoid
+:TextualFactoid rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty :hasAuthor ;
+                                  owl:someValuesFrom :Author
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :refersTo ;
+                                  owl:someValuesFrom owl:Thing
+                                ] ;
+                rdfs:comment "A discrete unit of textual information from a philosophical work"@en ;
+                rdfs:label "Textual Factoid"@en .
+
+
+###  http://example.org/philtext/Work
+:Work rdf:type owl:Class ;
+      rdfs:comment "A philosophical work or text being analyzed"@en ;
+      rdfs:label "Work"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/philtext/Adjectival
+:Adjectival rdf:type owl:NamedIndividual ,
+                     :SyntheticStylisticCategory ;
+            rdfs:label "Adjectival"@en .
+
+
+###  http://example.org/philtext/Descriptive
+:Descriptive rdf:type owl:NamedIndividual ,
+                      :AnalyticStylisticCategory ;
+             rdfs:label "Descriptive"@en .
+
+
+###  http://example.org/philtext/Dialectic
+:Dialectic rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+           rdfs:label "Dialectic"@en .
+
+
+###  http://example.org/philtext/Evocative
+:Evocative rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+           rdfs:label "Evocative"@en .
+
+
+###  http://example.org/philtext/Honorific
+:Honorific rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+           rdfs:label "Honorific"@en .
+
+
+###  http://example.org/philtext/Metaphoric
+:Metaphoric rdf:type owl:NamedIndividual ,
+                     :AnalyticStylisticCategory ;
+            rdfs:label "Metaphoric"@en .
+
+
+###  http://example.org/philtext/Nominal
+:Nominal rdf:type owl:NamedIndividual ,
+                  :SyntheticStylisticCategory ;
+         rdfs:label "Nominal"@en .
+
+
+###  http://example.org/philtext/Paratactic
+:Paratactic rdf:type owl:NamedIndividual ,
+                     :AnalyticStylisticCategory ;
+            rdfs:label "Paratactic"@en .
+
+
+###  http://example.org/philtext/ProgressiveLinear
+:ProgressiveLinear rdf:type owl:NamedIndividual ,
+                            :AnalyticStylisticCategory ;
+                   rdfs:label "Progressive-linear"@en .
+
+
+###  http://example.org/philtext/Thesis
+:Thesis rdf:type owl:NamedIndividual ,
+                 :AnalyticStylisticCategory ;
+        rdfs:label "As a thesis"@en .
+
+
+###  http://example.org/philtext/Verbal
+:Verbal rdf:type owl:NamedIndividual ,
+                 :SyntheticStylisticCategory ;
+        rdfs:label "Verbal"@en .
+
+
+###  http://example.org/philtext/Visual
+:Visual rdf:type owl:NamedIndividual ,
+                 :AnalyticStylisticCategory ;
+        rdfs:label "Visual"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

@@ -1,0 +1,138 @@
+graph TD
+    %% Style Definitions
+    classDef factoid fill:#e1f5fe,stroke:#01579b
+    classDef concept fill:#fff3e0,stroke:#e65100
+    classDef page fill:#f3e5f5,stroke:#4a148c
+    classDef style fill:#e8f5e9,stroke:#1b5e20
+    classDef aesthetics fill:#fce4ec,stroke:#880e4f
+
+    %% TextualFactoids
+    TF1[":TF1 Expressive Object"]
+    TF1_1[":TF1.1 Individual Vision"]
+    TF1_2[":TF1.2 Anti-oppositional Nature"]
+    TF2[":TF2 Act of Expression"]
+    TF2_1[":TF2.1 Aesthetic Process"]
+    TF3[":TF3 Representation"]
+    TF3_1[":TF3.1 Experience"]
+    TF4[":TF4 Meaning"]
+    TF4_1[":TF4.1 Dynamic Interaction"]
+    TF5[":TF5 Working Connections"]
+    TF6[":TF6 Statement vs Expression"]
+    TF6_1[":TF6.1 Fulfillment"]
+    TF6_2[":TF6.2 Conceptual Oppositions"]
+    TF7[":TF7 Individual-Intersubjective"]
+    TF7_1[":TF7.1 Consummatory Fulfillment"]
+    TF8[":TF8 Subject Matter"]
+    TF9[":TF9 Perception-Construction"]
+    TF9_1[":TF9.1 Phenomenology"]
+    TF9_2[":TF9.2 Optical Apparatus"]
+    TF10[":TF10 Emotion-Enactivism"]
+    TF11[":TF11 Environment"]
+    TF11_1[":TF11.1 Perceived Qualities"]
+    TF11_2[":TF11.2 Dual Agency"]
+    TF11_3[":TF11.3 Habits"]
+    TF12[":TF12 Complete Interpretation"]
+
+    %% Concepts
+    C1(["expressiveObject"])
+    C2(["individualVision"])
+    C3(["subjectObjectInterdependence"])
+    C4(["actOfExpression"])
+    C5(["aestheticProcess"])
+    C6(["representation"])
+    C7(["experience"])
+    C8(["meaning"])
+    C9(["workingConnections"])
+    C10(["statement"])
+    C11(["expression"])
+    C12(["perception"])
+    C13(["construction"])
+    C14(["emotion"])
+    C15(["environment"])
+    C16(["completeInterpretation"])
+
+    %% Pages
+    P82[[":page82"]]
+    P83[[":page83"]]
+    P84[[":page84"]]
+    P85[[":page85"]]
+    P86[[":page86"]]
+    P87[[":page87"]]
+    P91[[":page91"]]
+    P94[[":page94"]]
+    P100[[":page100"]]
+    P103[[":page103"]]
+
+    %% Stylistic Categories
+    SD{{"Descriptive"}}
+    SV{{"Verbal"}}
+    SD2{{"Dialectic"}}
+    SPL{{"Progressive-linear"}}
+    ST{{"Thesis"}}
+    SV2{{"Visual"}}
+
+    %% Aestheticity
+    AE[/"Explanation"\]
+
+    %% Hierarchical Relationships
+    TF1 --> TF1_1
+    TF1 --> TF1_2
+    TF2 --> TF2_1
+    TF3 --> TF3_1
+    TF4 --> TF4_1
+    TF6 --> TF6_1
+    TF6 --> TF6_2
+    TF7 --> TF7_1
+    TF9 --> TF9_1
+    TF9 --> TF9_2
+    TF11 --> TF11_1
+    TF11 --> TF11_2
+    TF11 --> TF11_3
+
+    %% Page References
+    TF1 & TF2 -->|findableIn| P82
+    TF3 -->|findableIn| P83
+    TF6 -->|findableIn| P84
+    TF4 & TF7 -->|findableIn| P86
+    TF9 -->|findableIn| P87
+    TF11_3 -->|findableIn| P91
+    TF9_1 -->|findableIn| P94
+    TF9_2 -->|findableIn| P100
+    TF12 -->|findableIn| P103
+
+    %% Concept References
+    TF1 -->|refersTo| C1
+    TF1_2 -->|refersTo| C3
+    TF2 -->|refersTo| C4
+    TF2_1 -->|refersTo| C5
+    TF3 -->|refersTo| C6
+    TF3_1 -->|refersTo| C7
+    TF4 -->|refersTo| C8
+    TF5 -->|refersTo| C9
+    TF6 -->|refersTo| C10 & C11
+    TF9 -->|refersTo| C12 & C13
+    TF10 -->|refersTo| C14
+    TF11 -->|refersTo| C15
+    TF12 -->|refersTo| C16
+
+    %% Style Relationships
+    TF2_1 -->|hasAnalyticStyle| SD & SPL
+    TF1 -->|hasSyntheticStyle| SV
+    TF1_2 & TF4 -->|hasAnalyticStyle| SD2
+    TF9 -->|hasAnalyticStyle| SV2
+    TF12 -->|hasAnalyticStyle| ST
+
+    %% Aestheticity Relationships
+    TF1 & TF2 & TF3 & TF4 & TF5 & TF6 & TF7 & TF8 & TF9 & TF10 & TF11 & TF12 -->|hasAestheticity| AE
+
+    %% Concept Relationships
+    C6 -->|hasRelationWith| C7
+    C12 -->|hasRelationWith| C13
+    C16 -->|hasRelationWith| C8
+
+    %% Style class assignments
+    class TF1,TF1_1,TF1_2,TF2,TF2_1,TF3,TF3_1,TF4,TF4_1,TF5,TF6,TF6_1,TF6_2,TF7,TF7_1,TF8,TF9,TF9_1,TF9_2,TF10,TF11,TF11_1,TF11_2,TF11_3,TF12 factoid
+    class C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16 concept
+    class P82,P83,P84,P85,P86,P87,P91,P94,P100,P103 page
+    class SD,SV,SD2,SPL,ST,SV2 style
+    class AE aesthetics

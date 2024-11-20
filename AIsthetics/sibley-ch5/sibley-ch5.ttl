@@ -1,0 +1,406 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/philtext/> .
+
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:description "An ontology for representing philosophical text analysis, concepts, and their relationships"@en ;
+    dc:title "Philosophical Text Analysis Ontology"@en ;
+    owl:versionInfo "2.0"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:basedOn rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty ;
+    rdfs:label "based on"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:comment "Indicates that a TextualFactoid builds upon or references another TextualFactoid"@en .
+
+:findableIn rdf:type owl:ObjectProperty ;
+    rdfs:label "findable in"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:comment "Links a TextualFactoid to its page location in the source text"@en .
+
+:hasAnalyticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:label "has analytic stylistic category"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:comment "Associates a TextualFactoid with its analytical writing style"@en .
+
+:hasAuthor rdf:type owl:ObjectProperty ;
+    rdfs:label "has author"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:comment "Links a TextualFactoid to its author"@en .
+
+:hasReferencePage rdf:type owl:ObjectProperty ;
+    rdfs:label "has reference page"@en ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:comment "Indicates the page where a concept is primarily discussed"@en .
+
+:hasRelationWith rdf:type owl:ObjectProperty ,
+                         owl:SymmetricProperty ;
+    rdfs:label "has relation with"@en ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:comment "Represents relationships between philosophical concepts"@en .
+
+:hasSyntheticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:label "has synthetic stylistic category"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:comment "Associates a TextualFactoid with its synthetic writing style"@en .
+
+:refersTo rdf:type owl:ObjectProperty ;
+    rdfs:label "refers to"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:comment "Links a TextualFactoid to the concept it discusses"@en .
+
+:see rdf:type owl:ObjectProperty ;
+    rdfs:label "see"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:comment "Provides cross-references between TextualFactoids"@en .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:label "has description"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Contains additional descriptive text about the TextualFactoid"@en .
+
+:hasExternalReference rdf:type owl:DatatypeProperty ;
+    rdfs:label "has external reference"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:comment "References to external sources or materials"@en .
+
+:hasGloss rdf:type owl:DatatypeProperty ;
+    rdfs:label "has gloss"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Contains explanatory notes or glosses"@en .
+
+:hasNeighbourhood rdf:type owl:DatatypeProperty ;
+    rdfs:label "has neighbourhood"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Describes the contextual neighborhood of the TextualFactoid"@en .
+
+:hasText rdf:type owl:DatatypeProperty ;
+    rdfs:label "has text"@en ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Contains the actual text content of the TextualFactoid"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:AnalyticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:label "Analytic Stylistic Category"@en ;
+    rdfs:comment "Categories describing analytical aspects of writing style"@en .
+
+:Author rdf:type owl:Class ;
+    rdfs:label "Author"@en ;
+    rdfs:comment "The author of a philosophical work or text"@en .
+
+:Concept rdf:type owl:Class ;
+    rdfs:label "Concept"@en ;
+    rdfs:comment "A philosophical concept or idea discussed in the text"@en ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasReferencePage ;
+                      owl:someValuesFrom :Page
+                    ] .
+
+:Page rdf:type owl:Class ;
+    rdfs:label "Page"@en ;
+    rdfs:comment "A page reference in a work"@en .
+
+:StylisticCategory rdf:type owl:Class ;
+    rdfs:label "Stylistic Category"@en ;
+    rdfs:comment "A category describing the writing style"@en .
+
+:SyntheticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:label "Synthetic Stylistic Category"@en ;
+    rdfs:comment "Categories describing synthetic aspects of writing style"@en .
+
+:TextualFactoid rdf:type owl:Class ;
+    rdfs:label "Textual Factoid"@en ;
+    rdfs:comment "A discrete unit of textual information from a philosophical work"@en ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasAuthor ;
+                      owl:someValuesFrom :Author
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty :refersTo ;
+                      owl:someValuesFrom :Concept
+                    ] .
+
+:Work rdf:type owl:Class ;
+    rdfs:label "Work"@en ;
+    rdfs:comment "A philosophical work or text being analyzed"@en .
+
+#################################################################
+#    Named Individuals
+#################################################################
+
+# Analytic Stylistic Categories
+:Descriptive rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Honorific rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Metaphoric rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Evocative rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Visual rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Dialectic rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+:Thesis rdf:type owl:NamedIndividual, :AnalyticStylisticCategory ;
+    rdfs:label "As a thesis"@en .
+:ProgressiveLinear rdf:type owl:NamedIndividual, :AnalyticStylisticCategory ;
+    rdfs:label "Progressive-linear"@en .
+:Paratactic rdf:type owl:NamedIndividual, :AnalyticStylisticCategory .
+
+# Synthetic Stylistic Categories
+:Verbal rdf:type owl:NamedIndividual, :SyntheticStylisticCategory .
+:Adjectival rdf:type owl:NamedIndividual, :SyntheticStylisticCategory .
+:Nominal rdf:type owl:NamedIndividual, :SyntheticStylisticCategory .
+
+
+#################################################################
+#    Named Individuals from TSV
+#################################################################
+
+# Authors
+:Sibley rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "Sibley" .
+
+# Pages
+:Page54 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "54" .
+:Page55 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "55" .
+:Page56 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "56" .
+:Page57 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "57" .
+
+# Concepts
+:Property rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Property" .
+:ColourProperty rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Colour as property" .
+:Normality rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Normality" .
+:AsIfScenarios rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "As if scenarios" .
+:SetOfVisualProperties rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Set of visual properties" .
+:InitialDiscriminationAgreement rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Initial discrimination agreement" .
+:NamingTime rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Naming time" .
+:OriginalNamers rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Original namers" .
+
+# TextualFactoids
+:TF1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "Matters to which the notions of truth and falsity, correctness and error, have application are sometimes spoken of as 'objective'. The possibility of true and false attribution is certainly necessary to the notion of a property." ;
+    :refersTo :Property ;
+    :hasNeighbourhood "Colour attribution" .
+
+:TF1_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "This is so with attributions of colour, and is one reason why the colours of things are often called 'properties'." ;
+    :refersTo :ColourProperty ;
+    :basedOn :TF1 .
+
+:TF1_2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page54 ;
+    :hasText "To say that a thing is green if it looks green to a normal person in normal conditions only postpones questions about what it is for something to look green, what normal vision consists in, and what establishes that someone has it." ;
+    :refersTo :Normality ;
+    :hasDescription "1.2 is an insufficient explanation for 1.1" ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TF2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page55 ;
+    :hasText "I depict the beginning of colour language thus. People hitherto used to distinguishing objects, but with black-grey-white or achromatic vision, gradually or suddenly develop colour vision. They find there is a new way in which they are making similar discriminations. They group things as alike and unlike, each person tending to group together the same objects as others do." ;
+    :refersTo :AsIfScenarios ;
+    :hasGloss "How colour vision might have developed." .
+
+:TF2_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page56 ;
+    :hasText "It might be asked whether, when it has tied the matter down, among properties we now know about, to colours, i.e. excluding properties we discern by touch, hearing, or taste, some people might be distinguishing another set of visual properties that share the features already mentioned with colours but are of a type unknown to those of us who see colours." ;
+    :refersTo :SetOfVisualProperties ;
+    :hasAnalyticStylisticCategory :Rhetoric .
+
+:TF2_2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "We might imagine this period, from the first partial agreements to the eventual establishment of a complex language and behaviour like ours, telescoped into a short while. The outcome is that, in similar roughly specifiable conditions, everyone makes similar visual distinctions. I call this the initial discrimination-agreement," ;
+    :refersTo :InitialDiscriminationAgreement ;
+    :hasDescription "2.1 makes 1.1 possible" .
+
+:TF2_3 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "For things they group as alike, grass, emeralds, etc., they introduce 'green', and so on. I call this whole occasion 'naming time', and the people, 'the original namers'." ;
+    :refersTo :NamingTime ;
+    :hasDescription "2.2 happens in 2.3" .
+
+:TF2_4 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :refersTo :OriginalNamers ;
+    :hasDescription "2.4 makes 2.2 happen" .
+
+:TF2_5 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page57 ;
+    :hasText "Where people do not agree, divergences are attributable either to differences of angle, lighting, temporary physical condition (dazzles), etc., and should prove removable by appropriate changes, or to inadequate mastery of language, or, ultimately to some defect, e.g. colour-blindness." ;
+    :refersTo :Divergences ;
+    :hasNeighbourhood "Divergences in colour naming" .
+
+:TF2_6 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page58 ;
+    :hasText "The fully colour-sighted are those exhibiting the maximum or most detailed discrimination-agreement} That is, the 'is' of colour attribution, in our language, is linked to this group,3 and they are selected by performance in agreeing and disagreeing, not by other (e.g. physiological) tests." ;
+    :refersTo :ReferenceGroup .
+
+:TF3 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page58 ;
+    :hasText "errors' in colour judgements were possible, and were constantly being corrected. But these were 'errors' the removal of which helped settle standard conditions for attribution and other conventions of the language." ;
+    :refersTo :Errors .
+
+:TF3_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page59 ;
+    :hasText "Since those making maximum distinctions with common and widely seen things have eliminated 'errors' in the course of selecting standard conditions, it is safe to say, limiting the claim to these familiar objects, that their colour attributions could not be mistaken." ;
+    :refersTo :FamiliarObjects ;
+    :hasDescription "3 does not occur for 3.1" .
+
+:TF4 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "People agree which things are alike and unlike in colour, and also what colours they are: I call this 'name-agreement'" ;
+    :refersTo :NameAgreement ;
+    :hasNeighbourhood "Agreement" .
+
+:TF4_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "People agree which things are alike and unlike in colour, but not what their colours are (as if some had systematically mislearned colour words). I now reserve 'discrimination-agreement' for this." ;
+    :refersTo :NameDisagreement .
+
+:TF5 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page60 ;
+    :hasText "We must imagine the colours of all things systematically changed (to retain discrimination-agreement), and a systematic reciprocal change in something else (to retain name-agreement also): there must be a double reversal." ;
+    :refersTo :DoubleReversal .
+
+:TF5_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page61 ;
+    :hasText "First, we would surely seek an explanation, probably physiological." ;
+    :refersTo :PhysiologicalChange ;
+    :hasDescription "4 does not occur for 5.1 singular cases" .
+
+:TF5_2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "But they find themselves, with astonishment, disagreeing systematically with their remembered and recorded past colour judgements" ;
+    :refersTo :PastColourJudgementDisagreement .
+
+:TF5_3 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "Moreover, considerations seem conceivable that might incline us to either of the extraordinary explanations (2a) that everyone's vision, or (2b) that the colours of things, had systematically changed." ;
+    :refersTo :VisionChange ;
+    :hasDescription "Possible explanation of 5.2" .
+
+:TF5_4 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :refersTo :ColourOfThingsChange ;
+    :hasDescription "Possible explanation of 5.2" .
+
+:TF5_5 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page62 ;
+    :hasText "Everyone wakes up apparently as usual, agreeing on the colours of things; and their present judgements of things accord fully with past judgements, their own and others." ;
+    :refersTo :PastColourJudgementAgreement .
+
+:TF6 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page63 ;
+    :hasText "It might be said that a decision would be required: either to adopt the rule that wavelengths and physiology, whatever happens, are irrelevant; or to say that they are relevant, and that overall agreement, past and present, does not guarantee the colours of things." ;
+    :refersTo :Decision .
+
+:TF6_1 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "no decision about language would be required, but only an explicit affirming of what is already implicit; and it is already an implicit rule of our colour language to disallow the relevance of scientific considerations." ;
+    :refersTo :NoDecision .
+
+:TF6_2 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "The language already incorporates reference of wavelengths; not to allow scientific considerations to prevail would be a decision away from the spirit of existing practice." ;
+    :refersTo :ExistingPractice .
+
+:TF7 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page64 ;
+    :hasText "But if we take his 'Perhaps rubies are green' as a factual suggestion about the present, he must suppose that a double scientific change has already occurred, undetected. This we can reject, at least about the recent (scientifically sophisticated) past, and have no reason to believe about earlier times." ;
+    :refersTo :RejectionOfScepticism .
+
+:TF8 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page66 ;
+    :hasText "Properties like 'square' are entailed by the presence of other ascertainable properties; but 'simple' properties make direct reference to people and their agreement in discrimination, and the language of attribution is tied directly to this. So with the simple qualities of other senses. I chose properties of this kind, I confess, because my eye is ultimately on other sorts of properties or alleged properties important in aesthetics" ;
+    :refersTo :SimpleProperties .
+
+:TF9 rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page67 ;
+    :hasText "what I might call an 'ultimate proof (to distinguish it from asking a man already tested for colour vision) would consist in mustering facts so as to show, in a given case, that the conditions are met. To see if the conditions for X being green are met, one could assemble people, test them to see who is now making maximum distinctions, see if they group X with emeralds or grass, and whether they say that grass is green and that it looks as green things always have, etc." ;
+    :refersTo :UltimateProof .
+
+# Additional Concepts Referenced
+:Divergences rdf:type owl:NamedIndividual, :Concept .
+:ReferenceGroup rdf:type owl:NamedIndividual, :Concept .
+:Errors rdf:type owl:NamedIndividual, :Concept .
+:FamiliarObjects rdf:type owl:NamedIndividual, :Concept .
+:NameAgreement rdf:type owl:NamedIndividual, :Concept .
+:NameDisagreement rdf:type owl:NamedIndividual, :Concept .
+:DoubleReversal rdf:type owl:NamedIndividual, :Concept .
+:PhysiologicalChange rdf:type owl:NamedIndividual, :Concept .
+:PastColourJudgementDisagreement rdf:type owl:NamedIndividual, :Concept .
+:VisionChange rdf:type owl:NamedIndividual, :Concept .
+:ColourOfThingsChange rdf:type owl:NamedIndividual, :Concept .
+:PastColourJudgementAgreement rdf:type owl:NamedIndividual, :Concept .
+:Decision rdf:type owl:NamedIndividual, :Concept .
+:NoDecision rdf:type owl:NamedIndividual, :Concept .
+:ExistingPractice rdf:type owl:NamedIndividual, :Concept .
+:RejectionOfScepticism rdf:type owl:NamedIndividual, :Concept .
+:SimpleProperties rdf:type owl:NamedIndividual, :Concept .
+:UltimateProof rdf:type owl:NamedIndividual, :Concept .

@@ -1,0 +1,105 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dewey: <http://example.org/philtext/dewey/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dewey: rdf:type owl:Ontology ;
+    dc:title "Dewey's Theory of Experience Ontology Module"@en ;
+    dc:description "Domain-specific ontology module representing concepts from Dewey's Art as Experience, Chapter 3"@en ;
+    owl:imports <http://example.org/philtext> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+dewey:hasQuality rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range dewey:ExperientialQuality ;
+    rdfs:label "has quality"@en .
+
+dewey:contrasts rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "contrasts with"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+dewey:ExperientialQuality rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Experiential Quality"@en ;
+    rdfs:comment "A quality that characterizes an experience"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Main Concepts
+dewey:Experience rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Experience"@en ;
+    :hasReferencePage :Page35 .
+
+dewey:AnExperience rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "An Experience"@en ;
+    :hasReferencePage :Page35, :Page36 ;
+    dewey:contrasts dewey:Experience ;
+    dewey:hasQuality dewey:Unity, dewey:Fulfillment, dewey:Individuality .
+
+dewey:Unity rdf:type owl:NamedIndividual, dewey:ExperientialQuality ;
+    rdfs:label "Unity"@en .
+
+dewey:Fulfillment rdf:type owl:NamedIndividual, dewey:ExperientialQuality ;
+    rdfs:label "Fulfillment"@en .
+
+dewey:Individuality rdf:type owl:NamedIndividual, dewey:ExperientialQuality ;
+    rdfs:label "Individuality"@en .
+
+dewey:Flow rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Flow"@en ;
+    :hasRelationWith dewey:AnExperience ;
+    dewey:hasQuality dewey:Continuity .
+
+dewey:Continuity rdf:type owl:NamedIndividual, dewey:ExperientialQuality ;
+    rdfs:label "Continuity"@en .
+
+# TextualFactoids
+dewey:ExperienceContinuous rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :hasText """Experience occurs continuously, because the interaction of live creature and environing conditions is involved in the very process of living.""" ;
+    :refersTo dewey:Experience ;
+    :findableIn :Page35 ;
+    :hasAnalyticStylisticCategory :Thesis .
+
+dewey:AnExperienceDefinition rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :hasText """We have an experience when the material experienced runs its course to fulfillment. Then and then only is it integrated within and demarcated in the general stream of experience from other experiences.""" ;
+    :refersTo dewey:AnExperience ;
+    :findableIn :Page35 ;
+    :hasAnalyticStylisticCategory :Thesis, :Descriptive .
+
+dewey:FlowDescription rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor dewey:JohnDewey ;
+    :hasText """In such experiences, every successive part flows freely, without seam and without unfilled blanks, into what ensues. At the same time there is no sacrifice of the self-identity of the parts.""" ;
+    :refersTo dewey:Flow ;
+    :findableIn :Page36 ;
+    :hasAnalyticStylisticCategory :Descriptive, :Metaphoric .
+
+# Author
+dewey:JohnDewey rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "John Dewey"@en .
+
+# Pages
+:Page35 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 35"@en .
+
+:Page36 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 36"@en .
+
+# Additional relationships between concepts
+dewey:Experience :hasRelationWith dewey:AnExperience .
+dewey:AnExperience :hasRelationWith dewey:Flow .
+dewey:Flow :hasRelationWith dewey:Unity .

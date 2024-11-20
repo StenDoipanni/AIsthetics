@@ -1,0 +1,56 @@
+graph TD
+    %% Core Classes
+    subgraph CoreClasses
+        TF[TextualFactoid]
+        C[Concept]
+        A[Author]
+        P[Page]
+        SC[StylisticCategory]
+    end
+
+    %% Style Categories
+    subgraph AnalyticStyles
+        ASC[AnalyticStylisticCategory] --> |subtypes| SC
+        DESC[Descriptive]
+        HON[Honorific]
+        MET[Metaphoric]
+        EVO[Evocative]
+        VIS[Visual]
+        DIA[Dialectic]
+        THE[Thesis]
+        PRO[Progressive-linear]
+        PAR[Paratactic]
+    end
+
+    subgraph SyntheticStyles
+        SSC[SyntheticStylisticCategory] --> |subtypes| SC
+        VER[Verbal]
+        ADJ[Adjectival]
+        NOM[Nominal]
+    end
+
+    %% Core Relationships
+    TF -->|hasAuthor| A
+    TF -->|findableIn| P
+    TF -->|refersTo| C
+    TF -->|hasAnalyticStylisticCategory| ASC
+    TF -->|hasSyntheticStylisticCategory| SSC
+    C -->|hasRelationWith| C
+    C -->|hasReferencePage| P
+
+    %% Example TextualFactoid Chain
+    TF1.1[TextualFactoid_1.1]
+    TF1.2[TextualFactoid_1.2]
+    TF1.3[TextualFactoid_1.3]
+
+    TF1.1 -->|basedOn| TF1.2
+    TF1.2 -->|basedOn| TF1.3
+
+    %% Inheritance Example
+    TF1.1 -->|refersTo| C1[Essenza]
+    TF1.2 -->|inherits refersTo| C1
+    TF1.3 -->|inherits refersTo| C1
+
+    class TF,C,A,P,SC coreClass
+    class ASC,SSC styleCategory
+    class TF1.1,TF1.2,TF1.3 instance

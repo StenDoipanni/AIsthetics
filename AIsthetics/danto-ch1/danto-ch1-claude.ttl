@@ -1,0 +1,149 @@
+@prefix : <http://example.org/philtext/danto-ch1#> .
+@prefix core: <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/philtext/danto-ch1> rdf:type owl:Ontology ;
+    owl:imports <http://example.org/philtext> ;
+    dc:title "Danto Chapter 1 - Works of Art and Mere Real Things"@en ;
+    dc:description "Domain-specific ontology capturing concepts and relationships from Danto's analysis of art vs reality"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:hasArtisticStatus rdf:type owl:ObjectProperty ;
+    rdfs:domain :ArtObject ;
+    rdfs:range :ArtisticStatus ;
+    rdfs:label "has artistic status"@en .
+
+:hasOntologicalStatus rdf:type owl:ObjectProperty ;
+    rdfs:domain :ArtObject ;
+    rdfs:range :OntologicalStatus ;
+    rdfs:label "has ontological status"@en .
+
+:requiresConvention rdf:type owl:ObjectProperty ;
+    rdfs:domain :ArtObject ;
+    rdfs:range :ArtisticConvention ;
+    rdfs:label "requires convention"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:ArtObject rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Art Object"@en .
+
+:MereRealThing rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Mere Real Thing"@en .
+
+:ArtisticStatus rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Artistic Status"@en .
+
+:OntologicalStatus rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Ontological Status"@en .
+
+:ArtisticConvention rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Artistic Convention"@en .
+
+:RepresentationalTheory rdf:type owl:Class ;
+    rdfs:subClassOf core:Concept ;
+    rdfs:label "Representational Theory"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Key Concepts from the Text
+:indiscernibilityProblem rdf:type owl:NamedIndividual, core:Concept ;
+    rdfs:label "The Problem of Indiscernible Counterparts"@en ;
+    core:hasDescription "The philosophical problem of objects that are perceptually identical but have different ontological status as art vs non-art"@en ;
+    core:findableIn core:Page1 .
+
+:mimeticTheory rdf:type owl:NamedIndividual, :RepresentationalTheory ;
+    rdfs:label "Mimetic Theory of Art"@en ;
+    core:hasDescription "Theory that art is essentially imitative of reality"@en ;
+    core:hasRelationWith :platonicTheory .
+
+:platonicTheory rdf:type owl:NamedIndividual, :RepresentationalTheory ;
+    rdfs:label "Platonic Theory of Art"@en ;
+    core:hasDescription "Theory that art is an inferior copy of reality, twice removed from truth"@en ;
+    core:hasRelationWith :mimeticTheory .
+
+:institutionalTheory rdf:type owl:NamedIndividual, core:Concept ;
+    rdfs:label "Institutional Theory of Art"@en ;
+    core:hasDescription "Theory that art status is conferred by the institutional framework of the artworld"@en .
+
+:aestheticDistance rdf:type owl:NamedIndividual, core:Concept ;
+    rdfs:label "Aesthetic Distance"@en ;
+    core:hasDescription "The psychological separation between viewer and artwork that enables aesthetic appreciation"@en .
+
+# Artistic Statuses
+:artwork rdf:type owl:NamedIndividual, :ArtisticStatus ;
+    rdfs:label "Artwork"@en .
+
+:nonArtwork rdf:type owl:NamedIndividual, :ArtisticStatus ;
+    rdfs:label "Non-Artwork"@en .
+
+# Ontological Statuses
+:real rdf:type owl:NamedIndividual, :OntologicalStatus ;
+    rdfs:label "Real"@en .
+
+:representation rdf:type owl:NamedIndividual, :OntologicalStatus ;
+    rdfs:label "Representation"@en .
+
+:appearance rdf:type owl:NamedIndividual, :OntologicalStatus ;
+    rdfs:label "Appearance"@en .
+
+# Artistic Conventions
+:theatricalFraming rdf:type owl:NamedIndividual, :ArtisticConvention ;
+    rdfs:label "Theatrical Framing"@en ;
+    core:hasDescription "Conventions that mark something as theatrical performance rather than reality"@en .
+
+:galleryDisplay rdf:type owl:NamedIndividual, :ArtisticConvention ;
+    rdfs:label "Gallery Display"@en ;
+    core:hasDescription "Conventions of displaying objects in art galleries that mark them as artworks"@en .
+
+# Key Examples from Text
+:redSquareExample rdf:type owl:NamedIndividual, :ArtObject ;
+    rdfs:label "Red Square Examples"@en ;
+    core:hasDescription "Danto's example of multiple red square paintings with different meanings and statuses"@en ;
+    :hasArtisticStatus :artwork, :nonArtwork ;
+    :requiresConvention :galleryDisplay .
+
+:bedExample rdf:type owl:NamedIndividual, :ArtObject ;
+    rdfs:label "J's Bed"@en ;
+    core:hasDescription "Example of a real bed exhibited as artwork"@en ;
+    :hasArtisticStatus :artwork ;
+    :hasOntologicalStatus :real ;
+    :requiresConvention :galleryDisplay .
+
+#################################################################
+#    Textual Factoids
+#################################################################
+
+:factoid1 rdf:type core:TextualFactoid ;
+    core:hasText "The philosophical problem arises when we cannot tell the difference between artworks and mere real things through perception alone"@en ;
+    core:refersTo :indiscernibilityProblem ;
+    core:findableIn core:Page1 ;
+    core:hasAnalyticStylisticCategory core:Thesis .
+
+:factoid2 rdf:type core:TextualFactoid ;
+    core:hasText "Art and philosophy are antithetical, which then constitutes a second indictment of art when one realizes the importance, moral as well as intellectual, assigned to philosophy by Plato"@en ;
+    core:refersTo :platonicTheory ;
+    core:findableIn core:Page12 ;
+    core:hasAnalyticStylisticCategory core:Dialectic .
+
+:factoid3 rdf:type core:TextualFactoid ;
+    core:hasText "The conventional perimeters of the theater serve, then, a function whose analogue might be that of quotation marks, where these serve to dislocate whatever is contained within them from ordinary conversational discourse"@en ;
+    core:refersTo :theatricalFraming ;
+    core:findableIn core:Page23 ;
+    core:hasAnalyticStylisticCategory core:Metaphoric .

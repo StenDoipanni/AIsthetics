@@ -1,0 +1,26 @@
+
+### Refinement 1
+
+ok, some refinements:
+where there is a blank cell, usually it meas that it refers to previous row elements, therefore I need to obtain e.g. TextualFactoid_1.3  refersTo  Identity . etc.
+Use this rough conceptual structure to guide your refinement, but prioritize the core ontology classes.
+
+TextualFactoid - hasType-> textualFactoid
+TextualFactoid - refersTo -> fatto testuale 
+TextualFactoid - findableIn -> work (page + opera + libro, etc.)
+TextualFactoid - hasAuthor -> author
+TextualFactoid - hasText -> piece of text
+TextualFactoid - refersTo -> concept
+concept - referencePage -> reference page
+TextualFactoid - hasDescription -> relation to concept #2
+concept - hasRelationWith -> concept2
+TextualFactoid - hasNeighbourhood -> concept neighbourhood
+TextualFactoid - hasGloss -> gloss
+TextualFactoid - hasAnalyticStylisticCategory -> [ Descriptive, Honorific, Metaphoric, Evocative, Visual, Dialectic, As a thesis, Progressive-linear, Paratactic]
+TextualFactoid - hasSyntheticStylisticCategory -> [ Verbal, Adjectival, Nominal]
+
+
+### Refinement 2
+
+Regarding the ontology: explicilty declare the object and data properties. Print the whole ontology in Turtle syntax.
+

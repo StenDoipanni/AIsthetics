@@ -1,0 +1,76 @@
+graph LR
+    %% Main Concepts
+    indis[Indiscernibility]
+    iden[Identity]
+    onto[Ontology]
+    
+    %% Related Concepts with Semantic Relations
+    copies[Copies]
+    mime[Mimetic Art]
+    rep[Representations]
+    imit[Imitation]
+    know[Knowledge] -->|enables interpretation of| conc[Concept]
+    bound[Boundary] -->|defines| conc
+    aesth[Aesthetic Socratism] -->|produces| info[Information]
+    inst[Institutional Framework] -->|determines| ess[Essence]
+    pleas[Pleasure] -->|derived from| copies
+    cogdim[Cognitive Dimensions] -->|creates| about[Aboutness]
+    
+    %% Main Concept Relations with Semantics
+    indis -->|shapes understanding of| iden
+    iden -->|informs| onto
+    
+    %% Secondary Concept Relations with Semantics
+    copies -->|exemplifies| mime
+    imit -->|creates| rep
+    
+    %% All TextualFactoids for Indiscernibility
+    f1[Factoid 1]
+    f11[Factoid 1.1]
+    f12[Factoid 1.2]
+    f13[Factoid 1.3]
+    
+    %% All TextualFactoids for Identity
+    f2[Factoid 2]
+    f21[Factoid 2.1]
+    f22[Factoid 2.2]
+    f23[Factoid 2.3]
+    f24[Factoid 2.4]
+    f25[Factoid 2.5]
+    f26[Factoid 2.6]
+    
+    %% All TextualFactoids for Ontology
+    f3[Factoid 3]
+    f31[Factoid 3.1]
+    f32[Factoid 3.2]
+    f33[Factoid 3.3]
+    f34[Factoid 3.4]
+    f35[Factoid 3.5]
+    
+    %% Factoid Relations to Main Concepts
+    f1 & f11 & f12 & f13 -->|refers to| indis
+    f2 & f21 & f22 & f23 & f24 & f25 & f26 -->|refers to| iden
+    f3 & f31 & f32 & f33 & f34 & f35 -->|refers to| onto
+    
+    %% Factoid Dependencies
+    f12 -->|based on| f33
+    f33 -->|based on| f26
+    f34 -->|based on| f21
+    
+    %% Cross-references
+    f11 -->|see| f21
+    f32 -->|see| f22
+    f35 -->|see| f24
+    
+    %% Style Categories
+    subgraph StylisticCategories
+        nom[Nominal]
+        verb[Verbal]
+        adj[Adjectival]
+        desc[Descriptive]
+        dial[Dialectic]
+    end
+    
+    %% Style Relations
+    f1 -->|has style| nom
+    f22 -->|has style| dial

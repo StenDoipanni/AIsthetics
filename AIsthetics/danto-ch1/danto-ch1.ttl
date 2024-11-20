@@ -1,0 +1,303 @@
+@prefix : <http://example.org/philtext/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:basedOn a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "based on"@en .
+
+:findableIn a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:label "findable in"@en .
+
+:hasAnalyticStylisticCategory a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:label "has analytic stylistic category"@en .
+
+:hasAuthor a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:label "has author"@en .
+
+:hasReferencePage a owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:label "has reference page"@en .
+
+:hasRelationWith a owl:ObjectProperty, owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "has relation with"@en .
+
+:hasSyntheticStylisticCategory a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:label "has synthetic stylistic category"@en .
+
+:refersTo a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:label "refers to"@en .
+
+:see a owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "see"@en .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:hasDescription a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has description"@en .
+
+:hasExternalReference a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has external reference"@en .
+
+:hasGloss a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gloss"@en .
+
+:hasNeighbourhood a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has neighbourhood"@en .
+
+:hasText a owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has text"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+:TextualFactoid a owl:Class ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :hasAuthor ;
+        owl:someValuesFrom :Author
+    ] ,
+    [
+        a owl:Restriction ;
+        owl:onProperty :refersTo ;
+        owl:someValuesFrom owl:Thing
+    ] .
+
+:Concept a owl:Class ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :hasReferencePage ;
+        owl:someValuesFrom :Page
+    ] .
+
+:Author a owl:Class .
+:Page a owl:Class .
+:Work a owl:Class .
+
+:StylisticCategory a owl:Class .
+:AnalyticStylisticCategory rdfs:subClassOf :StylisticCategory .
+:SyntheticStylisticCategory rdfs:subClassOf :StylisticCategory .
+
+#################################################################
+#    Individuals - Authors
+#################################################################
+
+:danto a :Author ;
+    rdfs:label "Danto" .
+
+#################################################################
+#    Individuals - Main Concepts
+#################################################################
+
+:indiscernibility a :Concept ;
+    rdfs:label "Indiscernibility" ;
+    :hasReferencePage "1-2", "13", "21", "28", "31", "32" .
+
+:identity a :Concept ;
+    rdfs:label "Identity" ;
+    :hasReferencePage "3", "5", "7", "9", "13", "19", "24" .
+
+:ontology a :Concept ;
+    rdfs:label "Ontology" ;
+    :hasReferencePage "3", "14", "23", "30" .
+
+#################################################################
+#    Individuals - Style Categories
+#################################################################
+
+:Descriptive a :AnalyticStylisticCategory .
+:Honorific a :AnalyticStylisticCategory .
+:Metaphoric a :AnalyticStylisticCategory .
+:Evocative a :AnalyticStylisticCategory .
+:Visual a :AnalyticStylisticCategory .
+:Dialectic a :AnalyticStylisticCategory .
+:Thesis a :AnalyticStylisticCategory .
+:ProgressiveLinear a :AnalyticStylisticCategory .
+:Paratactic a :AnalyticStylisticCategory .
+
+:Verbal a :SyntheticStylisticCategory .
+:Adjectival a :SyntheticStylisticCategory .
+:Nominal a :SyntheticStylisticCategory .
+
+#################################################################
+#    Individuals - TextualFactoids from TSV
+#################################################################
+
+# Factoid 1
+:factoid_1 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :indiscernibility ;
+    :hasSyntheticStylisticCategory :Nominal ;
+    :hasGloss "L'intersse primario dell'autore è indagare i confini di ciò che definisce l'artisticità di un oggetto, rispondere alla domanda: cos'è che rende un'opera d'arte tale? Ricercando quindi cosa sia l'estetico, l'approccio di Danto è definibile come sostantivale." .
+
+# Factoid 1.1
+:factoid_1_1 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page3 ;
+    :hasText """Meanwhile, I can only observe that though he has produced a (pretty minimal) artwork (...) he has not yet made an artwork out of that bare red expanse. It remains (...) a stranger to the community of artworks, even though that community contains many members indiscernible from it.""" ;
+    :refersTo :indiscernibility ;
+    :hasNeighbourhood "indiscernible artworks" ;
+    :see :factoid_2_1 .
+
+# Factoid 1.2
+:factoid_1_2 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :indiscernibility ;
+    :basedOn :factoid_3_3 ;
+    :hasDescription "based on id. 3.3" ;
+    :hasRelationWith :copies, :mimeticArt .
+
+# Factoid 1.3
+:factoid_1_3 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :indiscernibility ;
+    :hasNeighbourhood "mimeses as a class" .
+
+# Factoid 2
+:factoid_2 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :identity .
+
+# Factoid 2.1
+:factoid_2_1 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :identity ;
+    :hasGloss "Se vi sono due oggetti percettivamente identici, cosa rende uno un'opera d'arte e l'altro un mero oggetto banale? La differenza va ricercata oltre le qualità sensibili." ;
+    :hasDescription "based on id. 2.1" ;
+    :hasRelationWith :institutionalFramework, :essence .
+
+# Factoid 2.2
+:factoid_2_2 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page18 ;
+    :hasText """imitations have a more important function of representing real ones""" ;
+    :refersTo :identity ;
+    :hasNeighbourhood "Rappresentazione assume qui il duplice significato di ripresentazione e di stare al posto di qualcos'altro. I due sensi di rappresentazione corrispondono ai due sensi di apparenza." ;
+    :hasRelationWith :representations, :imitation ;
+    :hasSyntheticStylisticCategory :Dialectic .
+
+# Factoid 2.3
+:factoid_2_3 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :hasText """It is safe to say that the greater the degree of realism intended, the greater the need for external indicators that it is art and not reality, these becoming decreasingly necessary as the work itself is decreasingly realistic.""" ;
+    :refersTo :identity ;
+    :basedOn :factoid_2_1 ;
+    :hasRelationWith :conventions ;
+    :hasGloss """the difference between art and reality is just a matter of those conventions, and that whatever convention allows to be an artwork is an artwork"" (p. 31).""" .
+
+# Factoid 2.4
+:factoid_2_4 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page16 ;
+    :hasText """the art lover's pleasure is exactly based upomn a difference he is logically required to be able to mark.""" ;
+    :refersTo :identity ;
+    :hasRelationWith :pleasure, :copies .
+
+# Factoid 2.5
+:factoid_2_5 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :identity ;
+    :hasRelationWith :mirror_of_reality .
+
+# Factoid 2.6
+:factoid_2_6 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page3 ;
+    :hasText """Artworks are typically about something.""" ;
+    :refersTo :identity ;
+    :basedOn :factoid_2_3 ;
+    :hasRelationWith :cognitive_dimensions, :aboutness ;
+    :hasGloss "Vedi colonna G, riga 19." .
+
+# Factoid 3
+:factoid_3 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :ontology .
+
+# Factoid 3.1
+:factoid_3_1 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :ontology ;
+    :hasNeighbourhood "what makes it art?" .
+
+# Factoid 3.2
+:factoid_3_2 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :ontology ;
+    :hasNeighbourhood "gap between the reality and its representations" ;
+    :see :factoid_2_2 .
+
+# Factoid 3.3
+:factoid_3_3 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :refersTo :ontology ;
+    :basedOn :factoid_2_6 ;
+    :hasRelationWith :aesthetic_socratism, :information .
+
+# Factoid 3.4
+:factoid_3_4 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page26 ;
+    :hasText """If art is to have any function at all, it must be execised through what it does not have in common with life.""" ;
+    :refersTo :ontology ;
+    :basedOn :factoid_2_1 ;
+    :hasRelationWith :boundary ;
+    :hasNeighbourhood "discontinous with reality" .
+
+# Factoid 3.5
+:factoid_3_5 a :TextualFactoid ;
+    :hasAuthor :danto ;
+    :findableIn :page14 ;
+    :hasText """As Goodman has pointed out in a parallel case, knowledge that it is different may in the end mae a difference in the way something tastes.""" ;
+    :refersTo :ontology ;
+    :hasGloss "L'essenza di un'opera d'arte - venendo meno il ruolo della sensibilità nel delineare i confini tra ciò che è arte e ciò che non lo è - va ricercata in una dimensione cognitiva, in cui l'informazione e il concetto vengono messi in primo piano." ;
+    :hasRelationWith :concept, :knowledge ;
+    :see :factoid_2_4 .
+
+#################################################################
+#    Concept Relationships
+#################################################################
+
+:indiscernibility :hasRelationWith :identity .
+:identity :hasRelationWith :ontology .
+:copies :hasRelationWith :mimeticArt .
+:imitation :hasRelationWith :representations .
+:knowledge :hasRelationWith :concept .
+:boundary :hasRelationWith :concept .
+:aesthetic_socratism :hasRelationWith :information .

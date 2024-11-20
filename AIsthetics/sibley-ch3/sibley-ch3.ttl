@@ -1,0 +1,555 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/philtext/> .
+
+<http://example.org/philtext> rdf:type owl:Ontology ;
+    dc:description "An ontology for representing philosophical text analysis in aesthetics"@en ;
+    dc:title "Philosophical Aesthetics Text Analysis Ontology"@en ;
+    owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/philtext/basedOn
+:basedOn rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "based on"@en ;
+    rdfs:comment "Indicates that a TextualFactoid builds upon or references another TextualFactoid"@en .
+
+###  http://example.org/philtext/findableIn
+:findableIn rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Page ;
+    rdfs:label "findable in"@en ;
+    rdfs:comment "Indicates the page where the TextualFactoid can be found"@en .
+
+###  http://example.org/philtext/hasAnalyticStylisticCategory
+:hasAnalyticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :AnalyticStylisticCategory ;
+    rdfs:label "has analytic stylistic category"@en ;
+    rdfs:comment "Associates a TextualFactoid with its analytical style"@en .
+
+###  http://example.org/philtext/hasAuthor
+:hasAuthor rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Author ;
+    rdfs:label "has author"@en ;
+    rdfs:comment "Links a TextualFactoid to its author"@en .
+
+###  http://example.org/philtext/hasReferencePage
+:hasReferencePage rdf:type owl:ObjectProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Page ;
+    rdfs:label "has reference page"@en ;
+    rdfs:comment "Links a concept to pages where it is discussed"@en .
+
+###  http://example.org/philtext/hasRelationWith
+:hasRelationWith rdf:type owl:ObjectProperty ,
+                          owl:SymmetricProperty ;
+    rdfs:domain :Concept ;
+    rdfs:range :Concept ;
+    rdfs:label "has relation with"@en ;
+    rdfs:comment "Indicates a relationship between two concepts"@en .
+
+###  http://example.org/philtext/hasSyntheticStylisticCategory
+:hasSyntheticStylisticCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :SyntheticStylisticCategory ;
+    rdfs:label "has synthetic stylistic category"@en ;
+    rdfs:comment "Associates a TextualFactoid with its synthetic style"@en .
+
+###  http://example.org/philtext/refersTo
+:refersTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :Concept ;
+    rdfs:label "refers to"@en ;
+    rdfs:comment "Links a TextualFactoid to the concept it discusses"@en .
+
+###  http://example.org/philtext/see
+:see rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range :TextualFactoid ;
+    rdfs:label "see"@en ;
+    rdfs:comment "References another related TextualFactoid for additional context"@en .
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/philtext/hasDescription
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has description"@en ;
+    rdfs:comment "Additional descriptive information about the TextualFactoid"@en .
+
+###  http://example.org/philtext/hasExternalReference
+:hasExternalReference rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has external reference"@en ;
+    rdfs:comment "References to external works or resources"@en .
+
+###  http://example.org/philtext/hasGloss
+:hasGloss rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gloss"@en ;
+    rdfs:comment "A brief explanation or interpretation of the TextualFactoid"@en .
+
+###  http://example.org/philtext/hasNeighbourhood
+:hasNeighbourhood rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has neighbourhood"@en ;
+    rdfs:comment "Describes the conceptual context or neighborhood of the TextualFactoid"@en .
+
+###  http://example.org/philtext/hasText
+:hasText rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range xsd:string ;
+    rdfs:label "has text"@en ;
+    rdfs:comment "The actual text content of the TextualFactoid"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/philtext/AnalyticStylisticCategory
+:AnalyticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:comment "Categories describing analytical aspects of writing style"@en ;
+    rdfs:label "Analytic Stylistic Category"@en .
+
+###  http://example.org/philtext/Author
+:Author rdf:type owl:Class ;
+    rdfs:comment "The author of a philosophical work or text"@en ;
+    rdfs:label "Author"@en .
+
+###  http://example.org/philtext/Concept
+:Concept rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasReferencePage ;
+                      owl:someValuesFrom :Page
+                    ] ;
+    rdfs:comment "A philosophical concept or idea discussed in the text"@en ;
+    rdfs:label "Concept"@en .
+
+###  http://example.org/philtext/Page
+:Page rdf:type owl:Class ;
+    rdfs:comment "A page reference in a work"@en ;
+    rdfs:label "Page"@en .
+
+###  http://example.org/philtext/StylisticCategory
+:StylisticCategory rdf:type owl:Class ;
+    rdfs:comment "A category describing the writing style"@en ;
+    rdfs:label "Stylistic Category"@en .
+
+###  http://example.org/philtext/SyntheticStylisticCategory
+:SyntheticStylisticCategory rdf:type owl:Class ;
+    rdfs:subClassOf :StylisticCategory ;
+    rdfs:comment "Categories describing synthetic aspects of writing style"@en ;
+    rdfs:label "Synthetic Stylistic Category"@en .
+
+###  http://example.org/philtext/TextualFactoid
+:TextualFactoid rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty :hasAuthor ;
+                      owl:someValuesFrom :Author
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty :refersTo ;
+                      owl:someValuesFrom :Concept
+                    ] ;
+    rdfs:comment "A discrete unit of textual information from a philosophical work"@en ;
+    rdfs:label "Textual Factoid"@en .
+
+###  http://example.org/philtext/Work
+:Work rdf:type owl:Class ;
+    rdfs:comment "A philosophical work or text being analyzed"@en ;
+    rdfs:label "Work"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/philtext/Adjectival
+:Adjectival rdf:type owl:NamedIndividual ,
+                     :SyntheticStylisticCategory ;
+    rdfs:label "Adjectival"@en .
+
+###  http://example.org/philtext/Descriptive
+:Descriptive rdf:type owl:NamedIndividual ,
+                      :AnalyticStylisticCategory ;
+    rdfs:label "Descriptive"@en .
+
+###  http://example.org/philtext/Dialectic
+:Dialectic rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+    rdfs:label "Dialectic"@en .
+
+###  http://example.org/philtext/Evocative
+:Evocative rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+    rdfs:label "Evocative"@en .
+
+###  http://example.org/philtext/Honorific
+:Honorific rdf:type owl:NamedIndividual ,
+                    :AnalyticStylisticCategory ;
+    rdfs:label "Honorific"@en .
+
+###  http://example.org/philtext/Metaphoric
+:Metaphoric rdf:type owl:NamedIndividual ,
+                     :AnalyticStylisticCategory ;
+    rdfs:label "Metaphoric"@en .
+
+###  http://example.org/philtext/Nominal
+:Nominal rdf:type owl:NamedIndividual ,
+                  :SyntheticStylisticCategory ;
+    rdfs:label "Nominal"@en .
+
+###  http://example.org/philtext/Paratactic
+:Paratactic rdf:type owl:NamedIndividual ,
+                     :AnalyticStylisticCategory ;
+    rdfs:label "Paratactic"@en .
+
+###  http://example.org/philtext/ProgressiveLinear
+:ProgressiveLinear rdf:type owl:NamedIndividual ,
+                            :AnalyticStylisticCategory ;
+    rdfs:label "Progressive-linear"@en .
+
+###  http://example.org/philtext/Thesis
+:Thesis rdf:type owl:NamedIndividual ,
+                 :AnalyticStylisticCategory ;
+    rdfs:label "As a thesis"@en .
+
+###  http://example.org/philtext/Verbal
+:Verbal rdf:type owl:NamedIndividual ,
+                 :SyntheticStylisticCategory ;
+    rdfs:label "Verbal"@en .
+
+###  http://example.org/philtext/Visual
+:Visual rdf:type owl:NamedIndividual ,
+                 :AnalyticStylisticCategory ;
+    rdfs:label "Visual"@en .
+
+
+# Concept Instances
+:NonAestheticJudgement rdf:type :Concept ;
+    :hasReferencePage :Page33 ;
+    :hasRelationWith :AestheticSensitivity ;
+    rdfs:label "Non-aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticJudgement rdf:type :Concept ;
+    :hasReferencePage :Page33, :Page37, :Page38, :Page40 ;
+    :hasRelationWith :AestheticSensitivity ;
+    rdfs:label "Aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticPerception rdf:type :Concept ;
+    :hasReferencePage :Page38, :Page40 ;
+    :hasRelationWith :AestheticJudgement ;
+    rdfs:label "Aesthetic perception" .
+
+# Page Instances
+:Page33 rdf:type :Page ;
+    rdfs:label "Page 33" .
+
+:Page34 rdf:type :Page ;
+    rdfs:label "Page 34" .
+
+# Author Instance
+:Sibley rdf:type :Author ;
+    rdfs:label "Sibley" .
+
+# Relationship Documentation
+:NonAestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :NonAestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is not involved with concept 2" .
+
+:AestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is involved with concept 2" .
+
+
+# TextualFactoid Instances
+
+# TextualFactoid Instances
+:TextualFactoid_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page33 ;
+    :hasText """Many judgements about the shape, colour, sound, wording, subject-matter, or composition of things, including works of art, are such that it would be ludicrous to suggest that aesthetic sensitivity, perceptiveness, or taste had been exhibited in making them.""" ;
+    :refersTo :NonAestheticJudgement ;
+    :hasGloss "Non-aesthetic judgements, qualities, descriptions and concepts do not involve taste, perceptiveness or aesthetic sensitivity." ;
+    :hasAnalyticStylisticCategory :Paratactic .
+
+:TextualFactoid_1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page33 ;
+    :hasText """By contrast, there are other judgements the making of which could clearly be said to exhibit an exercise of aesthetic sensitivity or perceptiveness.""" ;
+    :refersTo :AestheticJudgement ;
+    :hasGloss "Aesthetic judgements, qualities, descriptions and concepts necessarily involve aesthetic sensitivity, perceptiveness or taste." ;
+    :hasAnalyticStylisticCategory :Paratactic ;
+    :basedOn :TextualFactoid_1 .
+
+:TextualFactoid_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """We need therefore to investigate how we make such judgements and how we justify and explain them; we need also to examine further the aesthetic qualities and concepts (...). To do this, various relationship must be disentangled;""" ;
+    :refersTo :Intentions ;
+    :hasGloss "Intention to investigate the relationship between aesthetic and non-aesthetic in order to understand aesthetic qualities and concepts and the way we make and explain aesthetic judgements" ;
+    :hasAnalyticStylisticCategory :Paratactic .
+
+# Concept Instances
+:NonAestheticJudgement rdf:type :Concept ;
+    :hasReferencePage :Page33 ;
+    :hasRelationWith :AestheticSensitivity ;
+    rdfs:label "Non-aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticJudgement rdf:type :Concept ;
+    :hasReferencePage :Page33, :Page37, :Page38, :Page40 ;
+    :hasRelationWith :AestheticSensitivity ;
+    rdfs:label "Aesthetic judgements, qualities, descriptions and concepts" .
+
+:AestheticPerception rdf:type :Concept ;
+    :hasReferencePage :Page38, :Page40 ;
+    :hasRelationWith :AestheticJudgement ;
+    rdfs:label "Aesthetic perception" .
+
+# Page Instances
+:Page33 rdf:type :Page ;
+    rdfs:label "Page 33" .
+
+:Page34 rdf:type :Page ;
+    rdfs:label "Page 34" .
+
+# Author Instance
+:Sibley rdf:type :Author ;
+    rdfs:label "Sibley" .
+
+# Relationship Documentation
+:NonAestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :NonAestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is not involved with concept 2" .
+
+:AestheticJudgement_AestheticSensitivity rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgement ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticSensitivity ;
+    :relationType "Concept 1 is involved with concept 2" .
+
+# Continuing TextualFactoid Instances...
+
+:TextualFactoid_3 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """Aesthetics deals with a kind of perception. People have to see the grace or unity of a work, hear the plaintiveness or frenzy in the music, (...). They may be struck by these qualities at once, or they may come to perceive them only after repeated viewings, hearings, or readings, and with the help of critics. But unless they do perceive them for themselves, aesthetic enjoyment, appreciation, and judgement are beyond them. (...); the crucial thing is to see, hear, or feel.""" ;
+    :refersTo :AestheticPerception ;
+    :hasGloss "Perception is required for aesthetic enjoyment, appreciation and judgement. People cannot make aesthetic judgments unless they perceive for themselves the aesthetic qualities." ;
+    :hasAnalyticStylisticCategory :Descriptive .
+
+:TextualFactoid_3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page34 ;
+    :hasText """To suppose indeed that one can make aesthetic judgements without aesthetic perception, say, by following rules of some kind, is to misunderstand aesthetic judgement.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasDescription "Concept 1 is implied in concept 2" ;
+    :hasGloss "The role of aesthetic perception as the divide between aesthetic and non-aesthetic is reiterated, now specifically referring to aesthetic judgements, and it is raised the point that aesthetic judgements cannot be made by following rules" ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear ;
+    :basedOn :TextualFactoid_3 .
+
+:TextualFactoid_4 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page35 ;
+    :hasText """This therefore is how I shall use 'aesthetic judgement' throughout. Where there is no question of aesthetic perception, I shall use some other expression like 'attribution of aesthetic quality' or 'aesthetic statement'.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasRelationWith :AttributionOfAestheticQuality ;
+    :hasGloss "The fundamental terms of the analysis are laid out, the rigorous demarcation of the basic concepts lays the ground for the following arguments. Aesthetic judgements involve aesthetic sensitivity." ;
+    :hasAnalyticStylisticCategory :Expository ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_5 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page35 ;
+    :hasText """(i) Aesthetic qualities are dependent upon non-aesthetic ones for their existence. They could no more occur in isolation than there could be facial resemblances without features, or grins without faces; the converse is not true. (ii) The non-aesthetic qualities of a thing determine its aesthetic qualities. Any aesthetic character a thing has depends upon the character of the non-aesthetic qualities it has or appears to have, and changes in its aesthetic character result from changes in its non-aesthetic qualities. Aesthetic qualities are 'emergent'. Like (i) above, which it entails, (ii) concerns the nature of aesthetic properties in general.""" ;
+    :refersTo :DependenceOfTheAestheticOnTheNonAesthetic ;
+    :hasReferencePage :Page37, :Page45 ;
+    :hasDescription "Concept 1 is implied in concept 2" ;
+    :hasRelationWith :Emergency ;
+    :hasNeighbourhood "General relationship between aesthetic and non-aesthetic" ;
+    :hasGloss "First two relationships established between aesthetic and non-aesthetic qualities, purely general. Again, the author lays down the basic elements of the analysis before delving into the actual argument." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_6 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page35 ;
+    :hasText """(iii) [...] the particular aesthetic character of something may be said to result from the totality of its relevant non-aesthetic characteristics. [...] One might say that it is because everything about the work is exactly as it is—this colour here, that line there, and so on indefinitely—that it is graceful or moving or unbalanced. [...] This third relationship might therefore appropriately be called the relation of total specific dependence.""" ;
+    :refersTo :TotalSpecificDependence ;
+    :hasGloss "After stating the general relationship of dependence between aesthetic and non-aesthetic qualities, the author elaborates on one of the particular relations existing between them, and names the third relationship 'the relation of total specific dependence'." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_7 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page36 ;
+    :hasText """(iv) The other relationship, the fourth, remains to be considered. A critic frequently tries, as one of his central occupations, to say why a picture is unbalanced, or what gives a complex work its grace, unity, or serenity. [...] In short, what the critic is doing is selecting from a work those features which are notably or especially responsible for its character. For often in a work there are some features that strike us as making the most outstanding contribution, usually those in which a small alteration would work a remarkable aesthetic change. This fourth relationship might therefore be called that of notable specific dependence; statements of such relationships bulk large in criticism.""" ;
+    :refersTo :NotableSpecificDependence ;
+    :hasGloss "The author then elaborates on the fourth relationship, which he names that of 'notable specific dependence', and he explains it by referring to the actual work of critics. He points out that one of the central occupations of critics is selecting features that contribute the most to the aesthetic character of the piece considered. This fourth relationship is therefore particularly interesting for his inquiry. The reference to the work of critic is very frequent all throughout the text: it provides a proving ground for the concepts and theses sustained, and makes their comprehension easier for the reader, making the argument more convincing and the flow of the text smoother." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+# Additional concepts referenced
+:AttributionOfAestheticQuality rdf:type :Concept ;
+    rdfs:label "Attribution of aesthetic quality or aesthetic statement" .
+
+:Emergency rdf:type :Concept ;
+    rdfs:label "Emergency" .
+
+:TotalSpecificDependence rdf:type :Concept ;
+    rdfs:label "Total specific dependence" .
+
+:NotableSpecificDependence rdf:type :Concept ;
+    rdfs:label "Notable specific dependence" .
+
+# Additional pages
+:Page35 rdf:type :Page ;
+    rdfs:label "Page 35" .
+
+:Page36 rdf:type :Page ;
+    rdfs:label "Page 36" .
+
+# Additional relationship annotations
+:AestheticJudgements_AestheticPerception rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticJudgements ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :AestheticPerception ;
+    :relationType "Concept 1 depends on concept 2" .
+
+:AestheticQualities_NonAestheticQualities rdf:type owl:Axiom ;
+    owl:annotatedSource :AestheticQualities ;
+    owl:annotatedProperty :hasRelationWith ;
+    owl:annotatedTarget :NonAestheticQualities ;
+    :relationType "Concept 1 depends on concept 2" .
+
+# Continuing from where we left off...
+
+:TextualFactoid_7 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page37 ;
+    :hasText """(i) The relationships that I have just described hold between qualities independently of a person's realizing in particular cases that they do. Whether or not one sees that a picture lacks balance, and lacks it notably because of the placing of a certain figure, in no way bears on the fact that the placing of the figure is what unbalances the picture.""" ;
+    :refersTo :RelationshipsExistInThingsThemselves ;
+    :hasGloss "The relationship of dependence stands between the qualities themselves, this is an important point that will resurface later while talking about reasons as reasons for things to be the way they are and reasons to infer things are the way they are. This statement about the relationship of dependence standing between things themselves already hints at the fact that reasons in the first sense are the ones that hold according to this analysis." .
+
+:TextualFactoid_8 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page37 ;
+    :hasText """This consists largely in showing how aesthetic effects are achieved in a work by isolating and pointing out what is (notably, mainly, in part) responsible. [...] When we see in detail how and why the work has its character, we may find our initial judgement strengthened and trust it more confidently [...] our appreciation is deepened and enriched and becomes more intelligent in being articulate. [...]  Explaining why a work has an aesthetic character, even where the reasons involve mentioning only non-aesthetic features, requires aesthetic discrimination.""" ;
+    :refersTo :Explanation ;
+    :hasSyntheticStylisticCategory :Verbal .
+
+:TextualFactoid_9 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page38, :Page39 ;
+    :hasText """ a major occupation of critics is the task of bringing people to see things for what, aesthetically, they are, as well as why they are. How a critic manages by what he says and does to bring people to see aesthetic qualities they have missed has frequently puzzled writers. But there is no real reason for mystification. One might puzzle equally over how on my own I come to perceive, after ten minutes in front of a picture or several replayings of a sonata, what I had not previously perceived. A second question about this activity is whether it is a way of supporting orjustifying aesthetic judgements. Some aestheticians have held that this—showing the work, getting people to see—is the only way of supporting an aesthetic judgement, even perhaps the only point of critical activity. [...] I see no reason why it should not be called a way of supporting or justifying, even of proving, an aesthetic judgement""" ;
+    :refersTo :BringingPeopleToSeeAestheticQualities ;
+    :hasRelationWith :Supporting_justifying_or_proving_aesthetic_judgements ;
+    :hasSyntheticStylisticCategory :Verbal .
+
+:TextualFactoid_10 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page39 ;
+    :hasText """ If I say the apples are sour and someone doubts my claim, I may ask him to taste them. With more complex or subtle things I may have to help him in appropriate ways. If I say that a figure can be seen as either a staircase or a cornice, that a cloud looks like a giraffe, that two people look somewhat alike, or that the brandy is soft and velvety, and he questions what I say, it may not be enough merely to invite him to look or taste. I may need to draw attention to this and that, suggest he look at the figure thus, or taste the brandy in a certain way.[...] If he then finds himself agreeing with me, I have vindicated my claim in the best possible way, by getting him to see for himself. There is no reason not to say, if one wishes, that I have supported, justified, or even proved my original judgement. One might refer to this activity therefore, as perceptual proof.""" ;
+    :refersTo :PerceptualProof ;
+    :hasRelationWith :RationalSupport ;
+    :hasGloss "If we admit the possibility of justification or support for aesthetic judgements, we must clarify that it is not a rational support, one cannot reason in support of an aesthetic judgement." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_11 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page40 ;
+    :hasText """Nevertheless, if we do choose to call this support of an aesthetic judgement, we must be clear what kind it is and what kind it is not. The critic cannot be said to have reasoned in support of it. Where someone tries to bring another to agree with him by reasoning, or by offering rational support for a judgement, he offers statements which, if true, render it certain, likely, or reasonable to suppose, that his judgement was correct. The person to whom the reasons are offered may, after reviewing them, conclude or infer or decide that the judgement is indeed correct or justified. He has been offered reasons for thinking something, and so may end accepting the judgement originally offered. But it was neither the aim nor the outcome of the critic's activity I described to provide reasons from which his audience might reasonably conclude that his judgement was true.""" ;
+    :refersTo :AestheticJudgements ;
+    :hasReferencePage :Page50 ;
+    :hasRelationWith :InvolvementAestheticPerception ;
+    :hasGloss "Aesthetic judgements cannot be the outcome of reasons because of the involvement of aesthetic sensitivity in making them: making an aesthetic judgement is not a matter of thinking but one of perceiving aesthetically. Through rational justification one could, at most, make an attribution of aesthetic quality or an aesthetic statement." ;
+    :hasSyntheticStylisticCategory :Adjectival .
+
+:TextualFactoid_12 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page40 ;
+    :hasText """Even if 'perceptual proof* is not a matter of giving reasons, and even if the notion of an aesthetic judgement being the outcome solely of considering reasons is an impossible hybrid, the question must nevertheless be raised whether the aesthetic judgements I am discussing may be justified or supported by reasons in some other way. [...] Could any statements about a thing's non-aesthetic properties alone serve as reasons for agreeing or concluding that it has a certain aesthetic property? [...] How or in what sense then can a judgement be based on reasons given that, in one sense already explained (p, 40), judgements cannot be the outcome of reasons? Perhaps it is a matter of distinguishing two ways of using 'reason'.""" ;
+    :refersTo :Reasons ;
+    :hasRelationWith :AestheticJudgement ;
+    rdfs:comment "Concept 1 as justification for concept 2" .
+
+:TextualFactoid_13 rdf:type :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :findableIn :Page42 ;
+    :hasText """If a work is graceful there will be reasons why it is, and this will be so whether anyone ever knows, or thinks, or has any reasons for thinking it so or not. [...] But 'reason' is also used to mean roughly, a true statement or a fact such that, on the basis of knowing it, it would be reasonable, right, or plausible to infer, suppose, or believe that something is so.""" ;
+    :refersTo :ReasonsEmpirical ;
+    :hasReferencePage :Page50 ;
+    :hasRelationWith :ReasonsLogical ;
+    rdfs:comment "Concept 1 is distinguished from concept 2. Concept 1 is valid, concept 2 is not." .
+
+# Creating the additional concepts
+:ReasonsEmpirical rdf:type :Concept ;
+    rdfs:label "Reasons on an empirical level (reasons something has an aesthetic quality)" .
+
+:ReasonsLogical rdf:type :Concept ;
+    rdfs:label "Reasons on a logical level (reasons to infer something has an aesthetic quality)" .
+
+:PerceptualProof rdf:type :Concept ;
+    rdfs:label "Perceptual proof" .
+
+:RationalSupport rdf:type :Concept ;
+    rdfs:label "Rational support" .
+
+:BringingPeopleToSeeAestheticQualities rdf:type :Concept ;
+    rdfs:label "Bringing people to see aesthetic qualities" .
+
+:Supporting_justifying_or_proving_aesthetic_judgements rdf:type :Concept ;
+    rdfs:label "Supporting, justifying or proving aesthetic judgements" .
+
+:Explanation rdf:type :Concept ;
+    rdfs:label "Explanation" .
+
+:RelationshipsExistInThingsThemselves rdf:type :Concept ;
+    rdfs:label "The relationships of dependence exist in things themselves, not simply in the viewer's experience" .
+
+# Additional pages
+:Page37 rdf:type :Page ;
+    rdfs:label "Page 37" .
+
+:Page38_39 rdf:type :Page ;
+    rdfs:label "Pages 38-39" .
+
+:Page40 rdf:type :Page ;
+    rdfs:label "Page 40" .
+
+:Page42 rdf:type :Page ;
+    rdfs:label "Page 42" .
+
+:Page50 rdf:type :Page ;
+    rdfs:label "Page 50" .

@@ -1,0 +1,122 @@
+@prefix : <http://example.org/philtext/> .
+@prefix aes: <http://example.org/philtext/aesthetic/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Ontology Declaration
+aes: rdf:type owl:Ontology ;
+    owl:imports <http://example.org/philtext> ;
+    dc:title "Sibley's Aesthetic Concepts Domain Ontology"@en ;
+    dc:description "Domain ontology capturing concepts from Sibley's analysis of aesthetic terms"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+aes:requiresTaste rdf:type owl:ObjectProperty ;
+    rdfs:domain aes:AestheticTerm ;
+    rdfs:range aes:TasteSensitivity ;
+    rdfs:label "requires taste"@en .
+
+aes:dependsOnFeatures rdf:type owl:ObjectProperty ;
+    rdfs:domain aes:AestheticTerm ;
+    rdfs:range aes:NonAestheticFeature ;
+    rdfs:label "depends on features"@en .
+
+aes:hasCharacteristicFeature rdf:type owl:ObjectProperty ;
+    rdfs:domain aes:AestheticTerm ;
+    rdfs:range aes:NonAestheticFeature ;
+    rdfs:label "has characteristic feature"@en .
+
+aes:hasNegativeCondition rdf:type owl:ObjectProperty ;
+    rdfs:domain aes:AestheticTerm ;
+    rdfs:range aes:NonAestheticFeature ;
+    rdfs:label "has negative condition"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+aes:AestheticTerm rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Aesthetic Term"@en .
+
+aes:NonAestheticFeature rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Non-aesthetic Feature"@en .
+
+aes:TasteSensitivity rdf:type owl:Class ;
+    rdfs:subClassOf :Concept ;
+    rdfs:label "Taste Sensitivity"@en .
+
+aes:MetaphoricalTerm rdf:type owl:Class ;
+    rdfs:subClassOf aes:AestheticTerm ;
+    rdfs:label "Metaphorical Aesthetic Term"@en .
+
+aes:NonMetaphoricalTerm rdf:type owl:Class ;
+    rdfs:subClassOf aes:AestheticTerm ;
+    rdfs:label "Non-metaphorical Aesthetic Term"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Key Concepts from Sibley's Text
+aes:AestheticJudgment rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Aesthetic Judgment"@en ;
+    :hasReferencePage :Page1 .
+
+aes:TasteExercise rdf:type owl:NamedIndividual, aes:TasteSensitivity ;
+    rdfs:label "Exercise of Taste"@en ;
+    :hasReferencePage :Page1 .
+
+# Example Aesthetic Terms
+aes:Graceful rdf:type owl:NamedIndividual, aes:NonMetaphoricalTerm ;
+    rdfs:label "Graceful"@en ;
+    aes:requiresTaste aes:TasteExercise ;
+    aes:hasCharacteristicFeature aes:Slimness, aes:Lightness .
+
+aes:Dynamic rdf:type owl:NamedIndividual, aes:MetaphoricalTerm ;
+    rdfs:label "Dynamic"@en ;
+    aes:requiresTaste aes:TasteExercise .
+
+aes:Balanced rdf:type owl:NamedIndividual, aes:MetaphoricalTerm ;
+    rdfs:label "Balanced"@en ;
+    aes:requiresTaste aes:TasteExercise .
+
+# Non-aesthetic Features
+aes:Slimness rdf:type owl:NamedIndividual, aes:NonAestheticFeature ;
+    rdfs:label "Slimness"@en .
+
+aes:Lightness rdf:type owl:NamedIndividual, aes:NonAestheticFeature ;
+    rdfs:label "Lightness"@en .
+
+aes:Angularity rdf:type owl:NamedIndividual, aes:NonAestheticFeature ;
+    rdfs:label "Angularity"@en .
+
+# Key Textual Factoids
+aes:NonConditionGoverned rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :hasText "Aesthetic concepts are not condition-governed even in this way. There are no sufficient conditions, no non-aesthetic features such that the presence of some set or numbers of them will beyond question logically justify or warrant the application of an aesthetic term."@en ;
+    :refersTo aes:AestheticJudgment ;
+    :findableIn :Page5 .
+
+aes:TasteRequirement rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Sibley ;
+    :hasText "When a word or expression is such that taste or perceptiveness is required in order to apply it, I shall call it an aesthetic term or expression"@en ;
+    :refersTo aes:TasteExercise ;
+    :findableIn :Page1 .
+
+# Author
+:Sibley rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "Frank Sibley"@en .
+
+# Pages
+:Page1 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 1"@en .
+
+:Page5 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 5"@en .

@@ -1,0 +1,10 @@
+Attached you have four ontologies:
+* dewey-ch3.ttl is the ontology taken from expert analysis on aesthetic philosophical vision expressed in 3rd chapter of Dewey's work
+* dewey-ch4.ttl is the ontology taken from expert analysis on aesthetic philosophical vision expressed in 4th chapter of Dewey's work
+* dewey-ch5.ttl is the ontology taken from expert analysis on aesthetic philosophical vision expressed in 5th chapter of Dewey's work
+* aisthetics-core.ttl is a core model for both of them
+Your task is to:
+1. harmonize them syntactically: if the chapter modules use properties from the core module, use them and do not create duplications
+2. harmonize them conceptually: if they express the same concept in different ways, unify it and use the same URI (if it is used in a previous chapter, use the one in previous chapter)
+Provide the harmonized modules for chapter 3,4, and 5 separately. 
+Print the complete modules, DO NOT eliminate anything which has to be in the final output.

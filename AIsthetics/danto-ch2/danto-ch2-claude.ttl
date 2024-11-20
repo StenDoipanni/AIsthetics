@@ -1,0 +1,127 @@
+@prefix : <http://example.org/philtext/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix danto: <http://example.org/philtext/danto/> .
+@base <http://example.org/philtext/danto/> .
+
+# Ontology Declaration
+<http://example.org/philtext/danto> rdf:type owl:Ontology ;
+    dc:title "Danto Chapter 2 Aesthetic Philosophy Ontology"@en ;
+    dc:description "Ontology module capturing key concepts from Danto's Chapter 2 on indiscernible artworks"@en ;
+    owl:imports <http://example.org/philtext> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+danto:hasHistoricalContext rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range danto:HistoricalContext ;
+    rdfs:label "has historical context"@en .
+
+danto:hasArtisticIntention rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range danto:ArtisticIntention ;
+    rdfs:label "has artistic intention"@en .
+
+danto:hasCausalHistory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TextualFactoid ;
+    rdfs:range danto:CausalHistory ;
+    rdfs:label "has causal history"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+danto:HistoricalContext rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:comment "The historical and art-historical context that makes an artwork possible"@en .
+
+danto:ArtisticIntention rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:comment "The artistic intention behind the creation of an artwork"@en .
+
+danto:CausalHistory rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:comment "The causal history of how an artwork came into being"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Main Concepts
+danto:IndiscernibilityThesis rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Indiscernibility Thesis"@en ;
+    :hasGloss "Two objects may be perceptually identical yet ontologically distinct as artworks"@en .
+
+danto:ArtworkIdentity rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Artwork Identity"@en ;
+    :hasGloss "The identity of an artwork is not reducible to its physical properties"@en ;
+    :hasRelationWith danto:IndiscernibilityThesis .
+
+danto:HistoricalPossibility rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Historical Possibility"@en ;
+    :hasGloss "Not everything is possible as art at every historical moment"@en ;
+    :hasRelationWith danto:ArtworkIdentity .
+
+danto:ArtisticMeaning rdf:type owl:NamedIndividual, :Concept ;
+    rdfs:label "Artistic Meaning"@en ;
+    :hasGloss "The meaning of an artwork depends on its historical context and artistic intention"@en ;
+    :hasRelationWith danto:HistoricalPossibility .
+
+# Key TextualFactoids
+danto:MenardExample rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Danto ;
+    :hasText """Borges tells us that the Quixote of Menard is infinitely more subtle than that of Cervantes, while that of Cervantes is immeasurably more coarse than its counterpart even though every word contained in the Menard version can be found in Cervantes' and in the corresponding position.""" ;
+    :refersTo danto:IndiscernibilityThesis ;
+    :hasAnalyticStylisticCategory :Thesis ;
+    :findableIn :Page35 ;
+    danto:hasHistoricalContext danto:LiteraryContext .
+
+danto:PicassoTieExample rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Danto ;
+    :hasText """Let us suppose that just before his death, as the crowning work of his already amazing corpus, Picasso himself had made a tie, which I shall describe this way: Picasso, who of course had not worn one for years, found one of his old ties and painted it a bright blue all over.""" ;
+    :refersTo danto:ArtworkIdentity, danto:HistoricalPossibility ;
+    :hasAnalyticStylisticCategory :Evocative ;
+    :findableIn :Page40 ;
+    danto:hasHistoricalContext danto:ModernArtContext ;
+    danto:hasArtisticIntention danto:PicassoIntention .
+
+danto:WolfflinQuote rdf:type owl:NamedIndividual, :TextualFactoid ;
+    :hasAuthor :Danto ;
+    :hasText """Not everything is possible at every time, as Heinrich Wölflin has written, meaning that certain artworks simply could not be inserted as artworks into certain periods of art history, though it is possible that objects identical to artworks could have been made at that period.""" ;
+    :refersTo danto:HistoricalPossibility ;
+    :hasAnalyticStylisticCategory :Thesis ;
+    :findableIn :Page44 .
+
+# Contexts and Intentions
+danto:LiteraryContext rdf:type owl:NamedIndividual, danto:HistoricalContext ;
+    rdfs:label "Literary Context of Borges and Cervantes"@en .
+
+danto:ModernArtContext rdf:type owl:NamedIndividual, danto:HistoricalContext ;
+    rdfs:label "Context of Modern Art in Picasso's Time"@en .
+
+danto:PicassoIntention rdf:type owl:NamedIndividual, danto:ArtisticIntention ;
+    rdfs:label "Picasso's Artistic Intention"@en ;
+    :hasDescription "To transfigure commonplace objects into art through historical and artistic context"@en .
+
+# Authors
+:Danto rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "Arthur Danto"@en .
+
+:Borges rdf:type owl:NamedIndividual, :Author ;
+    rdfs:label "Jorge Luis Borges"@en .
+
+# Pages
+:Page35 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 35"@en .
+
+:Page40 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 40"@en .
+
+:Page44 rdf:type owl:NamedIndividual, :Page ;
+    rdfs:label "Page 44"@en .

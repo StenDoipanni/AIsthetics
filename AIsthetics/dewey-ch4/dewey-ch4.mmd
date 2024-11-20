@@ -1,0 +1,48 @@
+classDiagram
+    class TextualFactoid {
+        +hasType
+        +hasText
+        +hasDescription
+        +hasNeighbourhood
+        +hasGloss
+    }
+    
+    class Concept {
+        +referencePage
+    }
+    
+    class Author
+    class Page
+    class Work
+    
+    class AnalyticStylisticCategory {
+        <<enumeration>>
+        Descriptive
+        Honorific
+        Metaphoric
+        Evocative
+        Visual
+        Dialectic
+        Thesis
+        ProgressiveLinear
+        Paratactic
+    }
+    
+    class SyntheticStylisticCategory {
+        <<enumeration>>
+        Verbal
+        Adjectival
+        Nominal
+    }
+    
+    TextualFactoid --> TextualFactoid : basedOn
+    TextualFactoid --> Concept : refersTo
+    TextualFactoid --> Work : findableIn
+    TextualFactoid --> Author : hasAuthor
+    TextualFactoid --> AnalyticStylisticCategory : hasAnalyticStylisticCategory
+    TextualFactoid --> SyntheticStylisticCategory : hasSyntheticStylisticCategory
+    Concept --> Concept : hasRelationWith
+    Concept --> Page : referencePage
+
+    note for TextualFactoid "Core class for representing\ntextual analysis units"
+    note for Concept "Philosophical concepts\nfound in text"

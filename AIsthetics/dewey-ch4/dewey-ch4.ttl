@@ -1,0 +1,206 @@
+@prefix : <http://example.org/philtext/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@base <http://example.org/philtext/> .
+
+# [Previous ontology declarations remain the same...]
+
+#################################################################
+#    TextualFactoids from TSV
+#################################################################
+
+# Author
+:Dewey rdf:type :Author .
+
+# Work
+:ArtAsExperience rdf:type :Work ;
+    rdfs:label "Art as Experience" .
+
+# TextualFactoid 1
+:TF1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :hasText """Every experience, of slight or tremendous import, begins with an impulsion, rather as an impulsion. [...] "Impulsion" designates a movement outward and forward of the whole organism to which special impulses are auxiliary. It is the craving of the living creature for food as distinct from the reactions of toungue and lips that are involved in swallowing; the turning toward light of the body as a whole [...] as distinct from the following of of a particoular light by the eyes.""" ;
+    :refersTo :UnityOfOrganism ;
+    :hasNeighbourhood "of the body as a whole; organism in its entirety; whole self" ;
+    :hasGloss "The concept of unity and entirety of a living creature is fundamental in Dewey's aesthetic theory. It is the base concept upon which he develops and articulates the entirety of his theory." ;
+    :hasAnalyticStylisticCategory :Descriptive ;
+    :hasSyntheticStylisticCategory :Verbal, :Nominal ;
+    :findableIn :Page58 .
+
+# TextualFactoid 1.1
+:TF1_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF1 ;
+    :hasText "The unity of the experience of an organism is what produces an impulsion, rather than a simple impulse, which only involves some of the organism's parts." ;
+    :refersTo :Impulsion ;
+    :hasDescription "The unity of the experience of an organism is what produces an impulsion, rather than a simple impulse" ;
+    :findableIn :Page58 .
+
+# TextualFactoid 1.2
+:TF1_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF1 ;
+    :hasText """Some occasion [...] stirs the personaliry that has been thus formed. Then comes the need for expression. What is expressed will be neither the part events that have excercised theire shaping influence nor yet the literal existing occasion. It will be [...] an intimate union of the features of present experience with the values that past experience have incorporated in personality. Immediacy and individuality, the traits that mark concrete existence, come from the present occasion; meaning, substance, content, from what is embedded in the self from the past.""" ;
+    :refersTo :Meaning ;
+    :hasDescription "The entire organism utilises a particoular mean to express a specific emotion; once the material used is properly reformed and modified, it acquires meaning and substance." ;
+    :hasNeighbourhood "intimate union; incorporated in personality" ;
+    :hasGloss "An expression, in order to be fully developed, is supposed to impress a new meaning to an old object; in other words, it must re-form it, make it acquire a new meaning before the object re-enters the world. This can be achieved only if the whole personality of the artist - along with all of their past experiences - is involved" ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear, :Paratactic ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page71 .
+
+# TextualFactoid 1.3
+:TF1_3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF1 ;
+    :hasText "We live in a world in which ther is an immense ammount of organization, but it is an external organization, not one of the ordering of a growing experience, one that involves, moreover, the whole of the live creature, toward a fulfilling conclusion." ;
+    :refersTo :Fulfillment ;
+    :hasDescription "The experience in which is involved the whole of the live creature leads to a fulfilling conclusion, which enriches the creature itself and produces an aesthetic emotion" ;
+    :hasNeighbourhood "whole of the live creature" ;
+    :hasGloss "The fulfillment is the sign of a succesful aesthetic product. If something is aesthetic, then it will evoke in those who experience it a felling of fullness and fulfillment." ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page81 .
+
+# TextualFactoid 2
+:TF2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :hasText """Etymologically, and act of expression is a squeezing out, a pressing forth. Juice is expressed when grapes are crushed in the wine press; [...] lard and oil are rendered when certain fats are subjected to heat and pressure. Nothing is pressed forth except from original raw or natural material. But it is equally true that the mere issuing forth or discharge of raw material is not expression. Through the interaction with something external to it, the wine press, or the treading foot of man, juice results.""" ;
+    :refersTo :Processuality ;
+    :hasNeighbourhood "process of converting" ;
+    :hasGloss "The concept of processuality is key in Dewey's aesthetic theory, and it's the focal concept of this particoular chapter. In order to achive an act of true expression, the means used must undergo a process of modification, which invokves the interaction with both the artist - meaning their present and past emotions and experiences - and other means" ;
+    :hasAnalyticStylisticCategory :Visual, :Descriptive, :Evocative ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page63 .
+
+# TextualFactoid 2.1
+:TF2_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF2 ;
+    :hasText "The transformation of sounds, babblings, lalling, and so forth, into language is a perfect illustration of the way in which acts of expression are brought into existence and also of the difference between them and mere acts of discharge" ;
+    :refersTo :Transformation ;
+    :hasDescription "Throughout a process, which also involves the acquirying of meaning, the original mean and impulsion are transformed and reformed" ;
+    :hasNeighbourhood "carry forward in development; to work out to completion; brought into expistence" ;
+    :hasAnalyticStylisticCategory :Descriptive ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page62 .
+
+# TextualFactoid 2.2
+:TF2_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF2 ;
+    :refersTo :Interaction ;
+    :hasNeighbourhood "squeezing out; pressing forth; mere issuing forth [...] is not expression" ;
+    :findableIn :Page63 .
+
+# TextualFactoid 2.3
+:TF2_3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF2 ;
+    :hasText """It means that the expression of the self in and through a medium, constituting the work of art, is itself a prolonged interaction of something issuing from the self with objective conditions, a process in which both of them acquire a form and order they did not at first possess. Even the Almighty took seven days to create the heaven and the earth [...].""" ;
+    :refersTo :Time ;
+    :hasDescription "The concept of processuality also refers to the actual time that is required to fulfill the act of expression, not only to the process itself that both the material and the artist must undergo." ;
+    :hasNeighbourhood "is a construction in time; prolonged interaction" ;
+    :hasAnalyticStylisticCategory :Descriptive, :Paratactic ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page65 .
+
+# TextualFactoid 3
+:TF3 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :hasText """At first a baby weeps, just as it turns its head to follow light; there is an inner urge but nothing to express. As the infant matures, he learns that particular acts effect different consequences, that, for example, he attains attention if he cries [...]. He thus begins to be aware of the meaning of what he does. As he grasps the meaning of an act at first performed from sheer internal pressure, he becomes capable of acts of true expression.""" ;
+    :refersTo :Consciousness ;
+    :hasNeighbourhood "be aware of; grasps the meaning" ;
+    :hasGloss "Beign aware of what we're doing, being intentional in our actions is a prerequisite in order to achive a true act of expression. The subject must play an active and intentional role in the action of creating and expressing." ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear, :Descriptive ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page62 .
+
+# TextualFactoid 3.1
+:TF3_1 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF3 ;
+    :hasText "The final comment is that when excitement about subject matter goes deep, it stirs uo a store of attitudes and meanings derived from prior experience. As they are aroused into activity they become conscious thoughts and emotions, emotionalized images." ;
+    :refersTo :Emotion ;
+    :hasDescription "Being concious of the original impulsion or emotion means being able to instert it in the complection of past experiences" ;
+    :hasNeighbourhood "become concious thoughts and emotions" ;
+    :hasAnalyticStylisticCategory :ProgressiveLinear ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page65 .
+
+# TextualFactoid 3.2
+:TF3_2 rdf:type :TextualFactoid ;
+    :hasAuthor :Dewey ;
+    :basedOn :TF3 ;
+    :hasText """Hence it is not mere excitement that is expressed but excitement-about- something; [...] an emotion is to or from or about something objective, wheter in fact or in idea. An emotion is implicated in a situation, the issue of which is in suspense and in which the self thta is moved in the emotion is vitally concerned.""" ;
+    :refersTo :Goal ;
+    :hasDescription "When we become conscious about our actions, we understand why we want to express a certain thing in a certain way; in other words, we may say that we become aware of the goal of our expressions." ;
+    :hasNeighbourhood "excitement-about-something" ;
+    :hasAnalyticStylisticCategory :Descriptive, :Paratactic ;
+    :hasSyntheticStylisticCategory :Verbal ;
+    :findableIn :Page66 .
+
+# Concepts
+:UnityOfOrganism rdf:type :Concept ;
+    rdfs:label "Unity of the organism" .
+
+:Impulsion rdf:type :Concept ;
+    rdfs:label "Impulsion" ;
+    :hasRelationWith :UnityOfOrganism .
+
+:Meaning rdf:type :Concept ;
+    rdfs:label "Meaning" .
+
+:Fulfillment rdf:type :Concept ;
+    rdfs:label "Fulfillment" .
+
+:Processuality rdf:type :Concept ;
+    rdfs:label "Processuality" .
+
+:Transformation rdf:type :Concept ;
+    rdfs:label "Transformation" ;
+    :hasRelationWith :Processuality .
+
+:Interaction rdf:type :Concept ;
+    rdfs:label "Interaction" ;
+    :hasRelationWith :Processuality .
+
+:Time rdf:type :Concept ;
+    rdfs:label "Time" ;
+    :hasRelationWith :Processuality .
+
+:Consciousness rdf:type :Concept ;
+    rdfs:label "Consciousness" .
+
+:Emotion rdf:type :Concept ;
+    rdfs:label "Emotion" ;
+    :hasRelationWith :Consciousness .
+
+:Goal rdf:type :Concept ;
+    rdfs:label "Goal" ;
+    :hasRelationWith :Consciousness .
+
+# Pages
+:Page58 rdf:type :Page ;
+    rdfs:label "58" .
+
+:Page62 rdf:type :Page ;
+    rdfs:label "62" .
+
+:Page63 rdf:type :Page ;
+    rdfs:label "63" .
+
+:Page65 rdf:type :Page ;
+    rdfs:label "65" .
+
+:Page66 rdf:type :Page ;
+    rdfs:label "66" .
+
+:Page71 rdf:type :Page ;
+    rdfs:label "71" .
+
+:Page81 rdf:type :Page ;
+    rdfs:label "81" .
